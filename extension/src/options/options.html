@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings · Bugmark</title>
+  <link rel="icon" href="../../icons/icon32.png">
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap row">
+      <img class="logo" src="../../icons/icon128.png" alt="">
+      <b>Bugmark</b>
+      <span class="grow"></span>
+      <a class="btn ghost" id="openReports" href="../report/report.html">Open reports</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h1>Settings</h1>
+    <!-- BRANDING -->
+    <section class="card" id="branding">
+      <div class="card-head">
+        <div>
+          <h2>Report branding</h2>
+          <p class="muted">White-label exported reports with your agency’s identity.</p>
+        </div>
+      </div>
+      <div class="brand-grid" id="brandForm">
+        <div class="field">
+          <span>Logo</span>
+          <div class="logo-drop" id="logoDrop">
+            <img id="logoPreview" alt="" hidden>
+            <span id="logoHint">PNG, SVG or JPG · max 300 KB</span>
+          </div>
+          <div class="row gap sm">
+            <button class="btn sm" id="logoPick" type="button">Upload</button>
+            <button class="btn ghost sm" id="logoRemove" type="button">Remove</button>
+            <input type="file" id="logoFile" accept="image/png,image/jpeg,image/svg+xml,image/webp" hidden>
+          </div>
+        </div>
+        <div class="stack">
+          <label class="field"><span>Company name</span><input class="input" id="bCompany" placeholder="Acme Studio"></label>
+          <label class="field"><span>Website</span><input class="input" id="bWebsite" placeholder="acme.studio"></label>
+          <label class="field"><span>Accent colour</span>
+            <div class="row gap"><input type="color" id="bAccent" value="#16A34A"><input class="input mono" id="bAccentText" value="#16A34A" maxlength="7"></div>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- GITHUB -->
+    <section class="card" id="github">
+      <div class="card-head">
+        <div>
+          <h2>GitHub issues</h2>
+          <p class="muted">Create an issue from any capture — screenshot, labels and page context included.</p>
+        </div>
+        <span class="gh-state" id="ghState" hidden></span>
+      </div>
+
+      <div id="ghConnect">
+        <div id="ghDevice" hidden>
+          <button class="btn primary" id="ghSignIn" type="button">Sign in with GitHub</button>
+          <div class="gh-code" id="ghCodeBox" hidden>
+            <span class="muted">Enter this code on GitHub:</span>
+            <b class="mono" id="ghCode">—</b>
+            <button class="btn sm" id="ghCopyCode" type="button">Copy &amp; open GitHub</button>
+            <button class="btn ghost sm" id="ghCancel" type="button">Cancel</button>
+          </div>
+          <div class="or"><span>or use a token</span></div>
+        </div>
+        <form class="token-form" id="ghTokenForm">
+          <label for="ghToken">Personal access token</label>
+          <div class="row gap">
+            <input class="input mono" id="ghToken" type="password" placeholder="github_pat_…" autocomplete="off" spellcheck="false">
+            <button class="btn" id="ghConnectBtn" type="submit">Connect</button>
+          </div>
+          <p class="msg" id="ghMsg" hidden></p>
+          <p class="help">
+            <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">Create a fine-grained token</a>
+            with access to your repositories and these permissions: <b>Issues</b> read &amp; write, <b>Contents</b> read &amp; write
+            (for screenshots). Classic tokens need the <code>repo</code> scope. The token is stored only in this browser.
+          </p>
+        </form>
+      </div>
+
+      <div id="ghConnected" hidden>
+        <div class="gh-user">
+          <img id="ghAvatar" alt="">
+          <div class="grow"><div class="t">Connected as <b id="ghLogin">—</b></div><div class="d" id="ghTokenType">Personal access token</div></div>
+          <button class="btn ghost danger sm" id="ghDisconnect" type="button">Disconnect</button>
+        </div>
+        <div class="setting col">
+          <label class="t" for="ghRepo">Default repository</label>
+          <div class="row gap">
+            <input class="input mono" id="ghRepo" list="ghRepoList" placeholder="owner/repository" autocomplete="off" spellcheck="false">
+            <datalist id="ghRepoList"></datalist>
+            <button class="btn sm" id="ghReload" type="button">Load repos</button>
+          </div>
+          <div class="d">Bugmark remembers the last repository used for each website.</div>
+        </div>
+        <label class="setting">
+          <div class="grow"><div class="t">Attach screenshots</div><div class="d">Commits the annotated image to a separate <code id="ghBranchName">bugmark-assets</code> branch and embeds it in the issue.</div></div>
+          <span class="switch"><input type="checkbox" id="ghShots"><span></span></span>
+        </label>
+        <div class="setting col" id="ghBranchRow">
+          <label class="t" for="ghBranch">Screenshot branch</label>
+          <input class="input mono" id="ghBranch" placeholder="bugmark-assets" spellcheck="false">
+        </div>
+        <label class="setting">
+          <div class="grow"><div class="t">Add type &amp; priority labels</div><div class="d">e.g. <code>bug</code>, <code>priority: high</code> — created automatically if missing.</div></div>
+          <span class="switch"><input type="checkbox" id="ghLabels"><span></span></span>
+        </label>
+        <div class="setting col">
+          <label class="t" for="ghExtra">Extra labels</label>
+          <input class="input" id="ghExtra" placeholder="Comma separated, e.g. qa, from-client" spellcheck="false">
+        </div>
+      </div>
+    </section>
+
+    <!-- GENERAL -->
+    <section class="card">
+      <div class="card-head"><div><h2>General</h2></div></div>
+      <label class="setting">
+        <div class="grow"><div class="t">Floating button</div><div class="d">Show the feedback button on websites</div></div>
+        <span class="switch"><input type="checkbox" id="showLauncher"><span></span></span>
+      </label>
+      <label class="setting">
+        <div class="grow"><div class="t">Record steps to reproduce</div><div class="d">Remembers clicks, field names and page changes (never what you type) and adds them to each report</div></div>
+        <span class="switch"><input type="checkbox" id="recordSteps"><span></span></span>
+      </label>
+      <label class="setting">
+        <div class="grow"><div class="t">Record request &amp; response bodies</div><div class="d">Save params, payloads, responses and headers with network logs. Passwords, tokens, cookies and auth headers are masked</div></div>
+        <span class="switch"><input type="checkbox" id="recordBodies"><span></span></span>
+      </label>
+      <label class="setting">
+        <div class="grow"><div class="t">Narrate screen recordings</div><div class="d">Include your microphone in recordings · <a href="#" id="micLink">allow microphone</a></div></div>
+        <span class="switch"><input type="checkbox" id="recordMic"><span></span></span>
+      </label>
+      <div class="setting col">
+        <label class="t" for="reviewer">Your name</label>
+        <input class="input" id="reviewer" placeholder="Shown as the reporter on each item" maxlength="60">
+      </div>
+      <div class="setting col">
+        <div class="t">Keyboard shortcut</div>
+        <div class="d">Start annotating with <kbd>⌥⇧S</kbd>, record video with <kbd>⌥⇧R</kbd>. Change it at <a href="#" id="shortcutsLink">chrome://extensions/shortcuts</a>.</div>
+      </div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section class="card" id="privacy">
+      <div class="card-head"><div><h2>Privacy</h2><p class="muted">Bugmark is free. Your captures, recordings and logs stay in this browser.</p></div></div>
+      <label class="setting">
+        <div class="grow"><div class="t">Share anonymous usage statistics</div><div class="d">Counts which features are used (for example “screenshot saved” or “PDF exported”) so we know what to improve. Never includes page addresses, screenshots, recordings, logs or anything you type</div></div>
+        <span class="switch"><input type="checkbox" id="analytics"><span></span></span>
+      </label>
+    </section>
+
+    <footer class="foot muted">
+      <span id="version"></span>
+      <span>·</span><a id="supportLink" href="#">Support</a>
+      <span>·</span><a id="siteLink" href="#" target="_blank" rel="noopener">Website</a>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

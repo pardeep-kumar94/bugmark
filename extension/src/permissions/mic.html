@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Microphone · Bugmark</title>
+  <link rel="icon" href="../../icons/icon32.png">
+  <link rel="stylesheet" href="../shared/base.css">
+  <style>
+    body { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+    .card { max-width: 440px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; text-align: center; box-shadow: var(--shadow); }
+    .card::before { content: ""; display: block; height: 2px; margin: -28px -28px 24px; border-radius: 16px 16px 0 0; background: var(--grad); }
+    h1 { font-size: 18px; letter-spacing: -.03em; margin: 14px 0 6px; }
+    p { color: var(--text-2); line-height: 1.6; margin: 0 0 20px; }
+    .logo { width: 44px; height: 44px; border-radius: 12px; }
+    .msg { margin-top: 14px; font-size: 12.5px; }
+    .ok { color: var(--ok); } .err { color: var(--err); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="../../icons/icon128.png" alt="">
+    <h1>Allow microphone for narration</h1>
+    <p>Bugmark records your voice over screen recordings so you can explain the bug as you go. Audio stays on your computer unless you share it.</p>
+    <button class="btn primary" id="allow">Allow microphone</button>
+    <div class="msg" id="msg"></div>
+  </div>
+  <script type="module" src="mic.js"></script>
+</body>
+</html>

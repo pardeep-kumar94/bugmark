@@ -1,0 +1,97 @@
+{
+  "manifest_version": 3,
+  "name": "Bugmark — Free Bug Reporting & Debugging Tool",
+  "short_name": "Bugmark",
+  "version": "1.7.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAw23tgCo4AV7GQ3XCE/mYY+C1sx+sSjTIuTiVIEk3XFM9lYAjhrDcFL8oCED2HlrfbecMOAL8et7GszhT8L76IPmU2qGB+jix4CzhO67tHkcCQR/vOgoVi5+JpkFGnVqqwUPqZfpQ+llBb2gfpA7SBZzDtfzNU+bBKoIeAKJUxmwFxVyxfE8TH7EpFKKVZSoePcoc4x5B/dxSNZoscdmJg918uNALG/CLW2CHa2BgxVI2/wauoeGA8RQDAVdEnbY0DRKqF8dmlws4Tlg7aOFFonwo6EZ4DhqAdFXek5NN2L2mpzOd87QjKVaR4oXbzIpbLo45brSPcdQzGTgMcslW2wIDAQAB",
+  "description": "Free bug reporting tool for web developers & QA: annotated screenshots, screen recording, console & network logs, GitHub issues.",
+  "minimum_chrome_version": "123",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Bugmark",
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "scripting",
+    "activeTab",
+    "tabCapture",
+    "offscreen",
+    "debugger"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/page-hook.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "toggle-annotate": {
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "mac": "Alt+Shift+S"
+      },
+      "description": "Start or stop annotating the current page"
+    },
+    "start-recording": {
+      "suggested_key": {
+        "default": "Alt+Shift+R",
+        "mac": "Alt+Shift+R"
+      },
+      "description": "Start or stop a screen recording of the current tab"
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://your-domain.com/*",
+      "https://*.your-domain.com/*",
+      "http://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "fonts/*.woff2"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

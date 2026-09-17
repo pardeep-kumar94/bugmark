@@ -1,0 +1,10 @@
+{
+  "name": "Bugmark",
+  "version": "1.7.0",
+  "file": "/downloads/bugmark-chrome-extension.zip",
+  "bytes": 270677,
+  "sha256": "247df17e9dd68fc3a1dbc62a3dab11a339d74716eddcea90d03873dda244bf6c",
+  "extensionId": "ebljpcoilmbiinebhadcchngeimdbepd",
+  "minimumChromeVersion": "123",
+  "builtAt": "2026-09-17T13:58:01.320Z"
+}

@@ -1,0 +1,12 @@
+{
+  "name": "bugmark",
+  "private": true,
+  "description": "Bugmark — free bug reporting & debugging tool for Chrome: extension + website",
+  "scripts": {
+    "setup": "npm --prefix web install",
+    "dev": "npm --prefix web run dev",
+    "build": "npm --prefix web run build",
+    "start": "npm --prefix web run start",
+    "package:extension": "npm --prefix web run package:extension"
+  }
+}

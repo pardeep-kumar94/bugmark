@@ -1,0 +1,20 @@
+# dependencies & builds
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# secrets
+.env
+.env*.local
+web/scripts/.private/
+*.pem
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# old screenshots and exports from Claude sessions
+Claude outputs/

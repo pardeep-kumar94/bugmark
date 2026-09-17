@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Bugmark</title>
+  <link rel="stylesheet" href="../shared/base.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="head">
+    <img class="logo" src="../../icons/icon128.png" alt="">
+    <div class="grow">
+      <div class="name">Bugmark</div>
+      <div class="host" id="host">—</div>
+    </div>
+    <button class="icon" id="openSettings" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+    </button>
+  </header>
+
+  <main class="body">
+    <button class="btn primary cta" id="annotate">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg>
+      <span id="annotateLabel">Annotate this page</span>
+      <span class="grow"></span><kbd>⌥⇧S</kbd>
+    </button>
+    <button class="btn rec-btn" id="record">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>
+      <span id="recordLabel">Record video</span>
+      <span class="grow"></span><kbd>⌥⇧R</kbd>
+    </button>
+    <p class="restricted" id="restricted" hidden>Chrome doesn’t allow extensions on this page. Open a website to add feedback.</p>
+
+    <div class="stats">
+      <button class="stat" id="siteStat"><b id="siteCount">0</b><span>on this site</span></button>
+      <button class="stat" id="totalStat"><b id="totalCount">0</b><span>across all sites</span></button>
+    </div>
+
+    <button class="btn report" id="openReport">
+      Open feedback report
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </main>
+
+  <section class="settings">
+    <label class="row">
+      <div class="grow"><div class="t">Floating button</div><div class="d">Show the feedback button on websites</div></div>
+      <span class="switch"><input type="checkbox" id="showLauncher"><span></span></span>
+    </label>
+    <label class="row" id="siteRow">
+      <div class="grow"><div class="t">Hide on this site</div><div class="d" id="siteRowDesc">Keep this site clean</div></div>
+      <span class="switch"><input type="checkbox" id="hideHere"><span></span></span>
+    </label>
+    <div class="row col">
+      <label class="t" for="reviewer">Your name</label>
+      <input class="input" id="reviewer" placeholder="Shown as the reporter in exports" maxlength="60">
+    </div>
+  </section>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
