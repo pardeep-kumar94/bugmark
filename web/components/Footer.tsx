@@ -54,7 +54,7 @@ export function Footer() {
 function FooterCol({ title, links }: { title: string; links: { href: string; label: string }[] }) {
   return (
     <div>
-      <div className="font-mono text-[12.5px] font-semibold text-ink">{title.toLowerCase()}</div>
+      <div className="text-[12.5px] font-semibold text-ink">{title.toLowerCase()}</div>
       <ul className="mt-4 space-y-2.5">
         {links.map((l) => (
           <li key={l.label}>

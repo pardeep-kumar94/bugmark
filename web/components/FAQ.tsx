@@ -69,7 +69,7 @@ export function FAQ() {
           {faqs.map((f, i) => (
             <details key={f.q} className="group py-1" open={i === 0}>
               <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-4 text-left text-[16px] font-medium tracking-[-0.01em] text-ink">
-                <span><span className="mr-3 font-mono text-[12px] text-mute">{String(i + 1).padStart(2, '0')}</span>{f.q}</span>
+                <span><span className="mr-3 text-[12px] text-mute">{String(i + 1).padStart(2, '0')}</span>{f.q}</span>
                 <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md border border-line-2 text-mute transition group-open:rotate-180 group-open:border-accent/40 group-open:text-accent">
                   <IconChevron size={14} />
                 </span>

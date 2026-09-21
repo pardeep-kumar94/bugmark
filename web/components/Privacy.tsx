@@ -23,7 +23,7 @@ export function Privacy() {
             <Reveal key={p.t} delay={i * 90} className="flex gap-4 rounded-2xl border border-line bg-canvas p-5">
               <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-accent/20 bg-accent/10 text-accent [&_svg]:h-5 [&_svg]:w-5">{p.icon}</span>
               <div>
-                <h3 className="font-mono text-[15px] font-semibold tracking-[-0.01em]">{p.t}</h3>
+                <h3 className="text-[15px] font-semibold tracking-[-0.01em]">{p.t}</h3>
                 <p className="mt-1 text-[14.5px] leading-relaxed text-dim">{p.d}</p>
               </div>
             </Reveal>

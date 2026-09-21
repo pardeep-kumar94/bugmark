@@ -31,7 +31,7 @@ export function Features() {
           {features.map((f, i) => (
             <Reveal key={f.title} delay={(i % 5) * 50} className="bg-surface p-6 transition hover:bg-surface-2">
               <span className="text-accent [&_svg]:h-5 [&_svg]:w-5">{f.icon}</span>
-              <h3 className="mt-4 font-mono text-[14.5px] font-semibold tracking-[-0.01em]">{f.title}</h3>
+              <h3 className="mt-4 text-[14.5px] font-semibold tracking-[-0.01em]">{f.title}</h3>
               <p className="mt-1.5 text-[13.5px] leading-relaxed text-dim">{f.text}</p>
             </Reveal>
           ))}

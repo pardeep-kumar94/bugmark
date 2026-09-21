@@ -14,10 +14,10 @@ export function HowItWorks() {
           {steps.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 80} className="bg-surface p-7">
               <div className="flex items-center gap-3">
-                <span className="font-mono text-[13px] font-semibold text-accent">{s.n}</span>
+                <span className="text-[13px] font-semibold text-accent">{s.n}</span>
                 <span className="h-px flex-1 bg-line" />
               </div>
-              <h3 className="mt-4 font-mono text-[18px] font-semibold tracking-[-0.02em]">{s.t}</h3>
+              <h3 className="mt-4 text-[18px] font-semibold tracking-[-0.02em]">{s.t}</h3>
               <p className="mt-2 text-[15px] leading-relaxed text-dim">{s.d}</p>
             </Reveal>
           ))}

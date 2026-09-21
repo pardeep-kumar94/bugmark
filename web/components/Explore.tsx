@@ -16,7 +16,7 @@ export function Explore() {
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           {cols.map((c) => (
             <div key={c.title}>
-              <Link href={c.href} className="font-mono text-[13px] font-semibold text-accent hover:underline">{c.title} →</Link>
+              <Link href={c.href} className="text-[13px] font-semibold text-accent hover:underline">{c.title} →</Link>
               <ul className="mt-4 space-y-2.5">
                 {c.pages.map((p) => (
                   <li key={p.slug}><Link href={hrefOf(p)} className="text-[15px] text-dim transition hover:text-ink">{p.h1}</Link></li>

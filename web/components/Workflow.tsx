@@ -43,7 +43,7 @@ export function Workflow() {
                 <div className="flex items-center gap-2.5">
                   <span className="grid h-9 w-9 place-items-center rounded-lg border border-accent/20 bg-accent/10 text-accent [&_svg]:h-[18px] [&_svg]:w-[18px]">{c.icon}</span>
                 </div>
-                <h3 className="mt-4 font-mono text-[17px] font-semibold tracking-[-0.02em]">{c.title}</h3>
+                <h3 className="mt-4 text-[17px] font-semibold tracking-[-0.02em]">{c.title}</h3>
                 <p className="mt-1.5 text-[14.5px] leading-relaxed text-dim">{c.text}</p>
                 <ul className="mt-4 space-y-1.5">
                   {c.points.map((p) => (
@@ -53,7 +53,7 @@ export function Workflow() {
               </div>
               <div className="relative mt-auto h-[230px] overflow-hidden border-t border-line bg-canvas">
                 <Image src={c.shot.src} width={c.shot.w} height={c.shot.h} alt={c.shot.alt} sizes="(min-width: 768px) 380px, 100vw"
-                  className="absolute left-1/2 top-5 w-[88%] -translate-x-1/2 rounded-lg border border-white/10 shadow-[0_20px_40px_-20px_rgba(0,0,0,.9)]" />
+                  className="absolute left-1/2 top-5 w-[88%] -translate-x-1/2 rounded-lg border border-line-2 shadow-[var(--sh)]" />
                 <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-canvas to-transparent" />
               </div>
             </Reveal>

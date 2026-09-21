@@ -4,12 +4,20 @@ node_modules/
 out/
 *.tsbuildinfo
 next-env.d.ts
-
+brag-output/*
+docs/*
+web/AGENTS.md
+web/CLAUDE.md
+web/.env.example
 # secrets
 .env
 .env*.local
 web/scripts/.private/
 *.pem
+# Firebase service-account keys — never commit these
+*-firebase-adminsdk-*.json
+service-account*.json
+firebase-service-account*.json
 
 # OS / editor
 .DS_Store

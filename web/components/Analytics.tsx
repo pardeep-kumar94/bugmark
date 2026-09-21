@@ -185,8 +185,8 @@ function ConsentBanner() {
         <Link href="/privacy#website-analytics" className="font-medium text-accent underline decoration-accent/30 underline-offset-4">Privacy policy</Link>
       </p>
       <div className="mt-3 flex justify-end gap-2">
-        <button type="button" onClick={() => setConsent('denied')} className="h-9 rounded-lg border border-line-2 px-3.5 font-mono text-[13px] text-ink-2 hover:bg-surface-2">Decline</button>
-        <button type="button" onClick={() => setConsent('granted')} className="h-9 rounded-lg bg-accent px-3.5 font-mono text-[13px] font-semibold text-on-accent hover:bg-[#6ee79a]">{consentMode === 'opt-in' ? 'Accept' : 'OK'}</button>
+        <button type="button" onClick={() => setConsent('denied')} className="h-9 rounded-lg border border-line-2 px-3.5 text-[13px] text-ink-2 hover:bg-surface-2">Decline</button>
+        <button type="button" onClick={() => setConsent('granted')} className="h-9 rounded-lg bg-accent px-3.5 text-[13px] font-semibold text-on-accent hover:bg-[#6ee79a]">{consentMode === 'opt-in' ? 'Accept' : 'OK'}</button>
       </div>
     </div>
   );

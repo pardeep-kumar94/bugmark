@@ -46,7 +46,7 @@ export function UninstallSurvey() {
       {sent ? (
         <div>
           <span className="grid h-10 w-10 place-items-center rounded-lg bg-accent/15 text-accent"><IconCheck size={20} /></span>
-          <h1 className="mt-5 font-mono text-[26px] font-semibold tracking-[-0.04em]">Thank you — that really helps.</h1>
+          <h1 className="mt-5 text-[26px] font-semibold tracking-[-0.04em]">Thank you — that really helps.</h1>
           <p className="mt-3 text-[15.5px] leading-relaxed text-dim">
             {note.trim() ? <>Want a reply? <a className="font-medium text-accent underline underline-offset-4" href={mail}>Send your note by email</a>.</> : 'If you change your mind, Bugmark is always free.'}
           </p>
@@ -55,7 +55,7 @@ export function UninstallSurvey() {
       ) : (
         <form onSubmit={submit}>
           <p className="kicker">uninstalled</p>
-          <h1 className="mt-3 font-mono text-[28px] font-semibold leading-tight tracking-[-0.045em]">Sorry to see you go.</h1>
+          <h1 className="mt-3 text-[28px] font-semibold leading-tight tracking-[-0.045em]">Sorry to see you go.</h1>
           <p className="mt-3 text-[15.5px] leading-relaxed text-dim">Bugmark has been removed. What made you uninstall it? It takes five seconds and shapes what we build next.</p>
           <fieldset className="mt-6 grid gap-2">
             <legend className="sr-only">Reasons</legend>
@@ -66,7 +66,7 @@ export function UninstallSurvey() {
             ))}
           </fieldset>
           <label className="mt-5 block">
-            <span className="font-mono text-[12.5px] text-dim">Anything else? (optional — we’ll only see it if you email it)</span>
+            <span className="text-[12.5px] text-dim">Anything else? (optional — we’ll only see it if you email it)</span>
             <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3} className="mt-2 w-full rounded-lg border border-line bg-canvas p-3 text-[14.5px] text-ink outline-none focus:border-accent/50" />
           </label>
           <button type="submit" className="btn-primary mt-5 w-full">Send feedback</button>

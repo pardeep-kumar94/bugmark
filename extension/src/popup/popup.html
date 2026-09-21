@@ -7,55 +7,72 @@
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
-  <header class="head">
-    <img class="logo" src="../../icons/icon128.png" alt="">
-    <div class="grow">
-      <div class="name">Bugmark</div>
-      <div class="host" id="host">—</div>
-    </div>
-    <button class="icon" id="openSettings" title="Settings" aria-label="Settings">
-      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg>
+  <header class="hd">
+    <span class="brandmark">B</span>
+    <span class="wm">Bugmark</span>
+    <span class="site" id="siteChip"><span class="sdot"></span><span id="host">—</span></span>
+    <span class="grow"></span>
+    <button class="iconbtn" id="openSettings" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5 5l2.1 2.1M16.9 16.9 19 19M19 5l-2.1 2.1M7.1 16.9 5 19"/></svg>
     </button>
   </header>
+  <hr class="hr">
 
-  <main class="body">
-    <button class="btn primary cta" id="annotate">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg>
-      <span id="annotateLabel">Annotate this page</span>
-      <span class="grow"></span><kbd>⌥⇧S</kbd>
+  <main class="bd">
+    <button class="btn primary primary-cta" id="annotate">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></svg>
+      <span class="pl"><span id="annotateLabel">Annotate this page</span><span class="sub">Draw, pin and label the bug</span></span>
+      <span class="kb"><kbd>⌥</kbd><kbd>⇧</kbd><kbd>S</kbd></span>
     </button>
-    <button class="btn rec-btn" id="record">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5" fill="currentColor"/></svg>
-      <span id="recordLabel">Record video</span>
-      <span class="grow"></span><kbd>⌥⇧R</kbd>
-    </button>
-    <p class="restricted" id="restricted" hidden>Chrome doesn’t allow extensions on this page. Open a website to add feedback.</p>
 
-    <div class="stats">
-      <button class="stat" id="siteStat"><b id="siteCount">0</b><span>on this site</span></button>
-      <button class="stat" id="totalStat"><b id="totalCount">0</b><span>across all sites</span></button>
+    <div class="duo">
+      <button class="tile" id="record">
+        <span class="ti"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.4" fill="currentColor" stroke="none"/></svg></span>
+        <span class="tt" id="recordLabel">Record</span>
+        <span class="pro-lock" id="recordLock" hidden>Pro</span>
+        <kbd id="recordKbd">⌥⇧R</kbd>
+      </button>
+      <button class="tile" id="openReport">
+        <span class="ti"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2.4"/><path d="M8 9h8M8 13h6"/></svg></span>
+        <span class="tt">Open report</span>
+      </button>
     </div>
 
-    <button class="btn report" id="openReport">
-      Open feedback report
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </button>
+    <p class="restricted" id="restricted" hidden>Chrome doesn’t allow extensions on this page. Open a website to capture a bug.</p>
+
+    <div class="sec">
+      <span class="l">Recent on this site</span>
+      <span class="n" id="recentCount" hidden>0</span>
+      <span class="grow"></span>
+      <button class="seclink" id="viewAll">Open report
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="list" id="recentList"></div>
+    <p class="empty" id="recentEmpty" hidden>No captures on this site yet. Press <kbd>⌥⇧S</kbd> to start.</p>
   </main>
 
-  <section class="settings">
-    <label class="row">
-      <div class="grow"><div class="t">Floating button</div><div class="d">Show the feedback button on websites</div></div>
-      <span class="switch"><input type="checkbox" id="showLauncher"><span></span></span>
-    </label>
-    <label class="row" id="siteRow">
-      <div class="grow"><div class="t">Hide on this site</div><div class="d" id="siteRowDesc">Keep this site clean</div></div>
-      <span class="switch"><input type="checkbox" id="hideHere"><span></span></span>
-    </label>
-    <div class="row col">
-      <label class="t" for="reviewer">Your name</label>
-      <input class="input" id="reviewer" placeholder="Shown as the reporter in exports" maxlength="60">
+  <footer class="acct" id="account" hidden>
+    <div class="acct-id">
+      <span class="av" id="acctAvatar" aria-hidden="true"></span>
+      <div class="grow">
+        <div class="nm" id="acctTitle">Not signed in</div>
+        <div class="pln" id="acctDesc">Sign in to unlock Pro</div>
+      </div>
+      <span class="chip free" id="planChip" hidden>Free</span>
+      <button class="signin" id="signIn">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 11v2.9h4.1a3.9 3.9 0 0 1-1.7 2.6l2.7 2.1c1.6-1.5 2.5-3.6 2.5-6.1 0-.6-.05-1.1-.15-1.5Z"/><path d="M6.6 12a5.4 5.4 0 0 1 8-4.7l2.3-2.3A9 9 0 0 0 4 8.2l2.9 2.2c.3-.9.9-1.7 1.7-2.4Z" opacity=".85"/></svg>
+        Sign in
+      </button>
     </div>
-  </section>
+    <div class="acct-actions" id="acctActions" hidden>
+      <button class="mini p" id="upgrade" hidden>Upgrade to Pro</button>
+      <button class="mini g" id="refreshLicense">Refresh</button>
+      <button class="mini g" id="signOut">Sign out</button>
+    </div>
+    <p class="acct-note" id="acctNote" hidden></p>
+  </footer>
+
   <script type="module" src="popup.js"></script>
 </body>
 </html>

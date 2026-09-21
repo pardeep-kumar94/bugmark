@@ -9,6 +9,8 @@
 //   NEXT_PUBLIC_SUPPORT_EMAIL   → extension CONFIG.supportEmail
 //   BUGMARK_GA_MEASUREMENT_ID   → extension anonymous analytics (GA4 property linked to Firebase), e.g. G-XXXXXXX
 //   BUGMARK_GA_API_SECRET       → GA4 Measurement Protocol API secret
+//   BUGMARK_OAUTH_CLIENT_ID     → Google OAuth client (Chrome-extension type) for Pro sign-in →
+//                                 manifest oauth2.client_id + CONFIG.licensing.oauthClientId
 //
 // What it does
 //  • copies the extension (skipping "Claude outputs", dotfiles, *.zip, *.pem)
@@ -78,6 +80,11 @@ copy(extDir, out);
 const manifestPath = join(out, 'manifest.json');
 const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
 manifest.key = pubB64;
+// Google OAuth client ID for the extension's Google sign-in (Pro licensing).
+// Must be a "Chrome extension" OAuth client tied to this build's pinned extension ID.
+if (process.env.BUGMARK_OAUTH_CLIENT_ID && manifest.oauth2) {
+  manifest.oauth2.client_id = process.env.BUGMARK_OAUTH_CLIENT_ID;
+}
 if (publicSite && manifest.externally_connectable?.matches) {
   const host = new URL(siteUrl).host;
   manifest.externally_connectable.matches = [`https://${host}/*`, ...(host.startsWith('www.') ? [`https://${host.slice(4)}/*`] : [`https://www.${host}/*`])];
@@ -92,6 +99,7 @@ if (existsSync(configPath)) {
   if (process.env.NEXT_PUBLIC_SUPPORT_EMAIL) cfg = cfg.replace(/supportEmail: '[^']*'/, `supportEmail: '${q(process.env.NEXT_PUBLIC_SUPPORT_EMAIL)}'`);
   if (process.env.BUGMARK_GA_MEASUREMENT_ID) cfg = cfg.replace(/measurementId: '[^']*'/, `measurementId: '${q(process.env.BUGMARK_GA_MEASUREMENT_ID)}'`);
   if (process.env.BUGMARK_GA_API_SECRET) cfg = cfg.replace(/apiSecret: '[^']*'/, `apiSecret: '${q(process.env.BUGMARK_GA_API_SECRET)}'`);
+  if (process.env.BUGMARK_OAUTH_CLIENT_ID) cfg = cfg.replace(/oauthClientId: '[^']*'/, `oauthClientId: '${q(process.env.BUGMARK_OAUTH_CLIENT_ID)}'`);
   cfg = cfg.replace(/debug: true/, 'debug: false');
   writeFileSync(configPath, cfg);
 }

@@ -21,7 +21,7 @@ export function Nav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? 'border-b border-line bg-canvas shadow-[0_8px_24px_-12px_rgba(0,0,0,.8)]'
+          ? 'glass border-b border-line'
           : 'border-b border-transparent bg-transparent'
       }`}
     >
@@ -37,6 +37,10 @@ export function Nav() {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2">
+          <Link href="/account" className="btn-secondary hidden !h-10 !rounded-lg !px-4 !text-[14px] sm:inline-flex">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+            Sign in
+          </Link>
           <a href={site.installUrl} className="btn-primary !h-10 !rounded-lg !px-4 !text-[14px]">
             <IconPuzzle size={16} />
             <span className="hidden sm:inline">Add to Chrome</span>
@@ -62,6 +66,9 @@ export function Nav() {
                 {n.label}
               </a>
             ))}
+            <Link href="/account" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-ink-2 hover:bg-surface-2">
+              Sign in / Account
+            </Link>
           </nav>
         </div>
       )}

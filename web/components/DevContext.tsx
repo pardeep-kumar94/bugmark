@@ -37,7 +37,7 @@ export function DevContext() {
                 className={`flex items-start gap-3 rounded-xl border px-4 py-3 text-left transition ${active === t.id ? 'border-accent/40 bg-accent/[.06]' : 'border-line bg-canvas/60 hover:border-line-2'}`}>
                 <span className={`mt-0.5 [&_svg]:h-[18px] [&_svg]:w-[18px] ${active === t.id ? 'text-accent' : 'text-mute'}`}>{t.icon}</span>
                 <span>
-                  <span className="block font-mono text-[14px] font-semibold tracking-[-0.01em] text-ink">{t.label}</span>
+                  <span className="block text-[14px] font-semibold tracking-[-0.01em] text-ink">{t.label}</span>
                   {active === t.id && <span className="mt-1 block text-[14px] leading-relaxed text-dim">{t.note}</span>}
                 </span>
               </button>
@@ -46,19 +46,19 @@ export function DevContext() {
 
           <div className="mt-6 flex items-start gap-3 rounded-xl border border-line bg-canvas/60 px-4 py-3 text-[13.5px] leading-relaxed text-dim">
             <IconShield size={18} className="mt-0.5 shrink-0 text-accent" />
-            <span>Passwords, tokens, API keys, card numbers and auth headers are replaced with <code className="rounded bg-surface-3 px-1 font-mono text-[12px] text-warn">[redacted]</code> before anything is saved.</span>
+            <span>Passwords, tokens, API keys, card numbers and auth headers are replaced with <code className="rounded bg-surface-3 px-1 text-[12px] text-warn">[redacted]</code> before anything is saved.</span>
           </div>
         </div>
 
         <div role="tabpanel" aria-label={tab.label} className="relative">
           <div className="absolute inset-8 -z-10 rounded-[40px] bg-accent opacity-[.08] blur-[90px]" />
-          <div className="overflow-hidden rounded-2xl border border-white/10 shadow-[0_30px_80px_-30px_rgba(0,0,0,.85)]">
+          <div className="overflow-hidden rounded-2xl border border-line-2 shadow-[var(--sh-lg)]">
             {tabs.map((t) => (
               <Image key={t.id} src={t.shot.src} width={t.shot.w} height={t.shot.h} alt={t.shot.alt} sizes="(min-width: 1024px) 680px, 100vw"
                 loading="eager" className={`h-auto w-full ${active === t.id ? 'block' : 'hidden'}`} />
             ))}
           </div>
-          <ul className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 font-mono text-[12.5px] text-mute">
+          <ul className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-[12.5px] text-mute">
             {['Copy as cURL', 'Download HAR', 'Filter to failed requests', '16 KB / 32 KB body limits'].map((x) => (
               <li key={x} className="flex items-center gap-1.5"><IconCheck size={13} className="text-accent" />{x}</li>
             ))}

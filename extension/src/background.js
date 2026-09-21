@@ -3,6 +3,11 @@ import { getGithub, setGithub, createIssue, listRepos } from './shared/github.js
 import { DEFAULT_SETTINGS } from './shared/settings.js';
 import { CONFIG } from './shared/config.js';
 import { track, bucket } from './shared/analytics.js';
+import { startPolling, licensingEnabled, isPro, openCheckout } from './shared/license.js';
+
+// Periodically refresh the Pro license so a purchase made on the website unlocks
+// the extension without the user re-opening the popup. No-op when licensing is off.
+startPolling();
 
 const REPORT_URL = chrome.runtime.getURL('src/report/report.html');
 const OPTIONS_URL = chrome.runtime.getURL('src/options/options.html');
@@ -99,6 +104,11 @@ function trackSaved(it) {
 
 async function startRecording(tabId, source = 'shortcut') {
   if (await getRecording()) throw new Error('A recording is already running');
+  // Screen recording is a Pro feature — gate every entry point (popup, shortcut, launcher).
+  if (licensingEnabled && !(await isPro())) {
+    await openCheckout();
+    throw new Error('Screen recording is a Bugmark Pro feature');
+  }
   const settings = { ...DEFAULT_SETTINGS, ...((await chrome.storage.local.get('settings')).settings || {}) };
   await ensureContent(tabId);
   await ensureOffscreen();

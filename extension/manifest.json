@@ -35,8 +35,18 @@
     "activeTab",
     "tabCapture",
     "offscreen",
-    "debugger"
+    "debugger",
+    "identity",
+    "alarms"
   ],
+  "oauth2": {
+    "client_id": "455219105372-29lrnj28t5mgqfb1pub4td1pgrco8s79.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile"
+    ]
+  },
   "host_permissions": [
     "<all_urls>"
   ],

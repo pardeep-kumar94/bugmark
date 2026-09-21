@@ -56,7 +56,7 @@ export function Showcase() {
                   <span className="grid h-9 w-9 place-items-center rounded-lg border border-accent/20 bg-accent/10 text-accent [&_svg]:h-[18px] [&_svg]:w-[18px]">{r.icon}</span>
                   <span className="kicker">{r.kicker}</span>
                 </div>
-                <h3 className="mt-5 font-mono text-[26px] font-semibold leading-[1.15] tracking-[-0.04em] text-balance sm:text-[32px]">{r.title}</h3>
+                <h3 className="mt-5 text-[26px] font-semibold leading-[1.15] tracking-[-0.04em] text-balance sm:text-[32px]">{r.title}</h3>
                 <p className="mt-4 text-[16.5px] leading-relaxed text-dim text-pretty">{r.text}</p>
                 <ul className="mt-6 space-y-2.5">
                   {r.points.map((p) => (
@@ -70,7 +70,7 @@ export function Showcase() {
                 <Frame shot={r.shot} url={r.url} chrome={!!r.url} sizes="(min-width: 1024px) 680px, 100vw" />
                 {r.inset && (
                   <div className={`absolute hidden sm:block ${r.inset.className}`}>
-                    <div className="overflow-hidden rounded-xl border border-white/15 shadow-[0_24px_60px_-20px_rgba(0,0,0,.9)]">
+                    <div className="overflow-hidden rounded-xl border border-line-2 shadow-[var(--sh-lg)]">
                       <Image src={r.inset.shot.src} width={r.inset.shot.w} height={r.inset.shot.h} alt={r.inset.shot.alt} sizes="400px" className="block h-auto w-full" />
                     </div>
                   </div>

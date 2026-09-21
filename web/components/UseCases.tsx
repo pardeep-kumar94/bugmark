@@ -23,7 +23,7 @@ export function UseCases() {
           {cases.map((c, i) => (
             <Reveal key={c.who} delay={i * 80} className="card group p-6 transition hover:-translate-y-1 hover:border-line-2">
               <span className="grid h-11 w-11 place-items-center rounded-lg border border-accent/20 bg-accent/10 text-accent [&_svg]:h-5 [&_svg]:w-5">{c.icon}</span>
-              <h3 className="mt-5 font-mono text-[16.5px] font-semibold tracking-[-0.02em]">{c.who}</h3>
+              <h3 className="mt-5 text-[16.5px] font-semibold tracking-[-0.02em]">{c.who}</h3>
               <p className="mt-2 text-[14.5px] leading-relaxed text-dim">{c.what}</p>
             </Reveal>
           ))}

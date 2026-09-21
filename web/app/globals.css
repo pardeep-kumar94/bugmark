@@ -1,117 +1,147 @@
 @import "tailwindcss";
 
 /* ─────────────────────────────────────────────────────────────
-   Bugmark — developer theme
-   Dark IDE-style canvas · terminal-green → cyan accent · Geist Mono display
+   Bugmark — Apple / premium-enterprise restraint
+   Light only (paper white) · rationed blue accent · Bricolage display
+   Token names preserved from the previous theme so components
+   reskin through the tokens. Palette per design-system.md §1.
    ───────────────────────────────────────────────────────────── */
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", var(--font-geist-sans), "Segoe UI", Inter, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", Menlo, monospace;
+  --font-display: var(--font-bricolage), var(--font-geist-sans), system-ui, sans-serif;
 
-  /* surfaces */
-  --color-canvas: #090b0f;
-  --color-surface: #0e1217;
-  --color-surface-2: #131820;
-  --color-surface-3: #1a2029;
-  --color-line: #1e252e;
-  --color-line-2: #2b3440;
+  /* surfaces — neutral paper */
+  --color-canvas: #FFFFFF;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F5F5F7;
+  --color-surface-3: #FBFBFD;
+  --color-line: #EAEAEE;
+  --color-line-2: #DEDEE3;
 
-  /* text */
-  --color-ink: #e6edf3;
-  --color-ink-2: #c9d1d9;
-  --color-dim: #9ba6b2;
-  --color-mute: #6b7684;
+  /* text — neutral ink */
+  --color-ink: #1D1D1F;
+  --color-ink-2: #3A3A3E;
+  --color-dim: #6E6E73;   /* muted */
+  --color-mute: #9A9AA1;  /* faint */
 
-  /* accent */
-  --color-accent: #4ade80;
-  --color-accent-deep: #22c55e;
-  --color-accent-2: #22d3ee;
-  --color-on-accent: #03140a;
-  --color-bug: #ff5c7a;
-  --color-warn: #fbbf24;
+  /* accent — rationed blue */
+  --color-accent: #0071E3;       /* fills, focus, large text */
+  --color-accent-ink: #0062C4;   /* accent TEXT & links (AA on white) */
+  --color-accent-deep: #0062C4;
+  --color-accent-2: #0062C4;
+  --color-accent-soft: #EAF2FE;
+  --color-on-accent: #ffffff;
 
-  --animate-draw: draw 1.6s cubic-bezier(.65,0,.35,1) forwards;
+  /* semantic */
+  --color-bug: #D0342C;
+  --color-warn: #C77C11;
+  --color-pro: #1D8A54;
+
   --animate-float: float 6s ease-in-out infinite;
   --animate-rise: rise .7s cubic-bezier(.2,.8,.2,1) both;
   --animate-blink: blink 1.1s steps(1) infinite;
 
-  @keyframes draw { to { stroke-dashoffset: 0; } }
   @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
   @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
   @keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 }
 
+/* Depth tokens (not Tailwind color tokens) */
+:root {
+  --sh-sm: 0 1px 1px rgba(20,20,30,.04);
+  --sh:    0 6px 20px -8px rgba(20,25,40,.16), 0 2px 6px rgba(20,25,40,.05);
+  --sh-lg: 0 30px 70px -34px rgba(15,20,40,.34);
+  --key:   0 1px 0 rgba(20,20,30,.10), inset 0 -1px 0 rgba(20,20,30,.10);
+}
+
+/* Light theme only — dark mode intentionally not supported. */
+
+/* ── Gradient / texture utilities ────────────────────────────── */
+/* Top-lit accent fill for primary surfaces (buttons, gradient borders). */
 @utility bg-brand {
-  background-image: linear-gradient(135deg, #4ade80 0%, #2dd4bf 55%, #22d3ee 100%);
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--color-accent) 86%, #fff), var(--color-accent));
+}
+@utility bg-brand-soft {
+  background-color: var(--color-accent-soft);
 }
 @utility bg-brand-btn {
-  background-color: #4ade80;
+  background-image: linear-gradient(180deg, color-mix(in srgb, var(--color-accent) 86%, #fff), var(--color-accent));
 }
+/* Solid accent text (used for short phrases; hero uses two-tone ink+muted). */
 @utility text-brand {
-  background-image: linear-gradient(95deg, #4ade80 0%, #2dd4bf 50%, #22d3ee 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-accent-ink);
 }
 @utility bg-grid {
   background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgb(30 30 40 / 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(30 30 40 / 0.04) 1px, transparent 1px);
   background-size: 44px 44px;
 }
 @utility bg-dots {
-  background-image: radial-gradient(rgb(255 255 255 / 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(30 30 40 / 0.06) 1px, transparent 1px);
   background-size: 18px 18px;
 }
+@utility glass {
+  background-color: color-mix(in srgb, var(--color-canvas) 72%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+}
 @utility glass-dark {
-  background-image: linear-gradient(180deg, #161c24 0%, #0e1217 100%);
+  background-image: linear-gradient(180deg, var(--color-surface) 0%, var(--color-surface-2) 100%);
 }
 
 @layer base {
-  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; color-scheme: dark; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; color-scheme: light; }
   body {
     background: var(--color-canvas);
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    letter-spacing: -0.011em;
   }
-  ::selection { background: rgb(74 222 128 / 0.25); color: #fff; }
-  :focus-visible { outline: 2px solid #4ade80; outline-offset: 3px; border-radius: 6px; }
+  /* Headings use Bricolage Grotesque across the site. */
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.035em; }
+  ::selection { background: color-mix(in srgb, var(--color-accent) 22%, transparent); color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 6px; }
   summary::-webkit-details-marker { display: none; }
 }
 
 @layer components {
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 h-12 font-mono text-[14px] font-semibold text-on-accent bg-accent transition;
-    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.25) inset, 0 10px 34px -12px rgb(74 222 128 / 0.6);
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 h-12 text-[15px] font-semibold text-on-accent bg-brand transition;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 10px 24px -12px color-mix(in srgb, var(--color-accent) 75%, transparent);
   }
-  .btn-primary:hover { background-color: #6ee79a; transform: translateY(-1px); box-shadow: 0 0 0 1px rgb(255 255 255 / 0.3) inset, 0 14px 40px -12px rgb(74 222 128 / 0.75); }
+  .btn-primary:hover { filter: brightness(1.04); transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 16px 34px -14px color-mix(in srgb, var(--color-accent) 80%, transparent); }
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 h-12 font-mono text-[14px] font-semibold text-ink bg-surface-2 border border-line-2 transition;
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 h-12 text-[15px] font-semibold text-ink bg-surface border border-line-2 transition;
+    box-shadow: var(--sh-sm);
   }
-  .btn-secondary:hover { border-color: #3d4856; background-color: var(--color-surface-3); transform: translateY(-1px); }
+  .btn-secondary:hover { border-color: var(--color-accent); color: var(--color-accent-ink); transform: translateY(-1px); }
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full border border-line-2 bg-surface/70 px-3 py-1 font-mono text-[12.5px] text-dim backdrop-blur;
+    @apply inline-flex items-center gap-2 rounded-full border border-line-2 bg-brand-soft px-3 py-1 text-[12.5px] font-semibold text-accent-ink;
   }
-  /* "// section" labels */
   .kicker {
-    @apply font-mono text-[13px] font-medium text-accent;
+    @apply text-[12.5px] font-bold uppercase tracking-[0.12em] text-accent-ink;
+    font-family: var(--font-sans);
   }
-  .kicker::before { content: "// "; color: var(--color-mute); }
   .section-title {
-    @apply font-mono text-[30px] leading-[1.1] sm:text-[44px] font-semibold tracking-[-0.045em] text-ink text-balance;
+    @apply text-[30px] leading-[1.04] sm:text-[44px] font-extrabold tracking-[-0.035em] text-ink text-balance;
+    font-family: var(--font-display);
   }
   .section-lead {
     @apply mt-4 text-lg leading-relaxed text-dim text-pretty;
   }
   .card {
-    @apply rounded-2xl border border-line bg-surface;
-    box-shadow: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 20px 40px -24px rgb(0 0 0 / 0.6);
+    @apply rounded-2xl border border-line-2 bg-surface;
+    box-shadow: var(--sh);
   }
   .kbd {
-    @apply inline-flex items-center rounded-md border border-line-2 bg-surface-3 px-1.5 py-0.5 font-mono text-[11px] font-medium text-ink-2;
+    @apply inline-flex items-center rounded-md border border-line-2 bg-surface px-1.5 py-0.5 font-mono text-[11px] font-medium text-ink-2;
+    box-shadow: var(--key);
   }
+  .code { @apply rounded-md border border-line bg-surface-2 px-1.5 py-0.5 font-mono text-[12.5px] text-ink-2; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -120,6 +150,75 @@
 
 @keyframes scrollpage { 0%, 12% { transform: translateY(0); } 50%, 62% { transform: translateY(-90px); } 100% { transform: translateY(0); } }
 
-@layer components {
-  .code { @apply rounded-md border border-line bg-surface-2 px-1.5 py-0.5 font-mono text-[12.5px] text-ink-2; }
+/* ── Hero signature: bug crawl → capture reticle ─────────────── */
+.bug-stage { position: absolute; pointer-events: none; }
+.bug-crawl {
+  position: absolute; top: 0; left: 0; width: 26px; height: 26px;
+  offset-path: path("M 0 120 C 90 40, 190 200, 300 96 S 520 20, 560 150");
+  offset-rotate: auto;
+  animation: bugcrawl 9s cubic-bezier(.5,0,.5,1) infinite;
+  color: var(--color-ink-2);
+}
+@keyframes bugcrawl {
+  0%   { offset-distance: 0%;   opacity: 0; }
+  5%   { opacity: 1; }
+  58%  { offset-distance: 100%; opacity: 1; }
+  100% { offset-distance: 100%; opacity: 1; }
+}
+/* reticle sits on the bug's path-end point (560,150) */
+.reticle {
+  position: absolute; left: 560px; top: 150px;
+  width: 72px; height: 72px; margin: -36px 0 0 -36px;
+  opacity: 0; transform: scale(1.45);
+  animation: reticle 9s cubic-bezier(.2,.8,.2,1) infinite;
+}
+@keyframes reticle {
+  0%, 56% { opacity: 0; transform: scale(1.45); }
+  64%     { opacity: 1; transform: scale(1); }
+  100%    { opacity: 1; transform: scale(1); }
+}
+.reticle .corner { position: absolute; width: 16px; height: 16px; border: 2px solid var(--color-accent); }
+.reticle .tl { top: 0; left: 0; border-right: 0; border-bottom: 0; border-top-left-radius: 3px; }
+.reticle .tr { top: 0; right: 0; border-left: 0; border-bottom: 0; border-top-right-radius: 3px; }
+.reticle .bl { bottom: 0; left: 0; border-right: 0; border-top: 0; border-bottom-left-radius: 3px; }
+.reticle .br { bottom: 0; right: 0; border-left: 0; border-top: 0; border-bottom-right-radius: 3px; }
+.reticle .scan {
+  position: absolute; left: 4px; right: 4px; height: 2px; top: 4px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  box-shadow: 0 0 8px 1px color-mix(in srgb, var(--color-accent) 60%, transparent);
+  opacity: 0; animation: scan 9s linear infinite;
+}
+@keyframes scan {
+  0%, 62% { opacity: 0; top: 4px; }
+  64%     { opacity: 1; }
+  74%     { top: 62px; opacity: 1; }
+  76%, 100% { opacity: 0; }
+}
+.reticle .flash {
+  position: absolute; inset: 0; border-radius: 6px;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-accent) 55%, transparent), transparent);
+  opacity: 0; animation: capflash 9s ease-out infinite;
+}
+@keyframes capflash { 0%, 74% { opacity: 0; } 78% { opacity: .9; } 88%, 100% { opacity: 0; } }
+.captag {
+  position: absolute; left: 560px; top: 196px;
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  padding: 4px 9px; border-radius: 7px;
+  background: var(--color-accent); color: #fff;
+  font: 600 11px/1 var(--font-mono);
+  box-shadow: var(--sh);
+  opacity: 0; transform: translateY(4px);
+  animation: captag 9s ease-out infinite;
+}
+.captag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+@keyframes captag {
+  0%, 78% { opacity: 0; transform: translateY(4px); }
+  86%     { opacity: 1; transform: translateY(0); }
+  100%    { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bug-crawl { offset-distance: 100%; opacity: 1; }
+  .reticle { opacity: 1; transform: scale(1); }
+  .reticle .scan, .reticle .flash { opacity: 0; }
+  .captag { opacity: 1; transform: none; }
 }

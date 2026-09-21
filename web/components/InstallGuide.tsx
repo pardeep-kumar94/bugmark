@@ -75,7 +75,7 @@ export function InstallGuide() {
           ) : (
             <span className="eyebrow"><IconDownload size={14} className="text-accent" />{started ? 'Your download has started' : 'Preparing your download…'}</span>
           )}
-          <h1 className="mx-auto mt-6 max-w-3xl font-mono text-[34px] font-semibold leading-[1.08] tracking-[-0.05em] text-balance sm:text-[50px]">
+          <h1 className="mx-auto mt-6 max-w-3xl text-[34px] font-semibold leading-[1.08] tracking-[-0.05em] text-balance sm:text-[50px]">
             {installed ? <>You’re all set. <span className="text-brand">Go find some bugs.</span></> : <>Add Bugmark to Chrome <span className="text-brand">in under a minute.</span></>}
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-[17px] leading-relaxed text-dim">
@@ -87,7 +87,7 @@ export function InstallGuide() {
             <button onClick={() => download('button')} className="btn-primary w-full sm:w-auto">
               <IconDownload size={18} />{started ? 'Download again' : 'Download Bugmark'}
             </button>
-            <span className="font-mono text-[12.5px] text-mute">v{release.version} · {kb(release.bytes)} · .zip</span>
+            <span className="text-[12.5px] text-mute">v{release.version} · {kb(release.bytes)} · .zip</span>
           </div>
         </div>
 
@@ -98,14 +98,14 @@ export function InstallGuide() {
           </Step>
           <Step n={2} title="Open the extensions page">
             Type <code className="code">{extUrl}</code> in the address bar and press Enter.
-            <button onClick={copyUrl} className="ml-2 inline-flex h-7 items-center gap-1.5 rounded-md border border-line-2 bg-surface-2 px-2.5 font-mono text-[12px] text-ink-2 hover:border-accent/40">
+            <button onClick={copyUrl} className="ml-2 inline-flex h-7 items-center gap-1.5 rounded-md border border-line-2 bg-surface-2 px-2.5 text-[12px] text-ink-2 hover:border-accent/40">
               {copied ? <><IconCheck size={12} className="text-accent" />Copied</> : 'Copy'}
             </button>
             <span className="mt-1 block text-[13.5px] text-mute">Browsers don’t allow websites to link to this page directly.</span>
           </Step>
           <Step n={3} title="Turn on Developer mode, then click “Load unpacked”">
             The switch is in the top-right corner{browser === 'edge' ? ' (in Edge, it’s in the left sidebar)' : ''}. Click <b>Load unpacked</b> and choose the <code className="code">bugmark</code> folder — the one that contains <code className="code">manifest.json</code>.
-            <div className="mt-5 overflow-hidden rounded-xl border border-white/10 bg-white shadow-[0_20px_50px_-24px_rgba(0,0,0,.9)]">
+            <div className="mt-5 overflow-hidden rounded-xl border border-line-2 bg-surface shadow-[var(--sh-lg)]">
               <Image src={screens.installPage.src} width={screens.installPage.w} height={screens.installPage.h} alt={screens.installPage.alt} sizes="(min-width: 768px) 760px, 100vw" className="block h-auto w-full" />
             </div>
           </Step>
@@ -129,14 +129,14 @@ export function InstallGuide() {
         </div>
 
         <details className="group mt-10 rounded-2xl border border-line bg-surface/60 p-5">
-          <summary className="flex cursor-pointer list-none items-center gap-2 font-mono text-[14px] font-semibold">
+          <summary className="flex cursor-pointer list-none items-center gap-2 text-[14px] font-semibold">
             <IconKeyboard size={17} className="text-accent" />Troubleshooting &amp; file details
           </summary>
           <ul className="mt-4 space-y-2.5 text-[14.5px] leading-relaxed text-dim">
             <li><b className="text-ink-2">“Manifest file is missing or unreadable”</b> — you selected the zip or a parent folder. Unzip first and pick the folder that directly contains <code className="code">manifest.json</code>.</li>
             <li><b className="text-ink-2">The button doesn’t appear on a page</b> — refresh tabs that were open before installing. Browser pages like the Chrome Web Store or <code className="code">chrome://</code> pages can’t be annotated.</li>
             <li><b className="text-ink-2">Recording has no voice</b> — the first time, allow the microphone on the page Bugmark opens (Settings → General → allow microphone).</li>
-            <li className="break-all font-mono text-[12px] text-mute">SHA-256 {release.sha256} · extension ID {release.extensionId}</li>
+            <li className="break-all text-[12px] text-mute">SHA-256 {release.sha256} · extension ID {release.extensionId}</li>
           </ul>
           <p className="mt-4 text-[14px] text-dim">Still stuck? Email <a className="font-medium text-accent underline decoration-accent/30 underline-offset-4" href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>
         </details>
@@ -148,9 +148,9 @@ export function InstallGuide() {
 function Step({ n, title, children }: { n: number; title: string; children: React.ReactNode }) {
   return (
     <li className="card grid grid-cols-[auto_1fr] gap-4 p-5 sm:gap-5 sm:p-6">
-      <span className="grid h-9 w-9 place-items-center rounded-lg border border-accent/25 bg-accent/10 font-mono text-[14px] font-semibold text-accent">{n}</span>
+      <span className="grid h-9 w-9 place-items-center rounded-lg border border-accent/25 bg-accent/10 text-[14px] font-semibold text-accent">{n}</span>
       <div className="min-w-0">
-        <h2 className="font-mono text-[17px] font-semibold tracking-[-0.02em] text-ink">{title}</h2>
+        <h2 className="text-[17px] font-semibold tracking-[-0.02em] text-ink">{title}</h2>
         <div className="mt-1.5 text-[15px] leading-relaxed text-dim [&_b]:font-semibold [&_b]:text-ink-2">{children}</div>
       </div>
     </li>
@@ -160,7 +160,7 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
 function Note({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="rounded-2xl border border-line bg-surface/60 p-5">
-      <h3 className="font-mono text-[14px] font-semibold text-ink">{title}</h3>
+      <h3 className="text-[14px] font-semibold text-ink">{title}</h3>
       <p className="mt-1.5 text-[14px] leading-relaxed text-dim [&_b]:text-ink-2">{children}</p>
     </div>
   );

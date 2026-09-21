@@ -6,7 +6,7 @@ export const DEFAULT_SETTINGS = {
   recordSteps: true,       // remember clicks / typing / navigation as "steps to reproduce"
   recordMic: true,
   recordBodies: true,      // save request params/bodies and responses with network logs (secrets masked)         // include microphone narration in screen recordings
-  brand: { company: '', logo: '', accent: '#16A34A', website: '' },
+  brand: { company: '', logo: '', accent: '#0071E3', website: '' },
 };
 
 export async function getSettings() {
