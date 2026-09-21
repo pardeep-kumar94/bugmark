@@ -40,9 +40,11 @@ export async function createCheckout({ sub, email, returnUrl }: CheckoutParams):
       product_cart: [{ product_id: PRODUCT_ID, quantity: 1 }],
       return_url: returnUrl,
       metadata: { sub },
-      ...(email
-        ? { customer: { email, name: email }, billing: { email } }
-        : {}),
+      // Dodo requires both `customer` and `billing`. `billing` is a billing
+      // *address* (country is the only required field, ISO 3166-1 alpha-2) —
+      // the hosted checkout lets the buyer edit it, so we send a placeholder.
+      customer: email ? { email, name: email } : { email: `${sub}@users.noreply.bugmark.site` },
+      billing: { country: 'US' },
     }),
   });
 
