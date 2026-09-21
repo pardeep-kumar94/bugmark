@@ -17,13 +17,19 @@ export const site = {
   // (public/downloads, built with `npm run package:extension`). Once Bugmark is on the Chrome Web Store,
   // set chromeStoreUrl and point installUrl at it.
   installUrl: '/install',
-  chromeStoreUrl: '', // e.g. 'https://chromewebstore.google.com/detail/bugmark/<id>'
+  chromeStoreUrl: 'https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj',
   // Extension ID — lets the website detect that Bugmark is installed. Defaults to the pinned ID of the downloadable build.
   extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID || release.extensionId || '',
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL || 'support@your-domain.com',
   // Public profiles, used for Organization structured data (sameAs). Add GitHub, X, LinkedIn, Product Hunt…
   sameAs: [] as string[],
 } as const;
+
+// Where "Add to Chrome" buttons point: the Chrome Web Store listing once published,
+// otherwise the manual download/install page. Buttons should use this, not installUrl.
+export const ctaHref: string = site.chromeStoreUrl || site.installUrl;
+// True when the CTA leaves our origin (opens the store in a new tab).
+export const ctaExternal = ctaHref.startsWith('http');
 
 export const nav = [
   { href: '/#product', label: 'Product' },

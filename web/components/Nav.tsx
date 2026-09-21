@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Logo } from './Logo';
-import { nav, site } from '@/lib/site';
+import { nav } from '@/lib/site';
+import { InstallLink } from './InstallLink';
 import { IconPuzzle, IconX } from './icons';
 
 export function Nav() {
@@ -41,11 +42,11 @@ export function Nav() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
             Sign in
           </Link>
-          <a href={site.installUrl} className="btn-primary !h-10 !rounded-lg !px-4 !text-[14px]">
+          <InstallLink className="btn-primary !h-10 !rounded-lg !px-4 !text-[14px]">
             <IconPuzzle size={16} />
             <span className="hidden sm:inline">Add to Chrome</span>
             <span className="sm:hidden">Install</span>
-          </a>
+          </InstallLink>
           <button
             className="grid h-10 w-10 place-items-center rounded-lg text-ink-2 md:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}

@@ -1,4 +1,4 @@
-import { site } from '@/lib/site';
+import { InstallLink } from './InstallLink';
 import { IconCheck, IconPuzzle } from './icons';
 
 const groups: { title: string; items: string[] }[] = [
@@ -40,7 +40,7 @@ export function Free() {
                 <p className="mt-3 max-w-md text-[15px] text-dim">No account, no credit card, no item limits and no watermark. Your captures stay on your device.</p>
               </div>
               <div className="flex flex-col items-stretch gap-2 sm:items-start md:items-end">
-                <a href={site.installUrl} className="btn-primary"><IconPuzzle size={18} />Add to Chrome — free</a>
+                <InstallLink className="btn-primary"><IconPuzzle size={18} />Add to Chrome — free</InstallLink>
                 <span className="text-center text-[12px] text-mute md:text-right">Chrome · Edge · Brave · Arc</span>
               </div>
             </div>

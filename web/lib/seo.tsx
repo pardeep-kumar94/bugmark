@@ -1,4 +1,4 @@
-import { site } from './site';
+import { site, ctaHref } from './site';
 import { faqs as homeFaqs } from '@/components/FAQ';
 
 export const abs = (path: string) => (path.startsWith('http') ? path : `${site.url}${path.startsWith('/') ? '' : '/'}${path}`);
@@ -43,7 +43,7 @@ export const softwareLd = () => ({
   browserRequirements: 'Requires Google Chrome or a Chromium-based browser (Edge, Brave, Arc)',
   isAccessibleForFree: true,
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
-  downloadUrl: abs(site.installUrl),
+  downloadUrl: abs(ctaHref),
   screenshot: [abs('/screens/hero-capture.webp'), abs('/screens/network-payload.webp'), abs('/screens/dashboard.webp')],
   featureList: [
     'Annotated screenshots (visible, full page, delayed, element, mobile/tablet/desktop)',

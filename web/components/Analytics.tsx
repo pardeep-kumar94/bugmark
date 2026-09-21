@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useReportWebVitals } from 'next/web-vitals';
 import { analyticsEnabled, consentMode, initAnalytics, readConsent, setConsent, track } from '@/lib/analytics';
-import { site } from '@/lib/site';
+import { site, ctaHref } from '@/lib/site';
 
 /**
  * Site-wide analytics (Firebase / GA4):
@@ -103,7 +103,8 @@ function Interactions() {
       try { url = new URL(href, location.href); } catch {}
       if (!url) return;
 
-      if (url.origin === location.origin && url.pathname === site.installUrl) {
+      const isInstallCta = href === ctaHref || (url.origin === location.origin && url.pathname === site.installUrl);
+      if (isInstallCta) {
         track('install_click', { section, link_text: text, page_path: location.pathname });
       } else if (href.startsWith('mailto:')) {
         track('contact_click', { section });

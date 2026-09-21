@@ -248,7 +248,7 @@ export const guidePages: ContentPage[] = [
           { type: 'shot', screen: 'steps', caption: 'Steps to reproduce are recorded from your actions in the tab and stay editable.' },
           {
             type: 'p',
-            text: 'Everything is stored locally in your browser, with no account required. [Add Bugmark to Chrome — free](/install)',
+            text: 'Everything is stored locally in your browser, with no account required. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj)',
           },
         ],
       },
@@ -469,7 +469,7 @@ export const guidePages: ContentPage[] = [
           { type: 'shot', screen: 'networkResponse', caption: 'Response bodies for recent fetch and XHR calls, ready to export as HAR.' },
           {
             type: 'p',
-            text: 'Data stays in your browser until you export it. [Add Bugmark to Chrome — free](/install)',
+            text: 'Data stays in your browser until you export it. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj)',
           },
         ],
       },
@@ -677,7 +677,7 @@ export const guidePages: ContentPage[] = [
           { type: 'shot', screen: 'console', caption: 'Console messages and JavaScript errors attached to a Bugmark capture.' },
           {
             type: 'p',
-            text: 'Logs stay in your browser until you choose to export them. See [how to write a bug report](/guides/how-to-write-a-bug-report) for what else to include. [Add Bugmark to Chrome — free](/install)',
+            text: 'Logs stay in your browser until you choose to export them. See [how to write a bug report](/guides/how-to-write-a-bug-report) for what else to include. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj)',
           },
         ],
       },
@@ -887,7 +887,7 @@ export const guidePages: ContentPage[] = [
           { type: 'shot', screen: 'githubDialog', caption: 'Send the steps, screenshot and failing requests straight to a GitHub issue.' },
           {
             type: 'p',
-            text: 'No account needed, and captures stay in your browser. [Add Bugmark to Chrome — free](/install)',
+            text: 'No account needed, and captures stay in your browser. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj)',
           },
         ],
       },
@@ -1118,7 +1118,7 @@ export const guidePages: ContentPage[] = [
           { type: 'shot', screen: 'breakpoints', caption: 'One capture renders the page at mobile, tablet and desktop widths side by side.' },
           {
             type: 'p',
-            text: 'Captures are stored locally in your browser. [Add Bugmark to Chrome — free](/install)',
+            text: 'Captures are stored locally in your browser. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj)',
           },
         ],
       },

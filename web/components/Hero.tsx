@@ -1,6 +1,6 @@
 import { Frame } from './Frame';
 import { IconArrowRight, IconCheck, IconPuzzle } from './icons';
-import { site } from '@/lib/site';
+import { InstallLink } from './InstallLink';
 import { screens } from '@/lib/screens';
 
 function BugStage() {
@@ -47,10 +47,10 @@ export function Hero() {
           </p>
 
           <div className="animate-rise mt-9 flex flex-col items-start gap-3 sm:flex-row sm:items-center" style={{ animationDelay: '.18s' }}>
-            <a href={site.installUrl} className="btn-primary w-full sm:w-auto">
+            <InstallLink className="btn-primary w-full sm:w-auto">
               <IconPuzzle size={18} />
               Add to Chrome — free
-            </a>
+            </InstallLink>
             <a href="#product" className="group inline-flex items-center gap-1.5 px-1 text-[15px] font-semibold text-accent-ink hover:underline">
               See it in action
               <IconArrowRight size={16} className="transition group-hover:translate-x-0.5" />

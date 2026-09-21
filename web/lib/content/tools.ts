@@ -145,7 +145,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Every feature is unlocked, with no sign-up, no item limits and no required watermark. Installation currently takes about a minute from a downloadable zip, with a Chrome Web Store listing on the way. [Add Bugmark to Chrome — free](/install).',
+            text: 'Every feature is unlocked, with no sign-up, no item limits and no required watermark. Install it in a couple of clicks from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -286,7 +286,7 @@ export const toolPages: ContentPage[] = [
             type: 'list',
             ordered: true,
             items: [
-              'Share the [install page](/install) with the people who test your site; setup takes about a minute.',
+              'Share the [install page](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj) with the people who test your site; setup takes about a minute.',
               'When they hit a bug, they press ⌥⇧S, mark it up and save. The logs are already attached.',
               'They create a GitHub issue from the capture, or send you the self-contained HTML report.',
               'Open the failing request, copy it as cURL or download the HAR, and reproduce against your local API.',
@@ -313,7 +313,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Bugmark is free, with no account and every feature unlocked. It runs in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](/install).',
+            text: 'Bugmark is free, with no account and every feature unlocked. It runs in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -333,7 +333,7 @@ export const toolPages: ContentPage[] = [
       },
       {
         q: 'Which browsers does Bugmark support?',
-        a: 'Bugmark is a Manifest V3 extension for Chrome and Chromium-based browsers, including Microsoft Edge, Brave and Arc. Firefox and Safari are not supported. It is currently installed from a downloadable zip using Load unpacked, and a Chrome Web Store listing is coming.',
+        a: 'Bugmark is a Manifest V3 extension for Chrome and Chromium-based browsers, including Microsoft Edge, Brave and Arc. Firefox and Safari are not supported. It installs in a couple of clicks from the Chrome Web Store.',
       },
       {
         q: 'How do I see computed CSS styles in a bug report?',
@@ -475,7 +475,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Bugmark is free, needs no account and keeps data on your device. It works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](/install).',
+            text: 'Bugmark is free, needs no account and keeps data on your device. It works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -594,7 +594,7 @@ export const toolPages: ContentPage[] = [
             type: 'list',
             ordered: true,
             items: [
-              'Send the client or internal reviewer the [install page](/install). Nobody needs to create an account.',
+              'Send the client or internal reviewer the [install page](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj). Nobody needs to create an account.',
               'The reviewer walks through the staging site, pressing ⌥⇧S on each page with an issue and dropping numbered pins.',
               'They set a type and priority on each capture and save it to their dashboard.',
               'At the end of the session they export one white-label HTML report and send it to you.',
@@ -638,7 +638,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free, no account, every feature including white-label reports unlocked. [Add Bugmark to Chrome — free](/install).',
+            text: 'Free, no account, every feature including white-label reports unlocked. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -803,7 +803,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free, no account and no required watermark. Works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](/install).',
+            text: 'Free, no account and no required watermark. Works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -980,7 +980,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free with no account, no item limits and no required watermark. It installs in about a minute and works in Chrome, Edge, Brave and Arc, so the whole team can mark up pages the same way. [Add Bugmark to Chrome — free](/install).',
+            text: 'Free with no account, no item limits and no required watermark. It installs in about a minute and works in Chrome, Edge, Brave and Arc, so the whole team can mark up pages the same way. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -1154,7 +1154,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free, no account, data stays on your device. Works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](/install).',
+            text: 'Free, no account, data stays on your device. Works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -1318,7 +1318,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Bugmark is free, with no account and every feature unlocked. Installation takes about a minute and works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](/install).',
+            text: 'Bugmark is free, with no account and every feature unlocked. Installation takes about a minute and works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },

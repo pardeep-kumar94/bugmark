@@ -1,4 +1,4 @@
-import { site } from '@/lib/site';
+import { site, ctaHref } from '@/lib/site';
 import { IconChevron } from './icons';
 
 const link = 'font-medium text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent';
@@ -11,8 +11,8 @@ export const faqs: { q: string; a: string; rich?: React.ReactNode }[] = [
   },
   {
     q: 'How do I install Bugmark?',
-    a: 'Click Add to Chrome to download the extension, then follow the four steps on the install page: unzip, open chrome://extensions, turn on Developer mode and click “Load unpacked”. It takes about a minute. A Chrome Web Store listing is coming soon.',
-    rich: <>Click <b className="font-medium text-ink-2">Add to Chrome</b> to download the extension, then follow the four steps on the <a className={link} href="/install">install page</a>: unzip, open chrome://extensions, turn on Developer mode and click “Load unpacked”. It takes about a minute. A Chrome Web Store listing is coming soon.</>,
+    a: 'Click Add to Chrome to open the Chrome Web Store listing, then click “Add to Chrome” and confirm. It takes a few seconds — no account or sign-up required. It also works in Edge, Brave and Arc.',
+    rich: <>Click <b className="font-medium text-ink-2">Add to Chrome</b> to open the <a className={link} href={ctaHref} target="_blank" rel="noopener">Chrome Web Store listing</a>, then click <b className="font-medium text-ink-2">Add to Chrome</b> and confirm. It takes a few seconds — no account or sign-up required. It also works in Edge, Brave and Arc.</>,
   },
   {
     q: 'Which browsers does Bugmark work in?',

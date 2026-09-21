@@ -4,6 +4,7 @@ import { Footer } from '@/components/Footer';
 import { Frame } from '@/components/Frame';
 import { IconArrowRight, IconCheck, IconChevron, IconPuzzle } from '@/components/icons';
 import { screens } from '@/lib/screens';
+import { InstallLink } from '@/components/InstallLink';
 import { site } from '@/lib/site';
 import { type ContentPage, hrefOf, kindIndex, kindLabel, pageByHref } from '@/lib/content';
 import type { Block } from '@/lib/content/types';
@@ -85,7 +86,7 @@ export function ContentArticle({ page }: { page: ContentPage }) {
               <h1 className="mt-3 font-mono text-[32px] font-semibold leading-[1.08] tracking-[-0.05em] text-ink text-balance sm:text-[48px]">{page.h1}</h1>
               <p className="mt-5 text-[18px] leading-relaxed text-dim text-pretty"><RichText text={page.intro} /></p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a href={site.installUrl} className="btn-primary"><IconPuzzle size={18} />Add to Chrome — free</a>
+                <InstallLink className="btn-primary"><IconPuzzle size={18} />Add to Chrome — free</InstallLink>
                 <span className="font-mono text-[12.5px] text-mute">Updated {fmtDate(page.updated)} · {minutes} min read</span>
               </div>
             </div>
@@ -155,7 +156,7 @@ export function ContentArticle({ page }: { page: ContentPage }) {
                     <li key={t} className="flex items-center gap-2"><IconCheck size={14} className="text-accent" />{t}</li>
                   ))}
                 </ul>
-                <a href={site.installUrl} className="btn-primary mt-6"><IconPuzzle size={18} />Add to Chrome — free</a>
+                <InstallLink className="btn-primary mt-6"><IconPuzzle size={18} />Add to Chrome — free</InstallLink>
               </section>
 
               {related.length > 0 && (

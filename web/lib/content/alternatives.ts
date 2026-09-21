@@ -138,7 +138,7 @@ export const alternativePages: ContentPage[] = [
             type: "list",
             ordered: true,
             items: [
-              "Download Bugmark from the [install page](/install), unzip it, open `chrome://extensions`, turn on Developer mode and choose Load unpacked. A Chrome Web Store listing is coming.",
+              "Add Bugmark from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj) — click Add to Chrome and confirm. No account needed, and it works in Chrome, Edge, Brave and Arc.",
               "Reproduce a bug you recently reported in Jam and press `Alt+Shift+S` to capture it.",
               "Open the network log, filter to failures and compare the payload and response detail with your existing report.",
               "Connect GitHub in settings with a fine-grained token or OAuth device flow and create an issue from the capture.",
@@ -153,7 +153,7 @@ export const alternativePages: ContentPage[] = [
           {
             type: "p",
             text:
-              "Want the full picture first? See the [bug reporting tool overview](/bug-reporting-tool) or learn [how to write a bug report](/guides/how-to-write-a-bug-report) developers can fix. [Add Bugmark to Chrome — free](/install).",
+              "Want the full picture first? See the [bug reporting tool overview](/bug-reporting-tool) or learn [how to write a bug report](/guides/how-to-write-a-bug-report) developers can fix. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).",
           },
         ],
       },
@@ -313,7 +313,7 @@ export const alternativePages: ContentPage[] = [
             type: "list",
             ordered: true,
             items: [
-              "Download Bugmark from the [install page](/install), unzip it, open `chrome://extensions`, enable Developer mode and choose Load unpacked.",
+              "Add Bugmark from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj) — click Add to Chrome and confirm. No account needed, and it works in Chrome, Edge, Brave and Arc.",
               "Open the site you are reviewing and press `Alt+Shift+S`. Use interact-with-page mode to open menus before capturing.",
               "Annotate with arrows, numbered pins and text, and use the inspector to attach the exact element.",
               "Review captures in the dashboard, grouped by site, and set status and priority.",
@@ -328,7 +328,7 @@ export const alternativePages: ContentPage[] = [
           {
             type: "p",
             text:
-              "If client feedback is your main use case, read our [website feedback tool](/website-feedback-tool) page, or see how Bugmark works as a [QA testing tool](/qa-testing-tool). [Add Bugmark to Chrome — free](/install).",
+              "If client feedback is your main use case, read our [website feedback tool](/website-feedback-tool) page, or see how Bugmark works as a [QA testing tool](/qa-testing-tool). [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).",
           },
         ],
       },
@@ -494,7 +494,7 @@ export const alternativePages: ContentPage[] = [
             type: "list",
             ordered: true,
             items: [
-              "Download Bugmark from the [install page](/install), unzip it, open `chrome://extensions`, enable Developer mode and choose Load unpacked.",
+              "Add Bugmark from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj) — click Add to Chrome and confirm. No account needed, and it works in Chrome, Edge, Brave and Arc.",
               "Visit the site under review and press `Alt+Shift+S` to annotate the live page.",
               "Use a 3-second delayed capture for hover states, or the breakpoints mode for responsive issues.",
               "Triage captures in the dashboard by status and priority, and resolve them as you go.",
@@ -509,7 +509,7 @@ export const alternativePages: ContentPage[] = [
           {
             type: "p",
             text:
-              "For more on collecting feedback, see the [website feedback tool](/website-feedback-tool) page and our guide to [full-page screenshots in Chrome](/guides/full-page-screenshot-chrome). [Add Bugmark to Chrome — free](/install).",
+              "For more on collecting feedback, see the [website feedback tool](/website-feedback-tool) page and our guide to [full-page screenshots in Chrome](/guides/full-page-screenshot-chrome). [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).",
           },
         ],
       },
@@ -529,7 +529,7 @@ export const alternativePages: ContentPage[] = [
       },
       {
         q: "Does Bugmark work in Firefox or Safari?",
-        a: "No. Bugmark currently works in Chrome and Chromium-based browsers, including Edge, Brave and Arc. It is installed today as a downloadable zip loaded through chrome://extensions with Developer mode on, and a Chrome Web Store listing is coming. If you need Firefox or Safari support, check a tool that lists those browsers.",
+        a: "No. Bugmark works in Chrome and Chromium-based browsers, including Edge, Brave and Arc. It installs in a couple of clicks from the Chrome Web Store. If you need Firefox or Safari support, check a tool that lists those browsers.",
       },
       {
         q: "What technical details does Bugmark attach to feedback?",
@@ -674,7 +674,7 @@ export const alternativePages: ContentPage[] = [
             type: "list",
             ordered: true,
             items: [
-              "Download Bugmark from the [install page](/install), unzip it, open `chrome://extensions`, enable Developer mode and choose Load unpacked.",
+              "Add Bugmark from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj) — click Add to Chrome and confirm. No account needed, and it works in Chrome, Edge, Brave and Arc.",
               "Open the page with the bug and press `Alt+Shift+R` to start recording; allow microphone access if you want narration.",
               "Reproduce the bug while talking through what you expected to happen.",
               "Stop the recording, then review the steps, console log and network log attached to it.",
@@ -689,7 +689,7 @@ export const alternativePages: ContentPage[] = [
           {
             type: "p",
             text:
-              "Learn more on the [screen recorder for bug reports](/screen-recorder-for-bug-reports) page, or read [how to capture console logs](/guides/how-to-capture-console-logs). [Add Bugmark to Chrome — free](/install).",
+              "Learn more on the [screen recorder for bug reports](/screen-recorder-for-bug-reports) page, or read [how to capture console logs](/guides/how-to-capture-console-logs). [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).",
           },
         ],
       },

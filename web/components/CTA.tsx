@@ -1,4 +1,4 @@
-import { site } from '@/lib/site';
+import { InstallLink } from './InstallLink';
 import { IconArrowRight, IconPuzzle } from './icons';
 import { LogoMark } from './Logo';
 
@@ -16,7 +16,7 @@ export function CTA() {
           Install Bugmark in seconds and file your first reproducible bug report today. Free, with every feature and no account.
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href={site.installUrl} className="btn-primary w-full sm:w-auto"><IconPuzzle size={18} />Add to Chrome — it’s free</a>
+          <InstallLink className="btn-primary w-full sm:w-auto"><IconPuzzle size={18} />Add to Chrome — it’s free</InstallLink>
           <a href="/guides/how-to-write-a-bug-report" className="btn-secondary w-full sm:w-auto">
             how to write a bug report <IconArrowRight size={16} />
           </a>
