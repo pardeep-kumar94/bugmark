@@ -7,7 +7,7 @@ import { site } from '@/lib/site';
 type LicenseState =
   | { status: 'loading' }
   | { status: 'anonymous' }
-  | { status: 'ready'; pro: boolean; email: string | null }
+  | { status: 'ready'; pro: boolean; email: string | null; key: string | null; activations: { used: number | null; limit: number | null } | null }
   | { status: 'error'; message: string };
 
 export function Account() {
@@ -16,6 +16,15 @@ export function Account() {
   const [license, setLicense] = useState<LicenseState>({ status: 'loading' });
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copyKey = async (key: string) => {
+    try {
+      await navigator.clipboard.writeText(key);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {}
+  };
 
   // Surface the ?paid=success return from Dodo.
   useEffect(() => {
@@ -39,8 +48,8 @@ export function Account() {
         setLicense({ status: 'error', message: body.error || `Request failed (${res.status})` });
         return;
       }
-      const data = (await res.json()) as { pro: boolean; email: string | null };
-      setLicense({ status: 'ready', pro: data.pro, email: data.email });
+      const data = (await res.json()) as { pro: boolean; email: string | null; key: string | null; activations: { used: number | null; limit: number | null } | null };
+      setLicense({ status: 'ready', pro: data.pro, email: data.email, key: data.key, activations: data.activations });
     } catch (err) {
       setLicense({ status: 'error', message: err instanceof Error ? err.message : 'Network error' });
     }
@@ -135,12 +144,41 @@ export function Account() {
             {license.status === 'ready' && (
               license.pro ? (
                 <div>
-                  <span className="inline-flex items-center rounded-full bg-[color-mix(in_srgb,var(--color-pro)_16%,transparent)] px-3 py-1 text-[13px] font-semibold text-pro">
-                    Pro — active
-                  </span>
+                  <div className="flex items-center justify-between gap-4">
+                    <span className="inline-flex items-center rounded-full bg-[color-mix(in_srgb,var(--color-pro)_16%,transparent)] px-3 py-1 text-[13px] font-semibold text-pro">
+                      Pro — active
+                    </span>
+                    {license.activations && (
+                      <span className="text-[13px] text-mute">
+                        Activated on {license.activations.used ?? 0}
+                        {license.activations.limit ? `/${license.activations.limit}` : ''} device
+                        {(license.activations.used ?? 0) === 1 ? '' : 's'}
+                      </span>
+                    )}
+                  </div>
                   <p className="mt-3 text-[15px] text-dim">
                     You’re all set. Pro features are unlocked in the extension — sign in there with this same Google account.
                   </p>
+                  {license.key && (
+                    <>
+                      <label className="mt-5 block text-[13px] text-mute">Your license key</label>
+                      <div className="mt-2 flex gap-2">
+                        <code className="flex-1 select-all break-all rounded-lg border border-line bg-surface px-3 py-2 text-[13px] text-ink">
+                          {license.key}
+                        </code>
+                        <button
+                          onClick={() => copyKey(license.key!)}
+                          className="shrink-0 rounded-lg border border-line px-3 py-2 text-[13px] font-medium text-dim hover:text-ink"
+                        >
+                          {copied ? 'Copied' : 'Copy'}
+                        </button>
+                      </div>
+                      <p className="mt-3 text-[13.5px] text-dim">
+                        Paste this key into the {site.name} extension → Settings → Bugmark Pro to unlock Pro on this device. Need to move to a new
+                        machine? You can release a device from the extension’s Settings.
+                      </p>
+                    </>
+                  )}
                 </div>
               ) : (
                 <div>
