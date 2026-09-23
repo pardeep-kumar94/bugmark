@@ -27,18 +27,12 @@ export const CONFIG = {
     debug: false,          // true → validate hits against GA's debug endpoint and log the result
   },
 
-  // Pro licensing — Google sign-in (chrome.identity) + license check against the website API.
-  // The website resolves the Google account to a stable `sub`; the same account signed in on the
-  // website (for payment) and here unlocks Pro. Leave oauthClientId '' to disable licensing UI.
+  // Pro licensing — license key (bought on the website) activated here. No Google sign-in.
   licensing: {
-    apiBase: WEBSITE,                       // website that hosts /api/license + /api/checkout
-    checkoutUrl: `${WEBSITE}/account`,      // where "Upgrade to Pro" sends people to pay
-    // Google Cloud → Credentials → Create OAuth client ID → type "Chrome extension"
-    // (tied to the published extension ID). Paste the client ID here.
-    oauthClientId: '455219105372-29lrnj28t5mgqfb1pub4td1pgrco8s79.apps.googleusercontent.com',
-    scopes: ['openid', 'email', 'profile'],
-    pollIntervalMs: 6 * 60 * 60 * 1000,     // background re-check of license status
-    freeLimit: 2,                           // saved reports allowed on the free plan; Pro is unlimited
+    apiBase: WEBSITE,                       // website that hosts /api/license/*
+    upgradeUrl: `${WEBSITE}/account`,       // where "Get Pro" sends people (sign in → buy → copy key)
+    pollIntervalMs: 6 * 60 * 60 * 1000,     // background re-validation of the key
+    freeLimit: 2,                           // saved reports on the free plan; Pro is unlimited
   },
 
   // GitHub issues. Users can always connect with a personal access token.

@@ -3,7 +3,7 @@ import { getGithub, setGithub, createIssue, listRepos } from './shared/github.js
 import { DEFAULT_SETTINGS } from './shared/settings.js';
 import { CONFIG } from './shared/config.js';
 import { track, bucket } from './shared/analytics.js';
-import { startPolling, licensingEnabled, isPro, openCheckout } from './shared/license.js';
+import { startPolling, isPro, openUpgrade } from './shared/license.js';
 
 // Periodically refresh the Pro license so a purchase made on the website unlocks
 // the extension without the user re-opening the popup. No-op when licensing is off.
@@ -103,9 +103,7 @@ function trackSaved(it) {
 }
 
 // Free plan keeps a limited number of saved reports; Pro is unlimited.
-// Gating only applies when licensing is configured (packaged/store build).
 async function ensureUnderFreeLimit() {
-  if (!licensingEnabled) return;
   if (await isPro()) return;
   const limit = CONFIG.licensing.freeLimit;
   if (!limit) return;
@@ -336,7 +334,7 @@ const handlers = {
     chrome.runtime.sendMessage({ type: 'bugmark:changed' }).catch(() => {});
     return { item: { id: item.id, seq: item.seq }, counts };
   },
-  async 'bugmark:checkout'() { await openCheckout(); return {}; },
+  async 'bugmark:checkout'() { await openUpgrade(); return {}; },
   async 'bugmark:count'(msg) {
     return { counts: await countByHost(msg.host) };
   },
