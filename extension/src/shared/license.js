@@ -1,116 +1,111 @@
 // ─────────────────────────────────────────────────────────────
-// Pro licensing — Google sign-in + license check.
-//
-// Sign-in uses chrome.identity.getAuthToken (the manifest `oauth2` client_id), which
-// yields a Google OAuth access token. We send that token to the website's /api/license,
-// which resolves it to a stable Google `sub` and returns whether the user is Pro.
-// The result is cached in chrome.storage.local so the popup renders instantly.
+// Pro licensing — license key activated against the website API.
+// The key is bought on the website (Google sign-in there). Here we only activate/validate
+// it. Dodo binds each key to one device (Activation Limit 1); we cache the result so the
+// popup renders instantly and re-validate on a schedule so refunds/releases drop Pro.
 // ─────────────────────────────────────────────────────────────
 import { CONFIG } from './config.js';
 
-const { apiBase, oauthClientId, scopes, checkoutUrl, pollIntervalMs } = CONFIG.licensing;
-
+const { apiBase, upgradeUrl, pollIntervalMs } = CONFIG.licensing;
 const CACHE_KEY = 'bugmark:license';
-export const licensingEnabled = !!oauthClientId;
+const DEVICE_KEY = 'bugmark:device';
 
-/** Cached license state: { pro, email, checkedAt } — read synchronously-ish from storage. */
+/** Stable per-install device name so Dodo activations are recognisable. */
+async function deviceName() {
+  const { [DEVICE_KEY]: v } = await chrome.storage.local.get(DEVICE_KEY);
+  if (v) return v;
+  const name = `Chrome ${crypto.randomUUID().slice(0, 8)}`;
+  await chrome.storage.local.set({ [DEVICE_KEY]: name });
+  return name;
+}
+
 export async function getCached() {
   const { [CACHE_KEY]: v } = await chrome.storage.local.get(CACHE_KEY);
-  return v || { pro: false, email: null, checkedAt: 0 };
+  return v || { pro: false, key: null, instanceId: null, checkedAt: 0 };
 }
 
 async function setCached(patch) {
-  const cur = await getCached();
-  const next = { ...cur, ...patch };
+  const next = { ...(await getCached()), ...patch };
   await chrome.storage.local.set({ [CACHE_KEY]: next });
   return next;
 }
 
-/** True if the user currently has Pro (from cache — call checkLicense() to refresh). */
 export async function isPro() {
   return (await getCached()).pro === true;
 }
 
-/** Interactive Google sign-in. Resolves to the OAuth access token. */
-export function signIn() {
-  return new Promise((resolve, reject) => {
-    chrome.identity.getAuthToken({ interactive: true, scopes }, (token) => {
-      if (chrome.runtime.lastError || !token) {
-        reject(new Error(chrome.runtime.lastError?.message || 'Sign-in cancelled'));
-        return;
-      }
-      resolve(token);
+/** Activate a pasted key on this device. Returns { pro, error? }. */
+export async function activate(key) {
+  const trimmed = String(key || '').trim();
+  if (!trimmed) return { pro: false, error: 'Enter your license key.' };
+  let res;
+  try {
+    res = await fetch(`${apiBase}/api/license/activate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key: trimmed, device: await deviceName() }),
     });
-  });
+  } catch {
+    return { pro: false, error: 'Network error — check your connection and try again.' };
+  }
+  if (res.ok) {
+    const data = await res.json();
+    await setCached({ pro: true, key: trimmed, instanceId: data.instanceId || null, checkedAt: new Date().toISOString() });
+    return { pro: true };
+  }
+  const body = await res.json().catch(() => ({}));
+  const msg =
+    body.error === 'limit_reached' ? 'This key is already active on another device. Release it there first.'
+    : body.error === 'invalid_key' ? 'That license key isn't valid.'
+    : 'Could not activate the key. Try again.';
+  return { pro: false, error: msg };
 }
 
-/** Get a token without prompting; null if not signed in. */
-export function getToken({ interactive = false } = {}) {
-  return new Promise((resolve) => {
-    chrome.identity.getAuthToken({ interactive, scopes }, (token) => {
-      if (chrome.runtime.lastError || !token) { resolve(null); return; }
-      resolve(token);
+/** Re-check the cached key; downgrades to Free if Dodo says it's no longer valid. */
+export async function validate() {
+  const { key, instanceId } = await getCached();
+  if (!key) return { pro: false };
+  let res;
+  try {
+    res = await fetch(`${apiBase}/api/license/validate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ key, instanceId }),
     });
-  });
-}
-
-/** Forget the current Google token and clear the cached license. */
-export async function signOut() {
-  const token = await getToken({ interactive: false });
-  if (token) {
-    await new Promise((resolve) => chrome.identity.removeCachedAuthToken({ token }, resolve));
-    // Best-effort revoke so the next sign-in shows the account picker.
-    try { await fetch(`https://oauth2.googleapis.com/revoke?token=${token}`, { method: 'POST' }); } catch {}
+  } catch {
+    return { pro: (await getCached()).pro }; // keep last-known on transient errors
   }
-  await chrome.storage.local.set({ [CACHE_KEY]: { pro: false, email: null, checkedAt: 0 } });
-}
-
-/**
- * Ask the website whether the signed-in user is Pro, and cache the result.
- * Returns { pro, email, signedIn }. When `interactive`, prompts sign-in if needed.
- */
-export async function checkLicense({ interactive = false } = {}) {
-  const token = await getToken({ interactive });
-  if (!token) return { pro: false, email: null, signedIn: false };
-
-  const res = await fetch(`${apiBase}/api/license`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-  if (res.status === 401) {
-    // Token stale/rejected — drop it so the next attempt re-authenticates.
-    await new Promise((resolve) => chrome.identity.removeCachedAuthToken({ token }, resolve));
-    return { pro: false, email: null, signedIn: false };
-  }
-  if (!res.ok) {
-    // Keep the last-known state on transient errors.
-    const cur = await getCached();
-    return { pro: cur.pro, email: cur.email, signedIn: true };
-  }
-
+  if (!res.ok) return { pro: (await getCached()).pro };
   const data = await res.json();
-  const nowIso = new Date().toISOString();
-  await setCached({ pro: !!data.pro, email: data.email || null, checkedAt: nowIso });
-  return { pro: !!data.pro, email: data.email || null, signedIn: true };
+  await setCached({ pro: !!data.pro, checkedAt: new Date().toISOString() });
+  return { pro: !!data.pro };
 }
 
-/** Open the website upgrade/checkout page in a new tab. */
-export async function openCheckout() {
-  await chrome.tabs.create({ url: checkoutUrl });
+/** Release this device's activation and clear the local key. */
+export async function release() {
+  const { key, instanceId } = await getCached();
+  if (key && instanceId) {
+    try {
+      await fetch(`${apiBase}/api/license/deactivate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ key, instanceId }),
+      });
+    } catch { /* best effort */ }
+  }
+  await chrome.storage.local.set({ [CACHE_KEY]: { pro: false, key: null, instanceId: null, checkedAt: 0 } });
 }
 
-/**
- * Background polling — periodically refresh the license so a purchase made on the
- * website unlocks the extension without the user re-opening the popup.
- * Uses chrome.alarms; call once from the service worker.
- */
+/** Open the website upgrade/profile page (sign in → buy → copy key). */
+export async function openUpgrade() {
+  await chrome.tabs.create({ url: upgradeUrl });
+}
+
+/** Periodic re-validation via chrome.alarms; call once from the service worker. */
 export function startPolling() {
-  if (!licensingEnabled) return;
   const minutes = Math.max(1, Math.round(pollIntervalMs / 60000));
   chrome.alarms.create('bugmark:license-poll', { periodInMinutes: minutes });
   chrome.alarms.onAlarm.addListener((alarm) => {
-    if (alarm.name === 'bugmark:license-poll') {
-      checkLicense({ interactive: false }).catch(() => {});
-    }
+    if (alarm.name === 'bugmark:license-poll') validate().catch(() => {});
   });
 }
