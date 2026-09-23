@@ -6,10 +6,12 @@ import { Logo } from './Logo';
 import { nav } from '@/lib/site';
 import { InstallLink } from './InstallLink';
 import { IconPuzzle, IconX } from './icons';
+import { watchAuth, type User } from '@/lib/firebaseClient';
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -17,6 +19,10 @@ export function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => watchAuth(setUser), []);
+
+  const label = user ? (user.displayName?.split(' ')[0] || user.email || 'Profile') : 'Sign in';
 
   return (
     <header
@@ -39,8 +45,13 @@ export function Nav() {
         </nav>
         <div className="ml-auto flex items-center gap-2">
           <Link href="/account" className="btn-secondary hidden !h-10 !rounded-lg !px-4 !text-[14px] sm:inline-flex">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
-            Sign in
+            {user?.photoURL ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={user.photoURL} alt="" width={18} height={18} className="rounded-full" />
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
+            )}
+            {label}
           </Link>
           <InstallLink className="btn-primary !h-10 !rounded-lg !px-4 !text-[14px]">
             <IconPuzzle size={16} />
@@ -68,7 +79,7 @@ export function Nav() {
               </a>
             ))}
             <Link href="/account" onClick={() => setOpen(false)} className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-ink-2 hover:bg-surface-2">
-              Sign in / Account
+              {user ? 'Profile' : 'Sign in'}
             </Link>
           </nav>
         </div>
