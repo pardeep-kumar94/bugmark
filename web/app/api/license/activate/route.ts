@@ -28,7 +28,9 @@ export async function POST(req: Request) {
   } catch (err) {
     if (err instanceof DodoLicenseError) {
       const status = err.code === 'limit_reached' ? 409 : err.code === 'invalid_key' ? 404 : 502;
-      return NextResponse.json({ error: err.code, message: err.message }, { status, headers: CORS });
+      const message = err.code === 'dodo_error' ? 'Activation service error. Please try again.' : err.message;
+      if (err.code === 'dodo_error') console.error('license activate:', err.message);
+      return NextResponse.json({ error: err.code, message }, { status, headers: CORS });
     }
     return NextResponse.json({ error: 'activate_failed' }, { status: 502, headers: CORS });
   }

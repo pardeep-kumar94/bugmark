@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     await deactivateKey(String(key).trim(), String(instanceId));
     return NextResponse.json({ released: true }, { headers: CORS });
   } catch (err) {
-    const message = err instanceof DodoLicenseError ? err.message : 'deactivate_failed';
-    return NextResponse.json({ error: 'deactivate_failed', message }, { status: 502, headers: CORS });
+    console.error('license deactivate:', err instanceof Error ? err.message : err);
+    return NextResponse.json({ error: 'deactivate_failed', message: 'Could not release the device. Please try again.' }, { status: 502, headers: CORS });
   }
 }
