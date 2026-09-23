@@ -20,6 +20,30 @@
 
   <main class="wrap">
     <h1>Settings</h1>
+
+    <!-- PRO -->
+    <section class="card" id="proSection">
+      <div class="card-head">
+        <div>
+          <h2>Bugmark Pro</h2>
+          <p class="muted" id="proStatus">Free plan · 2 saved reports.</p>
+        </div>
+      </div>
+      <div class="field" id="proEntry">
+        <label class="t" for="licenseKey">License key</label>
+        <div class="row gap">
+          <input class="input mono" id="licenseKey" placeholder="Paste your key" autocomplete="off" spellcheck="false">
+          <button class="btn sm" id="activateKey" type="button">Activate</button>
+        </div>
+        <p class="help">No key yet? <a href="#" id="getProLink">Get Bugmark Pro</a> — sign in, upgrade, then copy your key from your profile.</p>
+      </div>
+      <div class="field" id="proActive" hidden>
+        <span class="chip pro">Pro active on this device</span>
+        <button class="btn sm" id="releaseKey" type="button">Release this device</button>
+      </div>
+      <p class="msg" id="proMsg" hidden></p>
+    </section>
+
     <!-- BRANDING -->
     <section class="card" id="branding">
       <div class="card-head">

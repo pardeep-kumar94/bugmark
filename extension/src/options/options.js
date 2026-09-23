@@ -2,6 +2,7 @@ import { CONFIG } from '../shared/config.js';
 import { getSettings, setSettings } from '../shared/settings.js';
 import { track, analyticsConfigured } from '../shared/analytics.js';
 import { getGithub, setGithub, disconnectGithub, connectWithToken, listRepos, isValidRepo, deviceFlowAvailable, startDeviceFlow, pollDeviceFlow } from '../shared/github.js';
+import { activate, release, validate, getCached, openUpgrade } from '../shared/license.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -9,6 +10,37 @@ $('siteLink').href = CONFIG.websiteUrl;
 $('supportLink').href = `mailto:${CONFIG.supportEmail}`;
 $('version').textContent = `Version ${chrome.runtime.getManifest().version}${!('update_url' in chrome.runtime.getManifest()) ? ' · developer build' : ''}`;
 $('shortcutsLink').addEventListener('click', (e) => { e.preventDefault(); chrome.tabs.create({ url: 'chrome://extensions/shortcuts' }); });
+
+// ---- Pro
+async function renderPro() {
+  const { pro } = await getCached();
+  $('proEntry').hidden = pro;
+  $('proActive').hidden = !pro;
+  $('proStatus').textContent = pro ? 'Pro · unlimited reports.' : 'Free plan · 2 saved reports.';
+}
+
+function proMsg(text, kind = 'err') {
+  $('proMsg').textContent = text || ''; $('proMsg').className = `msg ${kind}`; $('proMsg').hidden = !text;
+}
+
+$('activateKey').addEventListener('click', async () => {
+  proMsg('Activating…', 'ok');
+  const r = await activate($('licenseKey').value);
+  if (r.pro) { proMsg('Pro unlocked on this device.', 'ok'); $('licenseKey').value = ''; }
+  else proMsg(r.error || 'Could not activate.', 'err');
+  await renderPro();
+});
+
+$('releaseKey').addEventListener('click', async () => {
+  await release();
+  proMsg('Device released.', 'ok');
+  await renderPro();
+});
+
+$('getProLink').addEventListener('click', (e) => { e.preventDefault(); openUpgrade(); });
+
+renderPro();
+validate().then(renderPro);
 
 // ---- Branding
 const settings = await getSettings();

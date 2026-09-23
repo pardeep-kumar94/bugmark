@@ -37,9 +37,33 @@ adds a public `key` to manifest.json so every install gets the same extension ID
 - Don’t put the `key` field in the version you upload to the Chrome Web Store. Once listed, set `site.chromeStoreUrl`
   and point `site.installUrl` to it.
 
-## Bugmark is free
-There are no payments, plans or license keys. The old Dodo Payments checkout, billing portal, webhooks and Pro pricing
-were removed from both the website and the extension (they're in git history if paid plans ever return).
+## Bugmark Pro
+Bugmark's core capture flow is free. Pro is a one-time purchase (Dodo Payments hosted checkout) that unlocks unlimited
+saved reports; the license key is activated from the extension's Settings page and validated against the website API.
+
+### License keys (Dodo)
+The website talks to Dodo's REST API (`web/lib/dodo.ts`) for checkout, webhooks and license activation, but the
+license-key *entitlement* itself has to be created once, by hand, in the Dodo dashboard — there's no API for it:
+
+1. **Dodo dashboard → Products → Bugmark Pro** (the one-time product referenced by `DODO_PRODUCT_ID`).
+2. Add a **License Key** entitlement to that product:
+   - **Activation Limit**: `1` — a key unlocks exactly one device at a time; releasing it in Settings frees the slot
+     for another device (`web/lib/dodo.ts` → `activateKey` / `deactivateKey`).
+   - **Duration**: leave blank — the license is bought once and doesn't expire.
+   - **Activation instructions**: point to the extension, e.g. "Install Bugmark, open Settings → Bugmark Pro, paste
+     this key and click Activate."
+3. Save — new purchases of that product now issue a license key automatically, delivered on the post-checkout/profile
+   page (`getCustomerLicenseKey` in `web/lib/dodo.ts` looks it up by `customer_id`).
+
+Env vars this depends on (see `.env.example`):
+- `DODO_API_KEY` — dashboard → Developer → API keys (test key locally, live key in production).
+- `DODO_PRODUCT_ID` — the Bugmark Pro product id carrying the license-key entitlement above.
+- `DODO_WEBHOOK_SECRET` — dashboard → Webhooks; verifies `payment.succeeded` events (Standard Webhooks signature).
+- `DODO_API_BASE` — `https://test.dodopayments.com` (test mode) or `https://live.dodopayments.com` (live).
+
+To verify end to end in test mode: set `DODO_API_BASE` to the test URL, buy Pro on the website with a Dodo test card,
+copy the key from the profile page, and paste it into the extension's Settings → Bugmark Pro → Activate. Activating
+the same key on a second device should show "already active on another device" until the first device releases it.
 
 ## Environment variables
 Copy `.env.example` to `.env.local` (and add the same values in Vercel → Settings → Environment Variables):
