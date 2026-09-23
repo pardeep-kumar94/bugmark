@@ -118,3 +118,72 @@ export function isPaymentSuccess(event: DodoWebhookEvent): boolean {
   // Fallback for shapes that only carry a status.
   return event.data?.status === 'succeeded';
 }
+
+export class DodoLicenseError extends Error {
+  code: 'invalid_key' | 'limit_reached' | 'dodo_error';
+  constructor(code: 'invalid_key' | 'limit_reached' | 'dodo_error', message: string) {
+    super(message);
+    this.code = code;
+    this.name = 'DodoLicenseError';
+  }
+}
+
+// Public license endpoints (no API key). Dodo response shapes vary, so parse defensively.
+async function licenseCall(path: string, body: Record<string, unknown>) {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  const text = await res.text();
+  let data: any = {};
+  try { data = text ? JSON.parse(text) : {}; } catch { /* non-JSON */ }
+  return { res, data, text };
+}
+
+/** Record an activation for a key. Throws DodoLicenseError on invalid/exhausted keys. */
+export async function activateKey(key: string, device: string) {
+  const { res, data, text } = await licenseCall('/licenses/activate', { license_key: key, name: device });
+  if (res.status === 404 || res.status === 400) throw new DodoLicenseError('invalid_key', 'License key is invalid.');
+  if (res.status === 409 || /limit|exhaust|activation/i.test(text)) {
+    if (!res.ok) throw new DodoLicenseError('limit_reached', 'License key is already active on another device.');
+  }
+  if (!res.ok) throw new DodoLicenseError('dodo_error', `Dodo activate failed (${res.status}): ${text}`);
+  const instanceId = data.id || data.license_key_instance_id || data.instance?.id || null;
+  return { instanceId, valid: true };
+}
+
+/** Check a key (and optionally a specific activation instance) is still valid. */
+export async function validateKey(key: string, instanceId?: string) {
+  const body: Record<string, unknown> = { license_key: key };
+  if (instanceId) body.license_key_instance_id = instanceId;
+  const { res, data } = await licenseCall('/licenses/validate', body);
+  if (!res.ok) return { valid: false };
+  const valid = data.valid === true || data.status === 'active';
+  return { valid };
+}
+
+/** Free an activation slot so the key can move to another device. */
+export async function deactivateKey(key: string, instanceId: string) {
+  const { res, text } = await licenseCall('/licenses/deactivate', { license_key: key, license_key_instance_id: instanceId });
+  if (!res.ok) throw new DodoLicenseError('dodo_error', `Dodo deactivate failed (${res.status}): ${text}`);
+}
+
+/** Look up the license key issued to a Dodo customer (server-side, uses API key). */
+export async function getCustomerLicenseKey(customerId: string) {
+  if (!API_KEY) return null;
+  const res = await fetch(`${API_BASE}/license_keys?customer_id=${encodeURIComponent(customerId)}`, {
+    headers: { Authorization: `Bearer ${API_KEY}` },
+  });
+  if (!res.ok) return null;
+  const data = (await res.json()) as any;
+  const list: any[] = Array.isArray(data) ? data : data.items || data.data || [];
+  const row = list[0];
+  if (!row) return null;
+  return {
+    key: row.key || row.license_key || row.instance_key || '',
+    id: row.id || row.license_key_id || '',
+    used: row.instances_count ?? row.activations_used ?? null,
+    limit: row.activations_limit ?? row.activation_limit ?? null,
+  };
+}
