@@ -17,7 +17,6 @@ export const organizationLd = () => ({
   name: site.name,
   url: site.url,
   logo: { '@type': 'ImageObject', url: abs('/logo.png'), width: 512, height: 512 },
-  email: site.supportEmail,
   ...(site.sameAs.length ? { sameAs: site.sameAs } : {}),
 });
 
