@@ -1,8 +1,6 @@
 import { getAll, countByHost } from '../shared/db.js';
 import { track, bucket } from '../shared/analytics.js';
-import {
-  licensingEnabled, getCached, signIn, signOut, checkLicense, openCheckout,
-} from '../shared/license.js';
+import { getCached, validate, openUpgrade } from '../shared/license.js';
 
 const $ = (id) => document.getElementById(id);
 const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -38,7 +36,7 @@ paintRecordLock();
 
 $('record').addEventListener('click', async () => {
   if (recording) { await chrome.runtime.sendMessage({ type: 'bugmark:recStop' }); window.close(); return; }
-  if (recordLocked) { track('pro_upsell_clicked', { feature: 'recording' }); await openCheckout(); window.close(); return; }
+  if (recordLocked) { track('pro_upsell_clicked', { feature: 'recording' }); await openUpgrade(); window.close(); return; }
   chrome.runtime.sendMessage({ type: 'bugmark:recStart', tabId: tab.id, source: 'popup' });
   setTimeout(() => window.close(), 150);
 });
@@ -92,47 +90,21 @@ async function renderRecent() {
 renderRecent();
 
 // ── Account / Pro licensing ─────────────────────────────────
-if (licensingEnabled) {
+{
   $('account').hidden = false;
-  const els = {
-    avatar: $('acctAvatar'), title: $('acctTitle'), desc: $('acctDesc'), chip: $('planChip'),
-    signIn: $('signIn'), actions: $('acctActions'), upgrade: $('upgrade'),
-    refresh: $('refreshLicense'), signOut: $('signOut'), note: $('acctNote'),
+  const render = ({ pro }) => {
+    $('acctTitle').textContent = pro ? 'Bugmark Pro' : 'Free plan';
+    $('acctDesc').textContent = pro ? 'Unlimited reports' : '2 saved reports';
+    const chip = $('planChip');
+    chip.textContent = pro ? 'Pro' : 'Free';
+    chip.classList.toggle('pro', pro);
+    chip.classList.toggle('free', !pro);
+    $('acctActions').hidden = pro;
   };
-  const personGlyph = '<svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20c0-3.2 3-5.8 6.5-5.8s6.5 2.6 6.5 5.8"/></svg>';
-
-  function setNote(msg, isErr = false) { els.note.hidden = !msg; els.note.textContent = msg || ''; els.note.classList.toggle('err', isErr); }
-
-  function render({ pro, email }) {
-    const signedIn = !!email;
-    els.avatar.classList.toggle('out', !signedIn);
-    els.avatar.innerHTML = signedIn ? esc((email.trim()[0] || '?')) : personGlyph;
-    els.title.textContent = signedIn ? email : 'Not signed in';
-    els.desc.textContent = signedIn ? (pro ? 'Pro · unlimited reports' : 'Free plan · 2 reports') : 'Sign in to unlock Pro';
-    els.chip.hidden = !signedIn;
-    els.chip.textContent = pro ? 'Pro' : 'Free';
-    els.chip.classList.toggle('pro', pro);
-    els.chip.classList.toggle('free', !pro);
-    els.signIn.hidden = signedIn;
-    els.actions.hidden = !signedIn;
-    els.upgrade.hidden = pro;
-  }
-
   render(await getCached());
-  checkLicense({ interactive: false }).then(render).catch(() => {});
-
-  els.signIn.addEventListener('click', async () => {
-    setNote('Opening Google sign-in…');
-    try { await signIn(); const s = await checkLicense({ interactive: false }); render(s); setNote(s.pro ? 'Pro unlocked.' : 'Signed in.'); }
-    catch (err) { setNote(err?.message || 'Sign-in failed.', true); }
-  });
-  els.upgrade.addEventListener('click', async () => { track('pro_upsell_clicked', { feature: 'account' }); await openCheckout(); window.close(); });
-  els.refresh.addEventListener('click', async () => {
-    setNote('Checking…');
-    try { const s = await checkLicense({ interactive: false }); render(s); setNote(s.pro ? 'Pro is active.' : 'Still on the Free plan.'); }
-    catch { setNote('Could not refresh. Try again.', true); }
-  });
-  els.signOut.addEventListener('click', async () => { await signOut(); render({ pro: false, email: null }); setNote('Signed out.'); });
+  validate().then(render).catch(() => {});
+  $('getPro').addEventListener('click', async () => { track('pro_upsell_clicked', { feature: 'popup' }); await openUpgrade(); window.close(); });
+  $('enterKey').addEventListener('click', async () => { await chrome.runtime.openOptionsPage(); window.close(); });
 }
 
 track('popup_opened', { restricted_page: restricted, total_items: bucket((await countByHost(host)).total) });

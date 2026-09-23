@@ -54,21 +54,15 @@
 
   <footer class="acct" id="account" hidden>
     <div class="acct-id">
-      <span class="av" id="acctAvatar" aria-hidden="true"></span>
-      <div class="grow">
-        <div class="nm" id="acctTitle">Not signed in</div>
-        <div class="pln" id="acctDesc">Sign in to unlock Pro</div>
+      <div>
+        <div class="nm" id="acctTitle">Free plan</div>
+        <div class="pln" id="acctDesc">2 saved reports</div>
       </div>
-      <span class="chip free" id="planChip" hidden>Free</span>
-      <button class="signin" id="signIn">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12 11v2.9h4.1a3.9 3.9 0 0 1-1.7 2.6l2.7 2.1c1.6-1.5 2.5-3.6 2.5-6.1 0-.6-.05-1.1-.15-1.5Z"/><path d="M6.6 12a5.4 5.4 0 0 1 8-4.7l2.3-2.3A9 9 0 0 0 4 8.2l2.9 2.2c.3-.9.9-1.7 1.7-2.4Z" opacity=".85"/></svg>
-        Sign in
-      </button>
+      <span class="chip free" id="planChip">Free</span>
     </div>
-    <div class="acct-actions" id="acctActions" hidden>
-      <button class="mini p" id="upgrade" hidden>Upgrade to Pro</button>
-      <button class="mini g" id="refreshLicense">Refresh</button>
-      <button class="mini g" id="signOut">Sign out</button>
+    <div class="acct-actions" id="acctActions">
+      <button class="mini p" id="getPro">Get Pro</button>
+      <button class="mini g" id="enterKey">Enter key</button>
     </div>
     <p class="acct-note" id="acctNote" hidden></p>
   </footer>
