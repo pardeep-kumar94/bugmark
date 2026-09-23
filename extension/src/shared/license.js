@@ -21,7 +21,7 @@ async function deviceName() {
 
 export async function getCached() {
   const { [CACHE_KEY]: v } = await chrome.storage.local.get(CACHE_KEY);
-  return v || { pro: false, key: null, instanceId: null, checkedAt: 0 };
+  return v || { pro: false, key: null, instanceId: null, checkedAt: '' };
 }
 
 async function setCached(patch) {
@@ -93,7 +93,7 @@ export async function release() {
       });
     } catch { /* best effort */ }
   }
-  await chrome.storage.local.set({ [CACHE_KEY]: { pro: false, key: null, instanceId: null, checkedAt: 0 } });
+  await chrome.storage.local.set({ [CACHE_KEY]: { pro: false, key: null, instanceId: null, checkedAt: '' } });
 }
 
 /** Open the website upgrade/profile page (sign in → buy → copy key). */

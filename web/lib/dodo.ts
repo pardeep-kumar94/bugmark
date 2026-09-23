@@ -149,7 +149,11 @@ export async function activateKey(key: string, device: string) {
     throw new DodoLicenseError('limit_reached', 'License key is already active on another device.');
   }
   if (!res.ok) throw new DodoLicenseError('dodo_error', `Dodo activate failed (${res.status}): ${text}`);
-  const instanceId = data.id || data.license_key_instance_id || data.instance?.id || null;
+  // NOTE: verify this field name against a real Dodo activate response in TEST MODE before production —
+  // a wrong field yields a null instanceId, which prevents releasing the (single) activation slot later.
+  const instanceId =
+    data.id || data.license_key_instance_id || data.instance_id || data.instance?.id || data.instance?.instance_id || null;
+  if (!instanceId) console.warn('Dodo activate: could not parse an activation instance id from response:', data);
   return { instanceId, valid: true };
 }
 
