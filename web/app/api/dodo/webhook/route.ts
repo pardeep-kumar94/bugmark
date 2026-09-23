@@ -4,7 +4,7 @@
 // one-time payment reads metadata.sub and flips licenses/{sub}.paid = true.
 import { NextResponse } from 'next/server';
 import { verifyWebhook, isPaymentSuccess } from '@/lib/dodo';
-import { setPaid } from '@/lib/firebaseAdmin';
+import { setPaid, setLicenseKey } from '@/lib/firebaseAdmin';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -31,6 +31,10 @@ export async function POST(req: Request) {
         dodoCustomerId: event.data?.customer_id || event.data?.customer?.customer_id,
         dodoPaymentId: event.data?.payment_id,
       });
+      const ev = event.data as any;
+      const licenseKey = ev?.license_key || ev?.license?.key || ev?.license_keys?.[0]?.key;
+      const licenseKeyId = ev?.license_key_id || ev?.license?.id || ev?.license_keys?.[0]?.id;
+      if (licenseKey || licenseKeyId) await setLicenseKey(sub, { licenseKey, licenseKeyId });
     }
   }
 

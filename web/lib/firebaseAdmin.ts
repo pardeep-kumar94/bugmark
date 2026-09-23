@@ -102,13 +102,22 @@ export type License = {
   paid: boolean;
   dodoCustomerId?: string;
   dodoPaymentId?: string;
+  licenseKey?: string;
+  licenseKeyId?: string;
 };
 
 export async function getLicense(sub: string): Promise<License> {
   const snap = await db().collection('licenses').doc(sub).get();
   if (!snap.exists) return { plan: 'free', paid: false };
   const data = snap.data() as Partial<License>;
-  return { plan: data.paid ? 'pro' : 'free', paid: !!data.paid, dodoCustomerId: data.dodoCustomerId, dodoPaymentId: data.dodoPaymentId };
+  return {
+    plan: data.paid ? 'pro' : 'free',
+    paid: !!data.paid,
+    dodoCustomerId: data.dodoCustomerId,
+    dodoPaymentId: data.dodoPaymentId,
+    licenseKey: data.licenseKey,
+    licenseKeyId: data.licenseKeyId,
+  };
 }
 
 export async function setPaid(
@@ -124,6 +133,23 @@ export async function setPaid(
         paid: true,
         ...(info.dodoCustomerId ? { dodoCustomerId: info.dodoCustomerId } : {}),
         ...(info.dodoPaymentId ? { dodoPaymentId: info.dodoPaymentId } : {}),
+        updatedAt: FieldValue.serverTimestamp(),
+      },
+      { merge: true }
+    );
+}
+
+export async function setLicenseKey(
+  sub: string,
+  info: { licenseKey?: string; licenseKeyId?: string }
+): Promise<void> {
+  await db()
+    .collection('licenses')
+    .doc(sub)
+    .set(
+      {
+        ...(info.licenseKey ? { licenseKey: info.licenseKey } : {}),
+        ...(info.licenseKeyId ? { licenseKeyId: info.licenseKeyId } : {}),
         updatedAt: FieldValue.serverTimestamp(),
       },
       { merge: true }
