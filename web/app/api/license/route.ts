@@ -3,7 +3,8 @@
 // Auth: Bearer token = a website Firebase ID token OR an extension Google access token.
 // Called by the extension (polling) and the website account page.
 import { NextResponse } from 'next/server';
-import { resolveUser, bearerFrom, upsertUser, getLicense, adminEnabled } from '@/lib/firebaseAdmin';
+import { resolveUser, bearerFrom, upsertUser, getLicense, adminEnabled, setLicenseKey } from '@/lib/firebaseAdmin';
+import { getCustomerLicenseKey } from '@/lib/dodo';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -36,5 +37,22 @@ export async function GET(req: Request) {
   await upsertUser(user.sub, user.email);
   const license = await getLicense(user.sub);
 
-  return NextResponse.json({ pro: license.paid, email: user.email }, { headers: CORS });
+  let key = license.licenseKey || null;
+  let activations: { used: number | null; limit: number | null } | null = null;
+
+  if (license.paid && license.dodoCustomerId) {
+    const looked = await getCustomerLicenseKey(license.dodoCustomerId).catch(() => null);
+    if (looked) {
+      activations = { used: looked.used, limit: looked.limit };
+      if (!key && looked.key) {
+        key = looked.key;
+        await setLicenseKey(user.sub, { licenseKey: looked.key, licenseKeyId: looked.id }).catch(() => {});
+      }
+    }
+  }
+
+  return NextResponse.json(
+    { pro: license.paid, plan: license.plan, email: user.email, key, activations },
+    { headers: CORS }
+  );
 }
