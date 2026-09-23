@@ -1,10 +1,10 @@
 // ─────────────────────────────────────────────────────────────
 // Product configuration — edit these before publishing.
 // ─────────────────────────────────────────────────────────────
-// NOTE: for local testing while bugmark.site isn't deployed yet, this points at the
-// dev server. Switch back to 'https://bugmark.site' once the site is live (the
-// packaged build already uses NEXT_PUBLIC_SITE_URL, so prod zips are unaffected).
-const WEBSITE = 'http://localhost:3000'; // marketing site + API host (no trailing slash)
+// Live site is the API host for licensing + marketing URLs. For local API work,
+// temporarily set this to 'http://localhost:3000' while `npm run dev` is running.
+// (The packaged build still overrides this from NEXT_PUBLIC_SITE_URL at build time.)
+const WEBSITE = 'https://bugmark.site'; // marketing site + API host (no trailing slash)
 
 export const CONFIG = {
   productName: 'Bugmark',
