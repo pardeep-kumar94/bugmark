@@ -12,17 +12,22 @@ export const dynamic = 'force-dynamic';
 export async function POST(req: Request) {
   const rawBody = await req.text();
 
-  let event;
+  let result;
   try {
-    event = verifyWebhook(rawBody, req.headers);
+    result = verifyWebhook(rawBody, req.headers);
   } catch (err) {
     const message = err instanceof Error ? err.message : 'webhook_misconfigured';
     return NextResponse.json({ error: message }, { status: 500 });
   }
 
-  if (!event) {
-    return NextResponse.json({ error: 'invalid_signature' }, { status: 400 });
+  if (!result.ok) {
+    // Log the reason — a bare 400 is indistinguishable between "wrong headers"
+    // and "wrong signing secret", and Dodo's delivery log only shows the status.
+    console.error('Dodo webhook rejected:', result.reason, result.detail || '');
+    return NextResponse.json({ error: result.reason }, { status: 400 });
   }
+
+  const event = result.event;
 
   if (isPaymentSuccess(event)) {
     const sub = event.data?.metadata?.sub;

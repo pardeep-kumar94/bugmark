@@ -70,44 +70,79 @@ export type DodoWebhookEvent = {
   };
 };
 
+export type WebhookFailure =
+  | 'missing_headers'
+  | 'bad_secret_format'
+  | 'signature_mismatch'
+  | 'bad_json';
+
+export type WebhookResult =
+  | { ok: true; event: DodoWebhookEvent }
+  | { ok: false; reason: WebhookFailure; detail?: string };
+
 /**
  * Verify a Standard Webhooks signature over the RAW request body.
- * Returns the parsed event on success, or null if the signature is invalid.
+ *
+ * Header names: the spec uses `webhook-*`; senders built on svix emit `svix-*`.
+ * Dodo has used both, so accept either.
+ *
+ * Secret: `whsec_` + base64 per the spec. Some dashboards hand out a raw
+ * (non-base64) secret, which decodes to garbage and silently mismatches — so
+ * we try the decoded bytes first and fall back to the literal string.
  */
-export function verifyWebhook(rawBody: string, headers: Headers): DodoWebhookEvent | null {
+export function verifyWebhook(rawBody: string, headers: Headers): WebhookResult {
   if (!WEBHOOK_SECRET) throw new Error('DODO_WEBHOOK_SECRET is not set.');
 
-  const id = headers.get('webhook-id');
-  const timestamp = headers.get('webhook-timestamp');
-  const signatureHeader = headers.get('webhook-signature');
-  if (!id || !timestamp || !signatureHeader) return null;
+  const h = (name: string) => headers.get(`webhook-${name}`) || headers.get(`svix-${name}`);
+  const id = h('id');
+  const timestamp = h('timestamp');
+  const signatureHeader = h('signature');
+  if (!id || !timestamp || !signatureHeader) {
+    const present = [...headers.keys()].filter((k) => /^(webhook|svix)-/.test(k));
+    return { ok: false, reason: 'missing_headers', detail: `saw: [${present.join(', ')}]` };
+  }
 
-  // Secret is prefixed "whsec_" and base64-encoded per Standard Webhooks.
-  const secretBytes = Buffer.from(WEBHOOK_SECRET.replace(/^whsec_/, ''), 'base64');
+  const stripped = WEBHOOK_SECRET.replace(/^whsec_/, '');
+  const candidates: Buffer[] = [];
+  const decoded = Buffer.from(stripped, 'base64');
+  if (decoded.length > 0) candidates.push(decoded);
+  candidates.push(Buffer.from(stripped, 'utf8'));
+  if (candidates.length === 0) return { ok: false, reason: 'bad_secret_format' };
+
   const signedContent = `${id}.${timestamp}.${rawBody}`;
-  const expected = crypto.createHmac('sha256', secretBytes).update(signedContent).digest('base64');
+  const expectations = candidates.map((secretBytes) =>
+    crypto.createHmac('sha256', secretBytes).update(signedContent).digest('base64'),
+  );
 
   // Header is a space-separated list of "v1,<base64sig>" entries.
   const provided = signatureHeader
     .split(' ')
-    .map((p) => p.split(',')[1])
+    .map((p) => (p.includes(',') ? p.split(',')[1] : p))
     .filter(Boolean);
 
-  const ok = provided.some((sig) => {
-    try {
-      const a = Buffer.from(sig);
-      const b = Buffer.from(expected);
-      return a.length === b.length && crypto.timingSafeEqual(a, b);
-    } catch {
-      return false;
-    }
-  });
-  if (!ok) return null;
+  const ok = provided.some((sig) =>
+    expectations.some((expected) => {
+      try {
+        const a = Buffer.from(sig);
+        const b = Buffer.from(expected);
+        return a.length === b.length && crypto.timingSafeEqual(a, b);
+      } catch {
+        return false;
+      }
+    }),
+  );
+  if (!ok) {
+    return {
+      ok: false,
+      reason: 'signature_mismatch',
+      detail: `bodyBytes=${Buffer.byteLength(rawBody)} sigs=${provided.length} secretLen=${stripped.length}`,
+    };
+  }
 
   try {
-    return JSON.parse(rawBody) as DodoWebhookEvent;
+    return { ok: true, event: JSON.parse(rawBody) as DodoWebhookEvent };
   } catch {
-    return null;
+    return { ok: false, reason: 'bad_json' };
   }
 }
 
