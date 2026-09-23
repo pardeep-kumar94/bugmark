@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { track } from '@/lib/analytics';
-import { site } from '@/lib/site';
+import { ctaHref } from '@/lib/site';
 import { IconCheck, IconPuzzle } from './icons';
 
 const reasons = [
@@ -10,7 +10,7 @@ const reasons = [
   { id: 'missing_feature', label: 'A feature I need is missing' },
   { id: 'bug', label: 'Something didn’t work' },
   { id: 'hard_to_use', label: 'It was hard to use' },
-  { id: 'install_hassle', label: 'Installing/updating from a zip is a hassle' },
+  { id: 'install_hassle', label: 'Installing or updating was a hassle' },
   { id: 'switched', label: 'I switched to another tool' },
   { id: 'privacy', label: 'Privacy or permission concerns' },
   { id: 'other', label: 'Something else' },
@@ -49,7 +49,7 @@ export function UninstallSurvey() {
           <p className="mt-3 text-[15.5px] leading-relaxed text-dim">
             {note.trim() ? 'Thanks for the detail — it helps us make Bugmark better.' : 'If you change your mind, Bugmark is one click away.'}
           </p>
-          <a href={site.installUrl} className="btn-secondary mt-6"><IconPuzzle size={17} />Reinstall Bugmark</a>
+          <a href={ctaHref} target="_blank" rel="noopener" className="btn-secondary mt-6"><IconPuzzle size={17} />Reinstall Bugmark</a>
         </div>
       ) : (
         <form onSubmit={submit}>

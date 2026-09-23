@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Logo } from './Logo';
-import { site } from '@/lib/site';
+import { site, ctaHref } from '@/lib/site';
 import { guidePages, hrefOf } from '@/lib/content';
 
 export function Footer() {
@@ -19,7 +19,7 @@ export function Footer() {
           { href: '/#developers', label: 'For developers' },
           { href: '/#workflow', label: 'GitHub & exports' },
           { href: '/#free', label: 'Pricing' },
-          { href: site.installUrl, label: 'Download extension' },
+          { href: ctaHref, label: 'Get it on Chrome' },
         ]} />
         <FooterCol title="Tools" links={[
           { href: '/bug-reporting-tool', label: 'Bug reporting tool' },

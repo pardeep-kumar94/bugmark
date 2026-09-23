@@ -9,7 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const u = (p: string) => `${site.url}${p}`;
   const core: MetadataRoute.Sitemap = [
     { url: u('/'), lastModified: SITE_UPDATED, changeFrequency: 'weekly', priority: 1, images: [u(screens.heroCapture.src), u(screens.dashboard.src), u(screens.networkPayload.src)] },
-    { url: u('/install'), lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.9 },
     { url: u('/tools'), lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.8 },
     { url: u('/guides'), lastModified: SITE_UPDATED, changeFrequency: 'weekly', priority: 0.8 },
     { url: u('/alternatives'), lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.7 },

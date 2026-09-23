@@ -21,7 +21,7 @@ Key facts:
 - HAR export, Copy as cURL, element inspector with CSS selectors
 - Create GitHub issues with screenshots, video and logs; export HTML, PDF, CSV and Markdown reports
 
-- [Install ${site.name}](${site.url}/install): download and add to Chrome in about a minute
+- [Install ${site.name}](${site.chromeStoreUrl}): add to Chrome from the Chrome Web Store in about a minute
 - [Privacy policy](${site.url}/privacy)
 
 ${groups.join('\n\n')}
