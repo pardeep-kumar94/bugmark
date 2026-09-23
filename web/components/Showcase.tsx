@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { Reveal } from './Reveal';
 import { Frame } from './Frame';
 import { IconCheck, IconDevices, IconPen, IconSplit, IconVideo } from './icons';
@@ -66,15 +65,8 @@ export function Showcase() {
                   ))}
                 </ul>
               </Reveal>
-              <Reveal delay={80} className={`relative ${i % 2 ? 'lg:order-1' : ''} ${r.inset ? 'pb-10 sm:pb-14' : ''}`}>
+              <Reveal delay={80} className={`relative ${i % 2 ? 'lg:order-1' : ''}`}>
                 <Frame shot={r.shot} url={r.url} chrome={!!r.url} sizes="(min-width: 1024px) 680px, 100vw" />
-                {r.inset && (
-                  <div className={`absolute hidden sm:block ${r.inset.className}`}>
-                    <div className="overflow-hidden rounded-xl border border-line-2 shadow-[var(--sh-lg)]">
-                      <Image src={r.inset.shot.src} width={r.inset.shot.w} height={r.inset.shot.h} alt={r.inset.shot.alt} sizes="400px" className="block h-auto w-full" />
-                    </div>
-                  </div>
-                )}
               </Reveal>
             </div>
           ))}

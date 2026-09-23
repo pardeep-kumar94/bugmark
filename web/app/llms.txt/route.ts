@@ -11,7 +11,7 @@ export function GET() {
 
 > ${site.description}
 
-${site.name} is free (every feature, no account, no item limits). It is a Chrome extension (Chrome, Edge, Brave, Arc). Captures are stored locally in the browser.
+${site.name} is free to try (every feature unlocked, no account, up to 2 saved reports). A one-time $15 payment removes the limit for unlimited reports, forever — no subscription. It is a Chrome extension (Chrome, Edge, Brave, Arc). Captures are stored locally in the browser.
 
 Key facts:
 - Annotated screenshots: visible area, full page, 3-second delay, element, and mobile/tablet/desktop breakpoints in one image

@@ -13,7 +13,7 @@ export function CTA() {
           Stop describing bugs. <span className="text-dim">Send the evidence.</span>
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-lg text-dim">
-          Install Bugmark in seconds and file your first reproducible bug report today. Free, with every feature and no account.
+          Install Bugmark in seconds and file your first reproducible bug report today. Free to try, every feature unlocked — $15 one-time to remove the limit.
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <InstallLink className="btn-primary w-full sm:w-auto"><IconPuzzle size={18} />Add to Chrome — it’s free</InstallLink>

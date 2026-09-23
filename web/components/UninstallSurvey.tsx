@@ -39,7 +39,6 @@ export function UninstallSurvey() {
   }
 
   const toggle = (id: string) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
-  const mail = `mailto:${site.supportEmail}?subject=${encodeURIComponent('Feedback after uninstalling Bugmark')}&body=${encodeURIComponent(note)}`;
 
   return (
     <div className="card w-full max-w-xl p-7 sm:p-9">
@@ -48,7 +47,7 @@ export function UninstallSurvey() {
           <span className="grid h-10 w-10 place-items-center rounded-lg bg-accent/15 text-accent"><IconCheck size={20} /></span>
           <h1 className="mt-5 text-[26px] font-semibold tracking-[-0.04em]">Thank you — that really helps.</h1>
           <p className="mt-3 text-[15.5px] leading-relaxed text-dim">
-            {note.trim() ? <>Want a reply? <a className="font-medium text-accent underline underline-offset-4" href={mail}>Send your note by email</a>.</> : 'If you change your mind, Bugmark is always free.'}
+            {note.trim() ? 'Thanks for the detail — it helps us make Bugmark better.' : 'If you change your mind, Bugmark is one click away.'}
           </p>
           <a href={site.installUrl} className="btn-secondary mt-6"><IconPuzzle size={17} />Reinstall Bugmark</a>
         </div>

@@ -22,7 +22,7 @@ export function Nav() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? 'glass border-b border-line'
+          ? 'bg-canvas border-b border-line shadow-sm'
           : 'border-b border-transparent bg-transparent'
       }`}
     >

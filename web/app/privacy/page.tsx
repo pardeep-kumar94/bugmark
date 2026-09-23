@@ -80,7 +80,7 @@ export default function PrivacyPage() {
       <p>If you email us, we use your message only to respond to you.</p>
 
       <h2>Contact</h2>
-      <p>Questions about privacy? Email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>
+      <p>Questions about privacy? Reach us through the <a href={site.chromeStoreUrl} target="_blank" rel="noopener">Chrome Web Store listing</a>&rsquo;s support tab.</p>
     </LegalPage>
   );
 }

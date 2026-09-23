@@ -37,7 +37,7 @@ export default async function OpengraphImage() {
           </div>
         </div>
         <div style={{ display: 'flex', gap: 14, fontSize: 21, color: '#C9D1D9' }}>
-          <span>Chrome extension</span><span style={{ color: '#2B3440' }}>·</span><span>No account</span><span style={{ color: '#2B3440' }}>·</span><span style={{ color: green }}>100% free</span>
+          <span>Chrome extension</span><span style={{ color: '#2B3440' }}>·</span><span>No account</span><span style={{ color: '#2B3440' }}>·</span><span style={{ color: green }}>Free to try · $15 one-time</span>
         </div>
       </div>
     ),

@@ -162,6 +162,8 @@
         }
       } catch {}
       const p = origFetch.apply(this, arguments);
+      // Observe on a detached chain with a terminal catch, so instrumenting the page's fetch can never
+      // create — or be blamed for — an unhandled rejection. The page still receives the original `p`.
       p.then(async (res) => {
         const mime = res.headers.get('content-type') || '';
         // Clone right away, before the page reads the body.
@@ -179,7 +181,11 @@
       }, async (err) => {
         let requestBody = null; try { requestBody = reqBody && reqBody.pending ? await reqBody.pending : reqBody; } catch {}
         log({ kind: 'net', type: 'fetch', method, url, status: 0, error: String(err && err.message || err), start, duration: Date.now() - start, requestHeaders: cfg.bodies ? reqHeaders : undefined, requestBody: cfg.bodies ? requestBody : undefined });
-      });
+      }).catch(() => {});
+      // Swallow rejection on the original promise too: instrumenting it attaches our frame to the async
+      // stack, so a page request the site itself never catches would otherwise be blamed on the extension.
+      // The page keeps its own handlers on `p`; this extra one only prevents the mis-attributed report.
+      p.catch(() => {});
       return p;
     };
   }

@@ -1,4 +1,4 @@
-import { site, ctaHref } from '@/lib/site';
+import { ctaHref } from '@/lib/site';
 import { IconChevron } from './icons';
 
 const link = 'font-medium text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent';
@@ -6,8 +6,8 @@ const link = 'font-medium text-accent underline decoration-accent/30 underline-o
 /** `a` is plain text (also used for FAQPage structured data); `rich` optionally replaces it on the page. */
 export const faqs: { q: string; a: string; rich?: React.ReactNode }[] = [
   {
-    q: 'Is Bugmark really free?',
-    a: 'Yes. Every feature is free: screenshots and annotation, screen recording, console and network logs, steps to reproduce, GitHub issues, and HTML, PDF and CSV exports. There is no account, no credit card, no item limit and no watermark.',
+    q: 'How much does Bugmark cost?',
+    a: 'Bugmark is free to try — every feature is unlocked, including screenshots and annotation, screen recording, console and network logs, steps to reproduce, GitHub issues and exports. The free version keeps up to 2 saved reports at a time. A one-time $15 payment (no subscription) removes the limit for unlimited reports, forever. No account is needed to start.',
   },
   {
     q: 'How do I install Bugmark?',
@@ -61,8 +61,7 @@ export function FAQ() {
           <p className="kicker">faq</p>
           <h2 className="section-title mt-3">Questions, answered.</h2>
           <p className="section-lead">
-            Something else on your mind? Email{' '}
-            <a className={link} href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.
+            Everything you need to know before you install — capture, privacy, pricing and browser support.
           </p>
         </div>
         <div className="divide-y divide-line border-y border-line">

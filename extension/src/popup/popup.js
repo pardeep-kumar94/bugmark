@@ -1,7 +1,7 @@
 import { getAll, countByHost } from '../shared/db.js';
 import { track, bucket } from '../shared/analytics.js';
 import {
-  licensingEnabled, getCached, isPro, signIn, signOut, checkLicense, openCheckout,
+  licensingEnabled, getCached, signIn, signOut, checkLicense, openCheckout,
 } from '../shared/license.js';
 
 const $ = (id) => document.getElementById(id);
@@ -28,8 +28,8 @@ const recStatus = await chrome.runtime.sendMessage({ type: 'bugmark:recStatus', 
 const recording = recStatus?.recording || recStatus?.elsewhere;
 if (recording) { $('recordLabel').textContent = 'Stop recording'; $('record').classList.add('rec-on'); }
 
-// Screen recording is a Pro feature.
-let recordLocked = licensingEnabled && !recording && !(await isPro());
+// Recording is available on the free plan (subject to the saved-report limit).
+let recordLocked = false;
 function paintRecordLock() {
   $('recordLock').hidden = !recordLocked;
   $('recordKbd').hidden = recordLocked || recording;
@@ -108,7 +108,7 @@ if (licensingEnabled) {
     els.avatar.classList.toggle('out', !signedIn);
     els.avatar.innerHTML = signedIn ? esc((email.trim()[0] || '?')) : personGlyph;
     els.title.textContent = signedIn ? email : 'Not signed in';
-    els.desc.textContent = signedIn ? (pro ? 'Pro · all features' : 'Free plan') : 'Sign in to unlock Pro';
+    els.desc.textContent = signedIn ? (pro ? 'Pro · unlimited reports' : 'Free plan · 2 reports') : 'Sign in to unlock Pro';
     els.chip.hidden = !signedIn;
     els.chip.textContent = pro ? 'Pro' : 'Free';
     els.chip.classList.toggle('pro', pro);
@@ -116,8 +116,6 @@ if (licensingEnabled) {
     els.signIn.hidden = signedIn;
     els.actions.hidden = !signedIn;
     els.upgrade.hidden = pro;
-    recordLocked = !recording && !pro;
-    paintRecordLock();
   }
 
   render(await getCached());

@@ -18,7 +18,7 @@ export function Footer() {
           { href: '/#product', label: 'Product' },
           { href: '/#developers', label: 'For developers' },
           { href: '/#workflow', label: 'GitHub & exports' },
-          { href: '/#free', label: 'Free — every feature' },
+          { href: '/#free', label: 'Pricing' },
           { href: site.installUrl, label: 'Download extension' },
         ]} />
         <FooterCol title="Tools" links={[
@@ -36,7 +36,6 @@ export function Footer() {
         ]} />
         <FooterCol title="Company" links={[
           { href: '/#faq', label: 'FAQ' },
-          { href: `mailto:${site.supportEmail}`, label: 'Contact support' },
           { href: '/privacy', label: 'Privacy policy' },
           { href: '/terms', label: 'Terms of service' },
         ]} />
@@ -44,7 +43,6 @@ export function Footer() {
       <div className="mx-auto mt-12 max-w-6xl px-5 sm:px-8">
         <div className="flex flex-col justify-between gap-3 border-t border-line pt-6 text-[13px] text-mute sm:flex-row">
           <span>© {year} {site.name}. All rights reserved.</span>
-          <span>Chrome is a trademark of Google LLC.</span>
         </div>
       </div>
     </footer>

@@ -1,10 +1,10 @@
 {
   "name": "Bugmark",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "file": "/downloads/bugmark-chrome-extension.zip",
-  "bytes": 321187,
-  "sha256": "603be0fc4d3d7106cfbbe972413e655392cc728fd614fd68fa36bf46c137c5d2",
+  "bytes": 321700,
+  "sha256": "81f5dcfaef8a6b7e5ca0ab7a2852c2575cb0ec9945f52d3763f2f2cc801ce968",
   "extensionId": "ebljpcoilmbiinebhadcchngeimdbepd",
   "minimumChromeVersion": "123",
-  "builtAt": "2026-09-21T12:22:24.825Z"
+  "builtAt": "2026-09-21T14:06:23.426Z"
 }

@@ -1399,7 +1399,11 @@
     const res = await send({ type: 'bugmark:save', item });
     panel.querySelectorAll('.p-foot button').forEach((b) => (b.disabled = false));
     if (!res?.ok) {
-      toast(res?.error || 'Could not save feedback', { error: true });
+      if (res?.code === 'free_limit') {
+        toast(res.error || 'Free plan report limit reached', { error: true, action: 'Upgrade to Pro', onAction: () => send({ type: 'bugmark:checkout' }) });
+      } else {
+        toast(res?.error || 'Could not save feedback', { error: true });
+      }
       return;
     }
 

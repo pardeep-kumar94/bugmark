@@ -102,13 +102,23 @@ function trackSaved(it) {
   });
 }
 
+// Free plan keeps a limited number of saved reports; Pro is unlimited.
+// Gating only applies when licensing is configured (packaged/store build).
+async function ensureUnderFreeLimit() {
+  if (!licensingEnabled) return;
+  if (await isPro()) return;
+  const limit = CONFIG.licensing.freeLimit;
+  if (!limit) return;
+  const { total } = await countByHost(null);
+  if (total >= limit) {
+    const err = new Error(`The free plan keeps ${limit} reports at a time. Upgrade to Bugmark Pro for unlimited reports, or delete a report to make room.`);
+    err.code = 'free_limit';
+    throw err;
+  }
+}
+
 async function startRecording(tabId, source = 'shortcut') {
   if (await getRecording()) throw new Error('A recording is already running');
-  // Screen recording is a Pro feature — gate every entry point (popup, shortcut, launcher).
-  if (licensingEnabled && !(await isPro())) {
-    await openCheckout();
-    throw new Error('Screen recording is a Bugmark Pro feature');
-  }
   const settings = { ...DEFAULT_SETTINGS, ...((await chrome.storage.local.get('settings')).settings || {}) };
   await ensureContent(tabId);
   await ensureOffscreen();
@@ -319,12 +329,14 @@ const handlers = {
   },
 
   async 'bugmark:save'(msg) {
+    await ensureUnderFreeLimit();
     const item = await addItem(msg.item);
     trackSaved(msg.item);
     const counts = await countByHost(item.host);
     chrome.runtime.sendMessage({ type: 'bugmark:changed' }).catch(() => {});
     return { item: { id: item.id, seq: item.seq }, counts };
   },
+  async 'bugmark:checkout'() { await openCheckout(); return {}; },
   async 'bugmark:count'(msg) {
     return { counts: await countByHost(msg.host) };
   },

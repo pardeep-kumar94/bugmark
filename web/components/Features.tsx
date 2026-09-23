@@ -13,7 +13,7 @@ const features: { icon: React.ReactNode; title: string; text: string }[] = [
   { icon: <IconPalette />, title: 'White-label reports', text: 'Your logo, colours and company name. No Bugmark footer.' },
   { icon: <IconKeyboard />, title: 'Keyboard first', text: '⌥⇧S to annotate, ⌥⇧R to record, Enter to capture, ⌘↵ to save.' },
   { icon: <IconArchive />, title: 'Backup & restore', text: 'Move everything to another computer, recordings included.' },
-  { icon: <IconUserOff />, title: 'Free, no account', text: 'Install and go. Every feature is free, with no sign-up and no limits.' },
+  { icon: <IconUserOff />, title: 'Free to try, no account', text: 'Install and go — every feature works right away. Unlock unlimited use with a one-time $15 payment.' },
 ];
 
 export function Features() {

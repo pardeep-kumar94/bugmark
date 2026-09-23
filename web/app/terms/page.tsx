@@ -18,8 +18,10 @@ export default function TermsPage() {
 
       <h2>Price</h2>
       <p>
-        {site.name} is currently free to use, with every feature included and no account required. If we ever introduce paid features, we will
-        announce them on this website in advance, and nothing you have already captured will be locked.
+        {site.name} is free to try, with every feature unlocked and no account required; the free version keeps up to two saved reports at
+        a time. A one-time payment of $15 (USD) unlocks unlimited reports permanently — there is no subscription and no recurring charge.
+        Payments are processed by our payment provider, who acts as merchant of record. Nothing you have already captured is ever deleted
+        by reaching a limit.
       </p>
 
       <h2>Your content</h2>
@@ -41,7 +43,7 @@ export default function TermsPage() {
       <p>To the extent permitted by law, {site.name} is not liable for indirect or consequential losses, including loss of data.</p>
 
       <h2>Contact</h2>
-      <p>Email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>
+      <p>Reach us through the <a href={site.chromeStoreUrl} target="_blank" rel="noopener">Chrome Web Store listing</a>&rsquo;s support tab.</p>
     </LegalPage>
   );
 }

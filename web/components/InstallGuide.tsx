@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { release, site } from '@/lib/site';
+import { release } from '@/lib/site';
 import { screens } from '@/lib/screens';
 import { detectExtension } from '@/lib/extension';
 import { track } from '@/lib/analytics';
@@ -138,7 +138,6 @@ export function InstallGuide() {
             <li><b className="text-ink-2">Recording has no voice</b> — the first time, allow the microphone on the page Bugmark opens (Settings → General → allow microphone).</li>
             <li className="break-all text-[12px] text-mute">SHA-256 {release.sha256} · extension ID {release.extensionId}</li>
           </ul>
-          <p className="mt-4 text-[14px] text-dim">Still stuck? Email <a className="font-medium text-accent underline decoration-accent/30 underline-offset-4" href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>
         </details>
       </div>
     </section>

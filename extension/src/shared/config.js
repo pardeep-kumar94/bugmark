@@ -38,6 +38,7 @@ export const CONFIG = {
     oauthClientId: '455219105372-29lrnj28t5mgqfb1pub4td1pgrco8s79.apps.googleusercontent.com',
     scopes: ['openid', 'email', 'profile'],
     pollIntervalMs: 6 * 60 * 60 * 1000,     // background re-check of license status
+    freeLimit: 2,                           // saved reports allowed on the free plan; Pro is unlimited
   },
 
   // GitHub issues. Users can always connect with a personal access token.
