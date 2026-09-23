@@ -123,7 +123,7 @@ async function loadRepos(quiet) {
   $('ghReload').disabled = true; $('ghReload').textContent = 'Loading…';
   try {
     const repos = await listRepos(gh.token);
-    $('ghRepoList').innerHTML = repos.filter((r) => r.issues).map((r) => `<option value="${r.full}">${r.private ? 'Private' : 'Public'}</option>`).join('');
+    $('ghRepoList').innerHTML = repos.filter((r) => r.issues).map((r) => `<option value="${r.full}">${r.full}${r.private ? ' · private' : ''}</option>`).join('');
     if (!gh.defaultRepo && repos[0]) { gh = await setGithub({ defaultRepo: repos[0].full }); $('ghRepo').value = gh.defaultRepo; }
     if (!quiet) toast(`${repos.length} repositor${repos.length === 1 ? 'y' : 'ies'} available`);
   } catch (err) { if (!quiet) toast(err.message); }
