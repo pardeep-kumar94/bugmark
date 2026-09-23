@@ -145,8 +145,8 @@ async function licenseCall(path: string, body: Record<string, unknown>) {
 export async function activateKey(key: string, device: string) {
   const { res, data, text } = await licenseCall('/licenses/activate', { license_key: key, name: device });
   if (res.status === 404 || res.status === 400) throw new DodoLicenseError('invalid_key', 'License key is invalid.');
-  if (res.status === 409 || /limit|exhaust|activation/i.test(text)) {
-    if (!res.ok) throw new DodoLicenseError('limit_reached', 'License key is already active on another device.');
+  if (res.status === 409 || (!res.ok && /activation limit|limit reached|exhaust/i.test(text))) {
+    throw new DodoLicenseError('limit_reached', 'License key is already active on another device.');
   }
   if (!res.ok) throw new DodoLicenseError('dodo_error', `Dodo activate failed (${res.status}): ${text}`);
   const instanceId = data.id || data.license_key_instance_id || data.instance?.id || null;
