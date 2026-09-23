@@ -56,7 +56,7 @@ export async function activate(key) {
   const body = await res.json().catch(() => ({}));
   const msg =
     body.error === 'limit_reached' ? 'This key is already active on another device. Release it there first.'
-    : body.error === 'invalid_key' ? 'That license key isn't valid.'
+    : body.error === 'invalid_key' ? "That license key isn't valid."
     : 'Could not activate the key. Try again.';
   return { pro: false, error: msg };
 }
