@@ -2,6 +2,7 @@ import { CONFIG } from '../shared/config.js';
 import { getSettings, setSettings } from '../shared/settings.js';
 import { track, analyticsConfigured } from '../shared/analytics.js';
 import { getGithub, setGithub, disconnectGithub, connectWithToken, listRepos, isValidRepo, deviceFlowAvailable, startDeviceFlow, pollDeviceFlow } from '../shared/github.js';
+import { attachRepoCombo } from '../shared/repo-combo.js';
 import { activate, release, validate, getCached, openUpgrade } from '../shared/license.js';
 
 const $ = (id) => document.getElementById(id);
@@ -123,7 +124,7 @@ async function loadRepos(quiet) {
   $('ghReload').disabled = true; $('ghReload').textContent = 'Loading…';
   try {
     const repos = await listRepos(gh.token);
-    $('ghRepoList').innerHTML = repos.filter((r) => r.issues).map((r) => `<option value="${r.full}">${r.full}${r.private ? ' · private' : ''}</option>`).join('');
+    repoCombo.setRepos(repos.filter((r) => r.issues));
     if (!gh.defaultRepo && repos[0]) { gh = await setGithub({ defaultRepo: repos[0].full }); $('ghRepo').value = gh.defaultRepo; }
     if (!quiet) toast(`${repos.length} repositor${repos.length === 1 ? 'y' : 'ies'} available`);
   } catch (err) { if (!quiet) toast(err.message); }
@@ -171,6 +172,7 @@ $('ghDisconnect').addEventListener('click', async () => {
   renderGithub();
   toast('GitHub disconnected');
 });
+const repoCombo = attachRepoCombo($('ghRepo'));
 $('ghReload').addEventListener('click', () => loadRepos(false));
 $('ghRepo').addEventListener('input', (e) => {
   const v = e.target.value.trim();

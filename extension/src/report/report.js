@@ -4,6 +4,7 @@ import { getSettings, setSettings } from '../shared/settings.js';
 import { buildReportHtml, buildMarkdown, buildCsv, TYPE_META, PRIO_META, esc, firstLine } from './export.js';
 import { track, bucket } from '../shared/analytics.js';
 import { getGithub, defaultTitle, defaultLabels, isValidRepo } from '../shared/github.js';
+import { attachRepoCombo } from '../shared/repo-combo.js';
 
 const $ = (id) => document.getElementById(id);
 const state = { items: [], host: '', q: '', status: 'all', type: 'all', sort: 'newest', exScope: 'filtered', format: 'html' };
@@ -482,6 +483,7 @@ $('exportForm').addEventListener('submit', async (e) => {
 // ---------------------------------------------------------------- GitHub issue
 let ghItem = null;
 let reposLoaded = false;
+const repoCombo = attachRepoCombo($('ghRepo'));
 async function openGithubDialog(it) {
   const g = await getGithub();
   if (!g.token) {
@@ -502,7 +504,7 @@ async function openGithubDialog(it) {
   if (!reposLoaded) {
     reposLoaded = true;
     chrome.runtime.sendMessage({ type: 'bugmark:githubRepos' }).then((r) => {
-      if (r?.ok) $('ghRepoList').innerHTML = r.repos.filter((x) => x.issues).map((x) => `<option value="${esc(x.full)}">${x.private ? 'Private' : 'Public'}</option>`).join('');
+      if (r?.ok) repoCombo.setRepos(r.repos.filter((x) => x.issues));
       else reposLoaded = false;
     }).catch(() => { reposLoaded = false; });
   }
