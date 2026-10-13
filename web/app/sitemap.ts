@@ -3,7 +3,7 @@ import { site } from '@/lib/site';
 import { allPages, hrefOf } from '@/lib/content';
 import { screens } from '@/lib/screens';
 
-const SITE_UPDATED = new Date('2026-09-17');
+const SITE_UPDATED = new Date('2026-10-13');
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const u = (p: string) => `${site.url}${p}`;

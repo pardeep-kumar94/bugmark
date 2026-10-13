@@ -499,6 +499,7 @@ export const guidePages: ContentPage[] = [
     related: [
       '/guides/how-to-capture-console-logs',
       '/network-request-logger',
+      '/guides/copy-as-curl-chrome',
       '/debugging-tool',
       '/guides/how-to-write-a-bug-report',
     ],

@@ -1,7 +1,14 @@
 import type { ContentPage, PageKind } from './types';
 import { toolPages } from './tools';
-import { alternativePages } from './alternatives';
-import { guidePages } from './guides';
+import { alternativePages as baseAlternativePages } from './alternatives';
+import { moreAlternativePages } from './alternatives-more';
+import { guidePages as baseGuidePages } from './guides';
+import { moreGuidePages } from './guides-more';
+import { roundupGuidePages } from './guides-roundup';
+
+const alternativePages: ContentPage[] = [...baseAlternativePages, ...moreAlternativePages];
+// The roundup leads: the footer links the first guides site-wide.
+const guidePages: ContentPage[] = [...roundupGuidePages, ...baseGuidePages, ...moreGuidePages];
 
 export type { ContentPage, PageKind } from './types';
 export { toolPages, alternativePages, guidePages };

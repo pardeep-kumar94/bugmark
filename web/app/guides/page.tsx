@@ -4,9 +4,9 @@ import { guidePages } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'Bug Reporting & Debugging Guides',
-  description: 'Practical guides for developers and QA: write a bug report, capture HAR files and console logs, steps to reproduce templates and full page screenshots in Chrome.',
+  description: 'Practical guides for developers and QA: write bug reports, capture HAR files and console logs, copy requests as cURL, screen record in Chrome and compare tools.',
   alternates: { canonical: '/guides' },
-  openGraph: { url: '/guides', type: 'website', title: 'Bug Reporting & Debugging Guides', description: 'Practical guides for developers and QA: write a bug report, capture HAR files and console logs, steps to reproduce templates and full page screenshots in Chrome.' },
+  openGraph: { url: '/guides', type: 'website', title: 'Bug Reporting & Debugging Guides', description: 'Practical guides for developers and QA: write bug reports, capture HAR files and console logs, copy requests as cURL, screen record in Chrome and compare tools.' },
 };
 
 export default function GuidesPage() {

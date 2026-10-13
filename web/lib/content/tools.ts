@@ -145,7 +145,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Every feature is unlocked, with no sign-up, no item limits and no required watermark. Install it in a couple of clicks from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Every feature is unlocked, with no sign-up and no required watermark. The free version keeps up to 2 saved reports at a time; a one-time $15 payment removes the limit. Install it in a couple of clicks from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -153,7 +153,7 @@ export const toolPages: ContentPage[] = [
     faqs: [
       {
         q: 'Is there a free bug reporting tool for Chrome?',
-        a: 'Yes. Bugmark is a free Chrome extension with every feature unlocked, no account and no limits on the number of reports. It captures annotated screenshots, screen recordings, steps to reproduce, console logs and network requests, and it works in Chromium browsers such as Edge, Brave and Arc as well.',
+        a: 'Yes. Bugmark is free to try with every feature unlocked and no account; the free version keeps up to 2 saved reports at a time, and a one-time $15 payment (no subscription) unlocks unlimited reports. It captures annotated screenshots, screen recordings, steps to reproduce, console logs and network requests, and it works in Chromium browsers such as Edge, Brave and Arc as well.',
       },
       {
         q: 'What should a good bug report include?',
@@ -173,7 +173,7 @@ export const toolPages: ContentPage[] = [
       },
     ],
     related: ['/qa-testing-tool', '/screen-recorder-for-bug-reports', '/guides/how-to-write-a-bug-report', '/alternatives/jam'],
-    updated: '2026-09-17',
+    updated: '2026-10-13',
   },
 
   // ---------------------------------------------------------------------------
@@ -313,7 +313,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Bugmark is free, with no account and every feature unlocked. It runs in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Bugmark is free to try, with no account and every feature unlocked; a one-time $15 removes the 2-report limit. It runs in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -341,7 +341,7 @@ export const toolPages: ContentPage[] = [
       },
     ],
     related: ['/debugging-tool', '/network-request-logger', '/guides/how-to-capture-har-file-chrome', '/screenshot-annotation-tool'],
-    updated: '2026-09-17',
+    updated: '2026-10-13',
   },
 
   // ---------------------------------------------------------------------------
@@ -475,7 +475,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Bugmark is free, needs no account and keeps data on your device. It works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Bugmark is free to try, needs no account and keeps data on your device. It works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -503,7 +503,7 @@ export const toolPages: ContentPage[] = [
       },
     ],
     related: ['/network-request-logger', '/web-developer-tools', '/guides/how-to-capture-console-logs', '/screen-recorder-for-bug-reports'],
-    updated: '2026-09-17',
+    updated: '2026-10-13',
   },
 
   // ---------------------------------------------------------------------------
@@ -638,7 +638,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free, no account, every feature including white-label reports unlocked. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Free to try, no account, every feature including white-label reports unlocked; $15 one-time for unlimited reports. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -666,7 +666,7 @@ export const toolPages: ContentPage[] = [
       },
     ],
     related: ['/screenshot-annotation-tool', '/bug-reporting-tool', '/alternatives/bugherd', '/alternatives/marker-io'],
-    updated: '2026-09-17',
+    updated: '2026-10-13',
   },
 
   // ---------------------------------------------------------------------------
@@ -803,7 +803,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free, no account and no required watermark. Works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Free to try, no account and no required watermark. Works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -831,7 +831,7 @@ export const toolPages: ContentPage[] = [
       },
     ],
     related: ['/bug-reporting-tool', '/alternatives/loom', '/guides/steps-to-reproduce-template', '/debugging-tool'],
-    updated: '2026-09-17',
+    updated: '2026-10-13',
   },
 
   // ---------------------------------------------------------------------------
@@ -980,7 +980,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free with no account, no item limits and no required watermark. It installs in about a minute and works in Chrome, Edge, Brave and Arc, so the whole team can mark up pages the same way. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Free to try, with no account and no required watermark; a one-time $15 removes the 2-report limit. It installs in about a minute and works in Chrome, Edge, Brave and Arc, so the whole team can mark up pages the same way. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -1004,11 +1004,11 @@ export const toolPages: ContentPage[] = [
       },
       {
         q: 'Is Bugmark’s screenshot tool free?',
-        a: 'Yes. Bugmark is free with every feature unlocked, including full page, element and breakpoint captures, annotation tools, redaction and exports. There is no account, no limit on the number of screenshots and no required watermark. It runs in Chrome, Edge, Brave and Arc.',
+        a: 'Yes. Bugmark is free to try with every feature unlocked, including full page, element and breakpoint captures, annotation tools, redaction and exports. There is no account and no required watermark; the free version keeps up to 2 saved reports at a time, and a one-time $15 payment removes the limit. It runs in Chrome, Edge, Brave and Arc.',
       },
     ],
     related: ['/website-feedback-tool', '/guides/full-page-screenshot-chrome', '/bug-reporting-tool', '/web-developer-tools'],
-    updated: '2026-09-17',
+    updated: '2026-10-13',
   },
 
   // ---------------------------------------------------------------------------
@@ -1154,7 +1154,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free, no account, data stays on your device. Works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Free to try, no account, data stays on your device. Works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -1181,8 +1181,8 @@ export const toolPages: ContentPage[] = [
         a: 'Yes. Open any request in a Bugmark report and use Copy as cURL. This gives you a command you can run in a terminal to replay the request, tweak parameters or headers, and verify a fix against a local or staging server. Masked values will need to be replaced with valid credentials.',
       },
     ],
-    related: ['/debugging-tool', '/guides/how-to-capture-har-file-chrome', '/guides/how-to-capture-console-logs', '/web-developer-tools'],
-    updated: '2026-09-17',
+    related: ['/debugging-tool', '/guides/how-to-capture-har-file-chrome', '/guides/copy-as-curl-chrome', '/guides/how-to-capture-console-logs', '/web-developer-tools'],
+    updated: '2026-10-13',
   },
 
   // ---------------------------------------------------------------------------
@@ -1318,7 +1318,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Bugmark is free, with no account and every feature unlocked. Installation takes about a minute and works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Bugmark is free to try, with no account and every feature unlocked; a one-time $15 removes the 2-report limit. Installation takes about a minute and works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -1346,6 +1346,6 @@ export const toolPages: ContentPage[] = [
       },
     ],
     related: ['/bug-reporting-tool', '/guides/steps-to-reproduce-template', '/network-request-logger', '/guides/how-to-write-a-bug-report'],
-    updated: '2026-09-17',
+    updated: '2026-10-13',
   },
 ];

@@ -21,7 +21,10 @@ export const site = {
   // Extension ID — lets the website detect that Bugmark is installed. Defaults to the pinned ID of the downloadable build.
   extensionId: process.env.NEXT_PUBLIC_EXTENSION_ID || release.extensionId || '',
   // Public profiles, used for Organization structured data (sameAs). Add GitHub, X, LinkedIn, Product Hunt…
-  sameAs: [] as string[],
+  sameAs: [
+    'https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj',
+    'https://www.producthunt.com/products/bugmark',
+  ] as string[],
 } as const;
 
 // Where "Add to Chrome" buttons point: the Chrome Web Store listing once published,

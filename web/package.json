@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "package:extension": "node scripts/package-extension.mjs"
+    "package:extension": "node scripts/package-extension.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "firebase": "^12.19.0",
