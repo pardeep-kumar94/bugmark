@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
-import { Bricolage_Grotesque } from 'next/font/google';
+import localFont from 'next/font/local';
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ['latin'],
-  weight: ['600', '700', '800'],
+// Self-hosted (latin, variable 600–800) so builds don't depend on fetching Google Fonts.
+const bricolage = localFont({
+  src: './fonts/BricolageGrotesque-latin-600-800.woff2',
+  weight: '600 800',
   variable: '--font-bricolage',
   display: 'swap',
 });
