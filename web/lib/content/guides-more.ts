@@ -264,7 +264,7 @@ export const moreGuidePages: ContentPage[] = [
           { type: 'shot', screen: 'reportItem', caption: 'One Bugmark report holds the screenshot, page details, steps and failed requests.' },
           {
             type: 'p',
-            text: 'Bugmark is free to try with every feature unlocked: the free version keeps up to 2 saved reports at a time, and a one-time $15 payment removes the limit. No subscription and no account, and captures stay in your browser. [Add Bugmark to Chrome](' + CWS + ')',
+            text: 'Bugmark is free to try with every feature unlocked: the free version keeps up to 2 saved reports at a time, and a one-time $7.99 payment removes the limit. No subscription and no account, and captures stay in your browser. [Add Bugmark to Chrome](' + CWS + ')',
           },
         ],
       },
@@ -515,7 +515,7 @@ export const moreGuidePages: ContentPage[] = [
           { type: 'shot', screen: 'networkResponse', caption: 'The captured response body next to the request, ready to copy as cURL with secrets masked.' },
           {
             type: 'p',
-            text: 'Because commands are built from the already-masked log, you add your own test credentials when replaying. Bugmark is free to try with every feature unlocked, up to 2 saved reports at a time; a one-time $15 payment removes the limit, with no subscription or account. [Add Bugmark to Chrome](' + CWS + ')',
+            text: 'Because commands are built from the already-masked log, you add your own test credentials when replaying. Bugmark is free to try with every feature unlocked, up to 2 saved reports at a time; a one-time $7.99 payment removes the limit, with no subscription or account. [Add Bugmark to Chrome](' + CWS + ')',
           },
         ],
       },
@@ -764,7 +764,7 @@ export const moreGuidePages: ContentPage[] = [
           { type: 'shot', screen: 'videoPlayer', caption: 'Recordings play back next to the captured steps, console messages and network requests.' },
           {
             type: 'p',
-            text: 'Recordings are stored locally in your browser, not uploaded to Bugmark servers. Bugmark is free to try with every feature unlocked, up to 2 saved reports at a time; a one-time $15 payment removes the limit, with no subscription or account. [Add Bugmark to Chrome](' + CWS + ')',
+            text: 'Recordings are stored locally in your browser, not uploaded to Bugmark servers. Bugmark is free to try with every feature unlocked, up to 2 saved reports at a time; a one-time $7.99 payment removes the limit, with no subscription or account. [Add Bugmark to Chrome](' + CWS + ')',
           },
         ],
       },

@@ -39,7 +39,7 @@ export const moreAlternativePages: ContentPage[] = [
             type: "callout",
             title: "The short version",
             text:
-              "Choose **Userback** if you want to collect feedback from your own users through an embedded widget and surveys, manage it in a shared inbox with session replay, and sync it with Jira, ClickUp and other project tools. Choose **Bugmark** if the person reporting is your own developer, tester or designer and you want console logs, network payloads and responses, steps to reproduce, HAR download and GitHub issues on every capture, with no account, data kept on your device and a one-time $15 payment instead of a monthly plan.",
+              "Choose **Userback** if you want to collect feedback from your own users through an embedded widget and surveys, manage it in a shared inbox with session replay, and sync it with Jira, ClickUp and other project tools. Choose **Bugmark** if the person reporting is your own developer, tester or designer and you want console logs, network payloads and responses, steps to reproduce, HAR download and GitHub issues on every capture, with no account, data kept on your device and a one-time $7.99 payment instead of a monthly plan.",
           },
         ],
       },
@@ -78,7 +78,7 @@ export const moreAlternativePages: ContentPage[] = [
           {
             type: "list",
             items: [
-              "**Simple pricing:** every feature is unlocked from the first install. The free version keeps up to 2 saved reports at a time, and a one-time $15 payment (Bugmark Pro) removes the limit for unlimited reports, forever. No subscription, no seats and no account.",
+              "**Simple pricing:** every feature is unlocked from the first install. The free version keeps up to 2 saved reports at a time, and a one-time $7.99 payment (Bugmark Pro) removes the limit for unlimited reports, forever. No subscription, no seats and no account.",
               "**Developer context on every capture:** the last 30 actions as steps to reproduce, the last 150 console messages and errors, and the last 150 network requests with payloads and responses for recent fetch/XHR calls. Passwords, tokens, API keys and Authorization or Cookie headers are replaced with `[redacted]` before saving.",
               "**Local-first data:** screenshots, recordings and logs stay in your browser (IndexedDB). Nothing is uploaded to Bugmark servers; data leaves only when you export a report or create a GitHub issue.",
               "**Developer exports:** Copy as cURL, [Download HAR](/guides/how-to-capture-har-file-chrome) for Chrome DevTools, GitHub issues with screenshots, recordings and the HAR attached, and HTML, PDF, CSV and Markdown reports.",
@@ -104,7 +104,7 @@ export const moreAlternativePages: ContentPage[] = [
             type: "table",
             head: ["Feature", "Bugmark", "Userback"],
             rows: [
-              ["Price", "Free to try (2 saved reports); one-time $15 for unlimited reports", "Free Forever plan (feedback viewable for 7 days); paid Team, Business and Business Plus plans"],
+              ["Price", "Free to try (2 saved reports); one-time $7.99 for unlimited reports", "Free Forever plan (feedback viewable for 7 days); paid Team, Business and Business Plus plans"],
               ["Account required", "No", "Yes, for team members (seats); people submitting feedback don't need a seat"],
               ["Where data is stored", "Locally in your browser", "Userback's cloud"],
               ["Screenshots & annotation", "Yes: pen, arrows, shapes, text, numbered pins, redact", "Yes, annotated screenshots"],
@@ -129,7 +129,7 @@ export const moreAlternativePages: ContentPage[] = [
             items: [
               "**Who reports.** Userback is built to collect feedback from users and stakeholders at scale, through a widget, surveys or its extension. Bugmark is built for the person doing the testing, who installs one extension and captures everything locally.",
               "**Where technical context sits.** Userback includes console logs, network requests and session replay from the Business plan. Bugmark attaches steps, console history and network data, including payloads and responses with secrets masked, to every capture in both the free version and Pro.",
-              "**How you pay.** Userback plans are subscriptions with seat and project allowances. Bugmark is a single $15 payment for unlimited reports, with no seats or renewals, which suits freelancers and small teams who report their own bugs.",
+              "**How you pay.** Userback plans are subscriptions with seat and project allowances. Bugmark is a single $7.99 payment for unlimited reports, with no seats or renewals, which suits freelancers and small teams who report their own bugs.",
             ],
           },
           { type: "p", text: "If your goal is to hear from customers inside your product, Userback is purpose-built for that. If your goal is to hand developers a report they can reproduce in minutes, Bugmark covers that job for a one-time price." },
@@ -165,7 +165,7 @@ export const moreAlternativePages: ContentPage[] = [
     faqs: [
       {
         q: "Is Bugmark a free Userback alternative?",
-        a: "Bugmark is free to try with every feature unlocked, limited to 2 saved reports at a time. A one-time $15 payment removes the limit for unlimited reports, with no subscription, seats or account. It covers screenshots, tab recording with voice, console logs, network payloads and steps to reproduce, but not end-user widgets, surveys or a shared inbox.",
+        a: "Bugmark is free to try with every feature unlocked, limited to 2 saved reports at a time. A one-time $7.99 payment removes the limit for unlimited reports, with no subscription, seats or account. It covers screenshots, tab recording with voice, console logs, network payloads and steps to reproduce, but not end-user widgets, surveys or a shared inbox.",
       },
       {
         q: "Does Bugmark have a feedback widget like Userback?",
@@ -201,7 +201,7 @@ export const moreAlternativePages: ContentPage[] = [
     h1: "BetterBugs alternative: Bugmark vs BetterBugs",
     eyebrow: "betterbugs alternative",
     intro:
-      "BetterBugs and Bugmark are both Chrome extensions that turn a bug into a report with a screenshot or recording plus console and network logs. BetterBugs adds a cloud workspace, report links, a 2-minute Rewind and AI debugging. Bugmark keeps every report in your browser and costs a one-time $15 instead of a per-seat plan.",
+      "BetterBugs and Bugmark are both Chrome extensions that turn a bug into a report with a screenshot or recording plus console and network logs. BetterBugs adds a cloud workspace, report links, a 2-minute Rewind and AI debugging. Bugmark keeps every report in your browser and costs a one-time $7.99 instead of a per-seat plan.",
     primaryKeyword: "BetterBugs alternative",
     keywords: [
       "betterbugs alternative free",
@@ -221,7 +221,7 @@ export const moreAlternativePages: ContentPage[] = [
             type: "callout",
             title: "The short version",
             text:
-              "Choose **BetterBugs** if you want shareable report links, a team workspace with comments, Rewind to capture the last two minutes without pressing record, AI summaries and debugging, and integrations with Jira, Linear, GitHub and more. Choose **Bugmark** if you want reports that stay on your device until you export them, network payloads and responses with secret masking, cURL and HAR download, GitHub issues, and a one-time $15 payment instead of per-seat pricing.",
+              "Choose **BetterBugs** if you want shareable report links, a team workspace with comments, Rewind to capture the last two minutes without pressing record, AI summaries and debugging, and integrations with Jira, Linear, GitHub and more. Choose **Bugmark** if you want reports that stay on your device until you export them, network payloads and responses with secret masking, cURL and HAR download, GitHub issues, and a one-time $7.99 payment instead of per-seat pricing.",
           },
         ],
       },
@@ -260,7 +260,7 @@ export const moreAlternativePages: ContentPage[] = [
           {
             type: "list",
             items: [
-              "**Simple pricing:** every feature is unlocked from the first install. The free version keeps up to 2 saved reports at a time, and a one-time $15 payment (Bugmark Pro) removes the limit for unlimited reports, forever. No subscription, no seats and no account.",
+              "**Simple pricing:** every feature is unlocked from the first install. The free version keeps up to 2 saved reports at a time, and a one-time $7.99 payment (Bugmark Pro) removes the limit for unlimited reports, forever. No subscription, no seats and no account.",
               "**Local-first data:** screenshots, recordings and logs stay in your browser (IndexedDB). Nothing is uploaded to Bugmark servers; data leaves only when you export a report or create a GitHub issue.",
               "**Network detail you can replay:** the last 150 requests with method, status and timing, and for recent fetch/XHR calls the request headers, payload, response headers and response body, with passwords, tokens, API keys and Authorization or Cookie headers replaced by `[redacted]`. Copy any request as cURL or [download a HAR](/guides/how-to-capture-har-file-chrome) for Chrome DevTools.",
               "**GitHub without a paid tier:** connect a fine-grained token or OAuth device flow and create issues with labels, steps, failing requests and console errors. Screenshots, recordings and HAR files are committed to a separate branch so they render inside the issue.",
@@ -281,7 +281,7 @@ export const moreAlternativePages: ContentPage[] = [
             type: "table",
             head: ["Feature", "Bugmark", "BetterBugs"],
             rows: [
-              ["Price", "Free to try (2 saved reports); one-time $15 for unlimited reports", "Free plan with seat, project, session and recording-link limits; Team plan priced per seat"],
+              ["Price", "Free to try (2 saved reports); one-time $7.99 for unlimited reports", "Free plan with seat, project, session and recording-link limits; Team plan priced per seat"],
               ["Account required", "No", "Workspace-based, with seats per plan"],
               ["Where data is stored", "Locally in your browser", "BetterBugs workspace (cloud); Rewind data stays local until you upload"],
               ["Screenshots & annotation", "Yes: pen, arrows, shapes, text, numbered pins, redact", "Yes: cropped, visible and full-page, delayed, with markup tools"],
@@ -306,7 +306,7 @@ export const moreAlternativePages: ContentPage[] = [
             items: [
               "**Hosted vs local.** A BetterBugs report is a link in a workspace that teammates can open and comment on. A Bugmark report is a local record you turn into a GitHub issue or export as HTML, PDF, CSV or Markdown when you are ready.",
               "**Capturing the past.** BetterBugs Rewind can recover the last two minutes of activity after something goes wrong. Bugmark records video only once you start, but it always keeps the last 30 actions, 150 console messages and 150 network requests, so a screenshot taken after the bug still carries what led to it.",
-              "**Cost model.** BetterBugs Team is billed per seat, every month or year. Bugmark Pro is a one-time $15 payment for unlimited reports, with no seats or renewals.",
+              "**Cost model.** BetterBugs Team is billed per seat, every month or year. Bugmark Pro is a one-time $7.99 payment for unlimited reports, with no seats or renewals.",
             ],
           },
           { type: "p", text: "If your team triages bugs together in a shared space and wants AI help along the way, BetterBugs offers more out of the box. If you want privacy by default, deep network detail and a tool you pay for once, Bugmark is the simpler choice." },
@@ -347,7 +347,7 @@ export const moreAlternativePages: ContentPage[] = [
     faqs: [
       {
         q: "Is Bugmark a free BetterBugs alternative?",
-        a: "Bugmark is free to try with every feature unlocked, limited to 2 saved reports at a time. A one-time $15 payment removes the limit for unlimited reports, with no seats or subscription. Like BetterBugs it captures screenshots, recordings, console logs and network requests, but it has no hosted report links, team workspace or AI features.",
+        a: "Bugmark is free to try with every feature unlocked, limited to 2 saved reports at a time. A one-time $7.99 payment removes the limit for unlimited reports, with no seats or subscription. Like BetterBugs it captures screenshots, recordings, console logs and network requests, but it has no hosted report links, team workspace or AI features.",
       },
       {
         q: "Does Bugmark have a Rewind feature like BetterBugs?",
@@ -403,7 +403,7 @@ export const moreAlternativePages: ContentPage[] = [
             type: "callout",
             title: "The short version",
             text:
-              "Choose **Usersnap** if you want one platform to collect bug reports, feedback and survey responses from users, analyze them with AI, run a roadmap and sync tickets both ways with Jira, Azure DevOps, Asana or Linear. Choose **Bugmark** if your testers and developers need detailed bug reports — console logs, network payloads and responses, steps to reproduce, HAR and GitHub issues — with no account, local storage and a one-time $15 payment.",
+              "Choose **Usersnap** if you want one platform to collect bug reports, feedback and survey responses from users, analyze them with AI, run a roadmap and sync tickets both ways with Jira, Azure DevOps, Asana or Linear. Choose **Bugmark** if your testers and developers need detailed bug reports — console logs, network payloads and responses, steps to reproduce, HAR and GitHub issues — with no account, local storage and a one-time $7.99 payment.",
           },
         ],
       },
@@ -442,7 +442,7 @@ export const moreAlternativePages: ContentPage[] = [
           {
             type: "list",
             items: [
-              "**Simple pricing:** every feature is unlocked from the first install. The free version keeps up to 2 saved reports at a time, and a one-time $15 payment (Bugmark Pro) removes the limit for unlimited reports, forever. No subscription, no seats and no account.",
+              "**Simple pricing:** every feature is unlocked from the first install. The free version keeps up to 2 saved reports at a time, and a one-time $7.99 payment (Bugmark Pro) removes the limit for unlimited reports, forever. No subscription, no seats and no account.",
               "**Full request detail:** not just errors but the last 150 network requests, with headers, payloads and response bodies for recent fetch/XHR calls and secrets masked before saving, plus Copy as cURL and HAR download.",
               "**Steps to reproduce, automatically:** the last 30 actions in the tab and the last 150 console messages, editable before you share.",
               "**No snippet, no workspace:** install the extension and capture on localhost, staging or pages behind a login. Captures stay in your browser (IndexedDB) and nothing is uploaded to Bugmark servers.",
@@ -468,7 +468,7 @@ export const moreAlternativePages: ContentPage[] = [
             type: "table",
             head: ["Feature", "Bugmark", "Usersnap"],
             rows: [
-              ["Price", "Free to try (2 saved reports); one-time $15 for unlimited reports", "Paid plans from Starter to Enterprise; free trial up to 20 feedback items — see their pricing page"],
+              ["Price", "Free to try (2 saved reports); one-time $7.99 for unlimited reports", "Paid plans from Starter to Enterprise; free trial up to 20 feedback items — see their pricing page"],
               ["Account required", "No", "Yes, for dashboard seats; people sending feedback via the widget don't need one"],
               ["Where data is stored", "Locally in your browser", "Usersnap's cloud"],
               ["Screenshots & annotation", "Yes: pen, arrows, shapes, text, numbered pins, redact", "Yes, annotated screenshots"],
@@ -493,7 +493,7 @@ export const moreAlternativePages: ContentPage[] = [
             items: [
               "**Scope.** Usersnap is a voice-of-customer platform where bug reports sit alongside surveys, support conversations and roadmaps. Bugmark does one job: capturing a bug with everything a developer needs to fix it.",
               "**Technical depth.** Usersnap attaches environment data and JavaScript and network errors. Bugmark keeps full request and response detail for recent fetch/XHR calls, the console history and your steps, so you can see why a request failed, not just that it did.",
-              "**Setup and cost.** Usersnap is installed with a snippet or its extension and billed monthly or yearly by plan. Bugmark is an extension with no account, free to try, with a single $15 payment for unlimited reports.",
+              "**Setup and cost.** Usersnap is installed with a snippet or its extension and billed monthly or yearly by plan. Bugmark is an extension with no account, free to try, with a single $7.99 payment for unlimited reports.",
             ],
           },
           { type: "p", text: "If you are building a feedback program across product, support and research, Usersnap covers far more ground. If you need your own team to file better bug reports this week without a procurement process, Bugmark is the faster route." },
@@ -529,7 +529,7 @@ export const moreAlternativePages: ContentPage[] = [
     faqs: [
       {
         q: "Is there a cheaper Usersnap alternative for bug reporting?",
-        a: "If you only need bug reports, Bugmark is free to try with every feature unlocked, limited to 2 saved reports at a time, and a one-time $15 payment removes the limit for unlimited reports. There is no subscription or seat pricing. It does not replace Usersnap's surveys, feedback analysis or roadmaps.",
+        a: "If you only need bug reports, Bugmark is free to try with every feature unlocked, limited to 2 saved reports at a time, and a one-time $7.99 payment removes the limit for unlimited reports. There is no subscription or seat pricing. It does not replace Usersnap's surveys, feedback analysis or roadmaps.",
       },
       {
         q: "Does Bugmark do surveys or customer feedback like Usersnap?",

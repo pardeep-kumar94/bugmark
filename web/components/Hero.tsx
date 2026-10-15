@@ -35,7 +35,7 @@ export function Hero() {
           </div>
 
           <ul className="animate-rise mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-[13.5px] text-dim" style={{ animationDelay: '.24s' }}>
-            {['Free to try · $15 to own', 'No account needed', 'Data stays on your device'].map((t) => (
+            {['Free to try · $7.99 to own', 'No account needed', 'Data stays on your device'].map((t) => (
               <li key={t} className="flex items-center gap-1.5"><IconCheck size={14} className="text-accent" />{t}</li>
             ))}
           </ul>

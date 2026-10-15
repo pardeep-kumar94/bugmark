@@ -7,7 +7,7 @@ const link = 'font-medium text-accent underline decoration-accent/30 underline-o
 export const faqs: { q: string; a: string; rich?: React.ReactNode }[] = [
   {
     q: 'How much does Bugmark cost?',
-    a: 'Bugmark is free to try — every feature is unlocked, including screenshots and annotation, screen recording, console and network logs, steps to reproduce, GitHub issues and exports. The free version keeps up to 2 saved reports at a time. A one-time $15 payment (no subscription) removes the limit for unlimited reports, forever. No account is needed to start.',
+    a: 'Bugmark is free to try — every feature is unlocked, including screenshots and annotation, screen recording, console and network logs, steps to reproduce, GitHub issues and exports. The free version keeps up to 2 saved reports at a time. A one-time $7.99 payment (no subscription) removes the limit for unlimited reports, forever. No account is needed to start.',
   },
   {
     q: 'How do I install Bugmark?',

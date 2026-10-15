@@ -37,7 +37,7 @@ export const alternativePages: ContentPage[] = [
             type: "callout",
             title: "The short version",
             text:
-              "Choose **Jam** if your team wants hosted share links, instant replay, a shared workspace and native Jira, Linear and Slack integrations. Choose **Bugmark** if you want a tool that is free to try, needs no account and costs a one-time $15 instead of a subscription, with reports stored locally in your browser, full network payloads and responses with secret masking, HAR download and GitHub issues created straight from a capture.",
+              "Choose **Jam** if your team wants hosted share links, instant replay, a shared workspace and native Jira, Linear and Slack integrations. Choose **Bugmark** if you want a tool that is free to try, needs no account and costs a one-time $7.99 instead of a subscription, with reports stored locally in your browser, full network payloads and responses with secret masking, HAR download and GitHub issues created straight from a capture.",
           },
         ],
       },
@@ -71,7 +71,7 @@ export const alternativePages: ContentPage[] = [
           {
             type: "p",
             text:
-              "Bugmark is built for people who want developer-grade bug reports without a workspace, a login or a usage meter. Install the extension and every feature is unlocked: no sign-up and no watermark requirement. The free version keeps up to 2 saved reports at a time; a one-time $15 payment removes that limit for good.",
+              "Bugmark is built for people who want developer-grade bug reports without a workspace, a login or a usage meter. Install the extension and every feature is unlocked: no sign-up and no watermark requirement. The free version keeps up to 2 saved reports at a time; a one-time $7.99 payment removes that limit for good.",
           },
           {
             type: "list",
@@ -96,7 +96,7 @@ export const alternativePages: ContentPage[] = [
             type: "table",
             head: ["Feature", "Bugmark", "Jam"],
             rows: [
-              ["Price", "Free to try (every feature, 2 saved reports); $15 one-time for unlimited", "Free plan with monthly limits; paid Team and Enterprise plans"],
+              ["Price", "Free to try (every feature, 2 saved reports); $7.99 one-time for unlimited", "Free plan with monthly limits; paid Team and Enterprise plans"],
               ["Account required", "No", "Yes, to create Jams"],
               ["Where data is stored", "Locally in your browser", "Jam's cloud (hosted links)"],
               ["Screenshots & annotation", "Yes: pen, arrows, shapes, text, numbered pins, redact", "Yes"],
@@ -120,7 +120,7 @@ export const alternativePages: ContentPage[] = [
             items: [
               "**Sharing model.** A Jam is a link your teammates open in the browser. A Bugmark capture is a local record you turn into a GitHub issue, an HTML or PDF report, a CSV row or a Markdown snippet when you are ready.",
               "**Privacy posture.** Both tools mask sensitive network values before saving. With Bugmark, the capture itself also stays on your device, which can simplify reviews for client work, staging environments or internal tools.",
-              "**Cost as you grow.** Jam's free plan has monthly limits and paid seats are priced per creator. Bugmark has no seats or subscription: each person can try it free, and unlimited reports cost a one-time $15, so a whole QA team can adopt it without a recurring budget line.",
+              "**Cost as you grow.** Jam's free plan has monthly limits and paid seats are priced per creator. Bugmark has no seats or subscription: each person can try it free, and unlimited reports cost a one-time $7.99, so a whole QA team can adopt it without a recurring budget line.",
             ],
           },
           { type: "p", text: "Neither approach is universally better. If your bug reports need to reach a product manager in one click, a hosted link is hard to beat. If they need to stay on your machine until you decide otherwise, local-first storage is the safer default." },
@@ -161,7 +161,7 @@ export const alternativePages: ContentPage[] = [
     faqs: [
       {
         q: "Is Bugmark a free Jam alternative?",
-        a: "Yes. Bugmark is a Chrome extension that is free to try with every feature unlocked and no account (up to 2 saved reports at a time); a one-time $15 payment removes the limit. It captures screenshots, tab recordings with voice, console logs, network requests with payloads and responses, and steps to reproduce. It does not offer hosted share links or a team workspace, so it suits people who prefer local reports and exports.",
+        a: "Yes. Bugmark is a Chrome extension that is free to try with every feature unlocked and no account (up to 2 saved reports at a time); a one-time $7.99 payment removes the limit. It captures screenshots, tab recordings with voice, console logs, network requests with payloads and responses, and steps to reproduce. It does not offer hosted share links or a team workspace, so it suits people who prefer local reports and exports.",
       },
       {
         q: "Does Bugmark have instant replay like Jam?",
@@ -216,7 +216,7 @@ export const alternativePages: ContentPage[] = [
             type: "callout",
             title: "The short version",
             text:
-              "Choose **Marker.io** if you need clients or guests to report issues from an embedded widget and want feedback synced both ways with Jira, Linear, GitHub, Asana or similar tools. Choose **Bugmark** if you want an extension that is free to try, with no account, no seats and a one-time $15 price instead of a subscription, local-first storage, network payloads and responses, HAR download and direct GitHub issues.",
+              "Choose **Marker.io** if you need clients or guests to report issues from an embedded widget and want feedback synced both ways with Jira, Linear, GitHub, Asana or similar tools. Choose **Bugmark** if you want an extension that is free to try, with no account, no seats and a one-time $7.99 price instead of a subscription, local-first storage, network payloads and responses, HAR download and direct GitHub issues.",
           },
         ],
       },
@@ -255,7 +255,7 @@ export const alternativePages: ContentPage[] = [
           {
             type: "list",
             items: [
-              "**Free to try, $15 to own:** every feature unlocked from the start, no seats or projects; a one-time $15 payment removes the 2-report limit of the free version.",
+              "**Free to try, $7.99 to own:** every feature unlocked from the start, no seats or projects; a one-time $7.99 payment removes the 2-report limit of the free version.",
               "**Local-first:** captures stay in your browser. Data leaves only when you export or create a GitHub issue.",
               "**Developer context on every capture:** last 30 actions as steps to reproduce, 150 console messages, and 150 network requests with payloads and responses for recent fetch/XHR calls, secrets masked.",
               "**Front-end review tools:** an element inspector that attaches the CSS selector and computed styles, responsive breakpoint captures and before/after screenshots.",
@@ -276,7 +276,7 @@ export const alternativePages: ContentPage[] = [
             type: "table",
             head: ["Feature", "Bugmark", "Marker.io"],
             rows: [
-              ["Price", "Free to try (every feature, 2 saved reports); $15 one-time for unlimited", "Paid plans with a 15-day free trial; varies by plan — see their pricing page"],
+              ["Price", "Free to try (every feature, 2 saved reports); $7.99 one-time for unlimited", "Paid plans with a 15-day free trial; varies by plan — see their pricing page"],
               ["Account required", "No", "Guests can report via the widget without an account; see their site for team seats"],
               ["Where data is stored", "Locally in your browser", "Marker.io's cloud and your connected tools"],
               ["Screenshots & annotation", "Yes, including numbered pins and a redact tool", "Yes"],
@@ -336,7 +336,7 @@ export const alternativePages: ContentPage[] = [
     faqs: [
       {
         q: "Is there a free Marker.io alternative?",
-        a: "Bugmark is a free Chrome extension for bug reporting and website feedback. It offers screenshot annotation, tab recording with voice, console logs, network requests with payloads and responses, steps to reproduce and GitHub issues, with no account; it is free to try and a one-time $15 unlocks unlimited reports. It does not include an embeddable guest widget or two-way sync, which are core Marker.io strengths.",
+        a: "Bugmark is a free Chrome extension for bug reporting and website feedback. It offers screenshot annotation, tab recording with voice, console logs, network requests with payloads and responses, steps to reproduce and GitHub issues, with no account; it is free to try and a one-time $7.99 unlocks unlimited reports. It does not include an embeddable guest widget or two-way sync, which are core Marker.io strengths.",
       },
       {
         q: "Can clients use Bugmark without installing anything?",
@@ -391,7 +391,7 @@ export const alternativePages: ContentPage[] = [
             type: "callout",
             title: "The short version",
             text:
-              "Choose **BugHerd** if you run client projects and want clients to leave pinned feedback without logging in, with a built-in kanban board and integrations with Jira, Trello, Asana, Slack and GitHub. Choose **Bugmark** if you want an extension that is free to try, with no account, no member limits and a one-time $15 price, local-first data, console logs, network payloads and responses, HAR download and GitHub issues.",
+              "Choose **BugHerd** if you run client projects and want clients to leave pinned feedback without logging in, with a built-in kanban board and integrations with Jira, Trello, Asana, Slack and GitHub. Choose **Bugmark** if you want an extension that is free to try, with no account, no member limits and a one-time $7.99 price, local-first data, console logs, network payloads and responses, HAR download and GitHub issues.",
           },
         ],
       },
@@ -431,7 +431,7 @@ export const alternativePages: ContentPage[] = [
           {
             type: "list",
             items: [
-              "**No subscription:** no member count, no storage plan and no account. Free to try; a one-time $15 unlocks unlimited reports.",
+              "**No subscription:** no member count, no storage plan and no account. Free to try; a one-time $7.99 unlocks unlimited reports.",
               "**Local-first:** captures live in your browser, and nothing is uploaded to Bugmark servers.",
               "**Developer context:** steps to reproduce from the last 30 actions, 150 console messages and errors, and network requests with payloads and responses for recent fetch/XHR calls, with secrets masked.",
               "**Precise capture:** full-page, element and delayed captures, mobile/tablet/desktop breakpoints, an element inspector and tab recording with voice.",
@@ -457,7 +457,7 @@ export const alternativePages: ContentPage[] = [
             type: "table",
             head: ["Feature", "Bugmark", "BugHerd"],
             rows: [
-              ["Price", "Free to try (every feature, 2 saved reports); $15 one-time for unlimited", "Paid plans with a 7-day free trial; varies by plan — see their pricing page"],
+              ["Price", "Free to try (every feature, 2 saved reports); $7.99 one-time for unlimited", "Paid plans with a 7-day free trial; varies by plan — see their pricing page"],
               ["Account required", "No", "Clients can give feedback without login; team seats vary by plan"],
               ["Where data is stored", "Locally in your browser", "BugHerd's cloud (storage varies by plan)"],
               ["Screenshots & annotation", "Yes: shapes, text, numbered pins, redact", "Pinned comments with automatic screenshots"],
@@ -481,7 +481,7 @@ export const alternativePages: ContentPage[] = [
             items: [
               "**Feedback vs diagnosis.** BugHerd is excellent at capturing what a reviewer wants changed and where. Bugmark adds why something broke, with console errors, failed requests and the actions that led to the problem.",
               "**Shared vs personal workspace.** BugHerd gives the whole team and its clients a shared board. Bugmark keeps a personal dashboard in your browser and hands work off through GitHub issues or exported reports.",
-              "**Pricing model.** BugHerd plans scale with team members and storage. Bugmark has no member count or storage plan: freelancers and small studios can try every feature free and pay a one-time $15 for unlimited reports.",
+              "**Pricing model.** BugHerd plans scale with team members and storage. Bugmark has no member count or storage plan: freelancers and small studios can try every feature free and pay a one-time $7.99 for unlimited reports.",
             ],
           },
           { type: "p", text: "Many agencies combine approaches: a client-facing feedback tool for approvals, and a developer-focused extension for QA passes before the client ever sees the site." },
@@ -517,7 +517,7 @@ export const alternativePages: ContentPage[] = [
     faqs: [
       {
         q: "Is Bugmark a free BugHerd alternative?",
-        a: "Bugmark is a Chrome extension for website feedback and bug reporting that is free to try, with no account, member limits or storage plans, and a one-time $15 for unlimited reports. It covers annotation, recording and developer context such as console and network logs. It does not provide a client portal, task board sharing or login-free client feedback links, which are central to how BugHerd works for agencies.",
+        a: "Bugmark is a Chrome extension for website feedback and bug reporting that is free to try, with no account, member limits or storage plans, and a one-time $7.99 for unlimited reports. It covers annotation, recording and developer context such as console and network logs. It does not provide a client portal, task board sharing or login-free client feedback links, which are central to how BugHerd works for agencies.",
       },
       {
         q: "Can my clients leave feedback with Bugmark?",
@@ -611,7 +611,7 @@ export const alternativePages: ContentPage[] = [
           {
             type: "list",
             items: [
-              "**No account:** record without signing up. Free to try with up to 2 saved reports; a one-time $15 removes the limit.",
+              "**No account:** record without signing up. Free to try with up to 2 saved reports; a one-time $7.99 removes the limit.",
               "**Recording built for bugs:** tab recording with microphone narration, up to 5 minutes, continuing across page loads, with playback in the dashboard.",
               "**Context on every capture:** the last 30 actions as editable steps, 150 console messages including unhandled promise rejections, and network requests with payloads and responses for recent fetch/XHR calls.",
               "**Private by default:** recordings stay in your browser, and secrets are masked in network data before saving.",
@@ -637,7 +637,7 @@ export const alternativePages: ContentPage[] = [
             type: "table",
             head: ["Feature", "Bugmark", "Loom"],
             rows: [
-              ["Price", "Free to try (every feature, 2 saved reports); $15 one-time for unlimited", "Free Starter plan; paid plans — see their pricing page"],
+              ["Price", "Free to try (every feature, 2 saved reports); $7.99 one-time for unlimited", "Free Starter plan; paid plans — see their pricing page"],
               ["Account required", "No", "See their site; viewers can watch shared links"],
               ["Where data is stored", "Locally in your browser", "Loom's cloud (hosted videos)"],
               ["Screenshots & annotation", "Yes: shapes, text, numbered pins, redact", "Video-first; see their site for screenshot options"],

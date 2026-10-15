@@ -19,7 +19,7 @@ export default function TermsPage() {
       <h2>Price</h2>
       <p>
         {site.name} is free to try, with every feature unlocked and no account required; the free version keeps up to two saved reports at
-        a time. A one-time payment of $15 (USD) unlocks unlimited reports permanently — there is no subscription and no recurring charge.
+        a time. A one-time payment of $7.99 (USD) unlocks unlimited reports permanently — there is no subscription and no recurring charge.
         Payments are processed by our payment provider, who acts as merchant of record. Nothing you have already captured is ever deleted
         by reaching a limit.
       </p>

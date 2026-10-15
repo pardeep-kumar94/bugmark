@@ -25,8 +25,8 @@ export function Free() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="kicker">pricing</p>
-          <h2 className="section-title mt-3">Try it free. <span className="text-brand">Own it for $15.</span></h2>
-          <p className="section-lead">Every feature is unlocked from the first install. Free covers a couple of reports so you can try the whole workflow; one $15 payment removes the limit for good — no subscription, no seats.</p>
+          <h2 className="section-title mt-3">Try it free. <span className="text-brand">Own it for $7.99.</span></h2>
+          <p className="section-lead">Every feature is unlocked from the first install. Free covers a couple of reports so you can try the whole workflow; one $7.99 payment removes the limit for good — no subscription, no seats.</p>
         </div>
 
         <div className="mx-auto mt-14 grid max-w-4xl gap-5 md:grid-cols-2">
@@ -52,7 +52,7 @@ export function Free() {
                 <span className="rounded-full bg-accent/15 px-2.5 py-1 text-[12px] font-medium text-accent">one-time</span>
               </div>
               <div className="relative mt-5 flex items-baseline gap-2">
-                <span className="text-[52px] font-semibold leading-none tracking-[-0.05em]">$15</span>
+                <span className="text-[52px] font-semibold leading-none tracking-[-0.05em]">$7.99</span>
                 <span className="text-[14px] text-mute">once · yours forever</span>
               </div>
               <p className="relative mt-3 text-[14.5px] text-dim"><strong className="text-ink-2">Unlimited reports</strong> and every feature, forever. One payment — no subscription, no renewals.</p>

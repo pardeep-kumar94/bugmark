@@ -43,7 +43,7 @@ export const softwareLd = () => ({
   isAccessibleForFree: true,
   offers: [
     { '@type': 'Offer', name: 'Free', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
-    { '@type': 'Offer', name: 'Pro (one-time unlock)', price: '15', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
+    { '@type': 'Offer', name: 'Pro (one-time unlock)', price: '7.99', priceCurrency: 'USD', availability: 'https://schema.org/InStock' },
   ],
   downloadUrl: abs(ctaHref),
   screenshot: [abs('/screens/hero-capture.webp'), abs('/screens/network-payload.webp'), abs('/screens/dashboard.webp')],

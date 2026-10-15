@@ -145,7 +145,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Every feature is unlocked, with no sign-up and no required watermark. The free version keeps up to 2 saved reports at a time; a one-time $15 payment removes the limit. Install it in a couple of clicks from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Every feature is unlocked, with no sign-up and no required watermark. The free version keeps up to 2 saved reports at a time; a one-time $7.99 payment removes the limit. Install it in a couple of clicks from the [Chrome Web Store](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -153,7 +153,7 @@ export const toolPages: ContentPage[] = [
     faqs: [
       {
         q: 'Is there a free bug reporting tool for Chrome?',
-        a: 'Yes. Bugmark is free to try with every feature unlocked and no account; the free version keeps up to 2 saved reports at a time, and a one-time $15 payment (no subscription) unlocks unlimited reports. It captures annotated screenshots, screen recordings, steps to reproduce, console logs and network requests, and it works in Chromium browsers such as Edge, Brave and Arc as well.',
+        a: 'Yes. Bugmark is free to try with every feature unlocked and no account; the free version keeps up to 2 saved reports at a time, and a one-time $7.99 payment (no subscription) unlocks unlimited reports. It captures annotated screenshots, screen recordings, steps to reproduce, console logs and network requests, and it works in Chromium browsers such as Edge, Brave and Arc as well.',
       },
       {
         q: 'What should a good bug report include?',
@@ -313,7 +313,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Bugmark is free to try, with no account and every feature unlocked; a one-time $15 removes the 2-report limit. It runs in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Bugmark is free to try, with no account and every feature unlocked; a one-time $7.99 removes the 2-report limit. It runs in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -638,7 +638,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free to try, no account, every feature including white-label reports unlocked; $15 one-time for unlimited reports. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Free to try, no account, every feature including white-label reports unlocked; $7.99 one-time for unlimited reports. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -980,7 +980,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Free to try, with no account and no required watermark; a one-time $15 removes the 2-report limit. It installs in about a minute and works in Chrome, Edge, Brave and Arc, so the whole team can mark up pages the same way. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Free to try, with no account and no required watermark; a one-time $7.99 removes the 2-report limit. It installs in about a minute and works in Chrome, Edge, Brave and Arc, so the whole team can mark up pages the same way. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
@@ -1004,7 +1004,7 @@ export const toolPages: ContentPage[] = [
       },
       {
         q: 'Is Bugmark’s screenshot tool free?',
-        a: 'Yes. Bugmark is free to try with every feature unlocked, including full page, element and breakpoint captures, annotation tools, redaction and exports. There is no account and no required watermark; the free version keeps up to 2 saved reports at a time, and a one-time $15 payment removes the limit. It runs in Chrome, Edge, Brave and Arc.',
+        a: 'Yes. Bugmark is free to try with every feature unlocked, including full page, element and breakpoint captures, annotation tools, redaction and exports. There is no account and no required watermark; the free version keeps up to 2 saved reports at a time, and a one-time $7.99 payment removes the limit. It runs in Chrome, Edge, Brave and Arc.',
       },
     ],
     related: ['/website-feedback-tool', '/guides/full-page-screenshot-chrome', '/bug-reporting-tool', '/web-developer-tools'],
@@ -1318,7 +1318,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: 'Bugmark is free to try, with no account and every feature unlocked; a one-time $15 removes the 2-report limit. Installation takes about a minute and works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
+            text: 'Bugmark is free to try, with no account and every feature unlocked; a one-time $7.99 removes the 2-report limit. Installation takes about a minute and works in Chrome, Edge, Brave and Arc. [Add Bugmark to Chrome — free](https://chromewebstore.google.com/detail/pmddndflbglmpliiinfhhecmfkmfffkj).',
           },
         ],
       },
