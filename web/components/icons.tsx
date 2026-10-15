@@ -56,3 +56,4 @@ export const IconKey = mk(<><circle cx="8" cy="15" r="4" /><path d="m11 12 8.5-8
 export const IconKeyboard = mk(<><rect x="2.5" y="6" width="19" height="12" rx="2.5" /><path d="M6.5 10h.01M10 10h.01M13.5 10h.01M17 10h.01M7.5 14h9" /></>);
 export const IconConsole = mk(<><rect x="3" y="4.5" width="18" height="15" rx="2.5" /><path d="M3 9h18M7 13l2 1.5L7 16M11.5 16h4" /></>);
 export const IconArchive = mk(<><rect x="3" y="4.5" width="18" height="5" rx="1.5" /><path d="M5 9.5V18a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18V9.5M10 13h4" /></>);
+export const IconPlay = mk(<path d="M8.5 5.8v12.4a.8.8 0 0 0 1.2.7l9.6-6.2a.8.8 0 0 0 0-1.4L9.7 5.1a.8.8 0 0 0-1.2.7Z" />);

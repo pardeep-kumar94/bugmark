@@ -1,16 +1,25 @@
 import { Reveal } from './Reveal';
+import { JourneyVideo } from './JourneyVideo';
 
 const steps = [
-  { n: '01', t: 'Capture', d: <>Press <span className="kbd">⌥⇧S</span> to mark up a screenshot or <span className="kbd">⌥⇧R</span> to record. Works on any page you can open.</> },
-  { n: '02', t: 'Context is attached', d: 'Steps, console, network payloads and responses, browser, OS and viewport are added automatically.' },
-  { n: '03', t: 'Ship the fix', d: 'Create a GitHub issue, export for your tracker or share a report. Add an “after” shot when it’s done.' },
+  { n: '01', t: 'Add it to Chrome', d: 'Two clicks from the Chrome Web Store. No account, nothing to set up.' },
+  { n: '02', t: 'Capture the bug', d: 'Click Bugmark on any page. Circle the problem on a screenshot, or record your screen.' },
+  { n: '03', t: 'Send it', d: 'Bugmark attaches the steps you took and what went wrong in the page. Send it to GitHub or share the report.' },
 ];
 
 export function HowItWorks() {
   return (
     <section id="how" className="scroll-mt-20 pt-24 sm:pt-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <ol className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="kicker">how it works</p>
+          <h2 className="section-title mt-3">See Bugmark in one minute</h2>
+          <p className="section-lead">From spotting a bug to a report your developer can fix — no account, nothing to set up.</p>
+        </div>
+
+        <JourneyVideo />
+
+        <ol className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line md:grid-cols-3">
           {steps.map((s, i) => (
             <Reveal as="li" key={s.n} delay={i * 80} className="bg-surface p-7">
               <div className="flex items-center gap-3">

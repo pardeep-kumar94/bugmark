@@ -10,6 +10,7 @@
 import { getApps, getApp, initializeApp, cert, applicationDefault, type App } from 'firebase-admin/app';
 import { getFirestore, type Firestore, FieldValue } from 'firebase-admin/firestore';
 import { getAuth } from 'firebase-admin/auth';
+import type { FeedbackDoc } from './feedback';
 
 const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
 const hasAppDefault = !!process.env.GOOGLE_APPLICATION_CREDENTIALS;
@@ -154,4 +155,9 @@ export async function setLicenseKey(
       },
       { merge: true }
     );
+}
+
+/** Stores one anonymous feedback answer (exit survey or uninstall page) in `feedback`. */
+export async function saveFeedback(doc: FeedbackDoc): Promise<void> {
+  await db().collection('feedback').add({ ...doc, createdAt: FieldValue.serverTimestamp() });
 }

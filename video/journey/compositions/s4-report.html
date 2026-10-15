@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>S4 · the report builds itself</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Bricolage Grotesque"; src: url("assets/fonts/BricolageGrotesque-latin-600-800.woff2") format("woff2"); font-weight: 600 800; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Regular.woff2") format("woff2"); font-weight: 400; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Medium.woff2") format("woff2"); font-weight: 500; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-SemiBold.woff2") format("woff2"); font-weight: 600; }
+        :root {
+          --canvas: #ffffff; --surface: #fbfbfd; --surface-2: #f5f5f7; --line: #eaeaee; --line-2: #dedee3;
+          --ink: #1d1d1f; --ink-2: #3a3a3e; --dim: #6e6e73; --mute: #747478;
+          --accent: #0071e3; --accent-ink: #0062c4; --accent-soft: #eaf2fe; --bug: #d0342c; --ok: #1d8a54;
+          --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+          --sans: "Geist", system-ui, sans-serif;
+          --shadow: 0 40px 90px -36px rgba(15, 20, 40, 0.32), 0 2px 8px rgba(20, 25, 40, 0.05);
+        }
+        #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+        #s4-wrap { position: absolute; inset: 0; }
+        #s4-sheet { position: absolute; left: 210px; top: 80px; width: 1500px; height: 760px; }
+        #s4-head {
+          position: absolute; left: 0; top: 0; width: 1500px; height: 150px; background: var(--canvas);
+          border: 1px solid var(--line-2); border-radius: 22px; box-shadow: 0 20px 50px -30px rgba(15, 20, 40, 0.25);
+        }
+        #s4-thumb { position: absolute; left: 16px; top: 16px; width: 208px; height: 118px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); }
+        #s4-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: 0 60%; display: block; }
+        #s4-title { position: absolute; left: 252px; top: 26px; font-family: var(--display); font-weight: 700; font-size: 48px; letter-spacing: -0.03em; color: var(--ink); white-space: nowrap; }
+        #s4-sub { position: absolute; left: 254px; top: 92px; font-size: 24px; color: var(--dim); white-space: nowrap; }
+        #s4-ready {
+          position: absolute; right: 26px; top: 46px; height: 58px; padding: 0 24px; border-radius: 999px;
+          background: #ecf7f1; border: 1px solid #bfe3cf; color: var(--ok); font-size: 24px; font-weight: 600;
+          display: flex; align-items: center; gap: 12px; opacity: 0;
+        }
+        .s4-card {
+          position: absolute; width: 738px; height: 282px; background: var(--canvas);
+          border: 1px solid var(--line-2); border-radius: 20px; box-shadow: 0 20px 50px -30px rgba(15, 20, 40, 0.25); opacity: 0;
+        }
+        .s4-lab { position: absolute; left: 22px; top: 18px; display: flex; align-items: center; gap: 14px; font-size: 30px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+        .s4-ic { width: 38px; height: 38px; border-radius: 10px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; }
+        .s4-ic svg { width: 22px; height: 22px; display: block; }
+        .s4-panel { position: absolute; left: 16px; top: 76px; width: 706px; height: 190px; border-radius: 12px; overflow: hidden; background: #0d1117; border: 1px solid var(--line); }
+        .s4-panel img { position: absolute; display: block; max-width: none; }
+        /* the real screenshot stays as context, softened behind a plain-language highlight */
+        .s4-soft { position: absolute; inset: 0; opacity: 0.32; filter: blur(5px); }
+        .s4-hl {
+          position: absolute; left: 22px; right: 22px; top: 34px; height: 86px; border-radius: 14px;
+          background: rgba(208, 52, 44, 0.2); border: 1.5px solid rgba(255, 120, 110, 0.7);
+          display: flex; align-items: center; gap: 18px; padding: 0 22px;
+        }
+        .s4-x { width: 40px; height: 40px; border-radius: 50%; background: #e5484d; flex: none; display: flex; align-items: center; justify-content: center; }
+        .s4-x svg { width: 22px; height: 22px; display: block; }
+        .s4-msg { position: relative; width: 466px; height: 65px; overflow: hidden; flex: none; }
+        .s4-what { font-size: 30px; font-weight: 600; color: #fff; white-space: nowrap; }
+        .s4-pill { height: 38px; padding: 0 16px; border-radius: 999px; background: #c42f2a; color: #fff; font-size: 21px; font-weight: 600; display: flex; align-items: center; white-space: nowrap; }
+        .s4-note { position: absolute; left: 24px; top: 138px; font-size: 21px; color: #c9ccd3; white-space: nowrap; }
+      </style>
+
+      <div id="root" data-composition-id="s4-report" data-width="1920" data-height="1080">
+        <div id="s4-wrap">
+          <div id="s4-sheet">
+            <div id="s4-head">
+              <div id="s4-thumb"><img src="assets/screens/annotate.webp" alt="" /></div>
+              <div id="s4-title">Card declined at checkout</div>
+              <div id="s4-sub">Bug report · built automatically while you worked</div>
+              <div id="s4-ready">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1d8a54" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                Ready to send
+              </div>
+            </div>
+
+            <div class="s4-card" id="s4-c1" style="left: 0; top: 174px">
+              <div class="s4-lab"><span class="s4-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.4" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11" /><circle cx="4.5" cy="6" r="1.2" fill="#0071e3" /><circle cx="4.5" cy="12" r="1.2" fill="#0071e3" /><circle cx="4.5" cy="18" r="1.2" fill="#0071e3" /></svg></span>Steps you took</div>
+              <div class="s4-panel" data-crop="steps"><img data-layout-allow-overflow src="assets/screens/steps.webp" alt="" /></div>
+            </div>
+
+            <div class="s4-card" id="s4-c2" style="left: 762px; top: 174px">
+              <div class="s4-lab"><span class="s4-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="12" rx="2" /><path d="M8 20h8M12 16.5V20" /></svg></span>Browser &amp; device</div>
+              <div class="s4-panel" data-crop="device" style="background: #fff"><img data-layout-allow-overflow src="assets/screens/report-item.webp" alt="" /></div>
+            </div>
+
+            <div class="s4-card" id="s4-c3" style="left: 0; top: 478px">
+              <div class="s4-lab"><span class="s4-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4l9 16H3z" /><path d="M12 10v4.5" /><circle cx="12" cy="17.2" r="0.9" fill="#0071e3" /></svg></span>Errors on the page</div>
+              <div class="s4-panel">
+                <div class="s4-soft" style="background: #0d1117 url('assets/screens/console.webp') 0 -214px / 1114px auto no-repeat"></div>
+                <div class="s4-hl">
+                  <span class="s4-x"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 6v8" /><circle cx="12" cy="18.5" r="0.6" fill="#fff" /></svg></span>
+                  <!-- real console row, cropped to the message the shopper saw -->
+                  <div class="s4-msg" data-crop="errors-msg"><img data-layout-allow-overflow src="assets/screens/console.webp" alt="" /></div>
+                </div>
+                <div class="s4-note">The error the page hit, caught for you</div>
+              </div>
+            </div>
+
+            <div class="s4-card" id="s4-c4" style="left: 762px; top: 478px">
+              <div class="s4-lab"><span class="s4-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#0071e3" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5" /><path d="M9 9l6 6M15 9l-6 6" /></svg></span>What failed to load</div>
+              <div class="s4-panel">
+                <div class="s4-soft" data-crop="failed-soft"><img data-layout-allow-overflow src="assets/screens/network-response.webp" alt="" /></div>
+                <div class="s4-hl">
+                  <span class="s4-x"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M8 8l8 8M16 8l-8 8" /></svg></span>
+                  <span class="s4-what">Payment</span>
+                  <span class="s4-pill">Didn’t go through</span>
+                </div>
+                <div class="s4-note">The step that failed while you paid</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // screenshot crops: source rect (sx, sy, sw) of an image iw wide, fitted to its box width
+          const CROPS = {
+            steps: { iw: 1720, sx: 10, sy: 258, sw: 900, w: 706 },
+            device: { iw: 1952, sx: 1160, sy: 1380, sw: 780, w: 706 },
+                        "errors-msg": { iw: 1720, sx: 748, sy: 452, sw: 345, w: 466 },
+            "failed-soft": { iw: 1720, sx: 57, sy: 560, sw: 960, w: 706 },
+          };
+          document.querySelectorAll("#s4-sheet [data-crop]").forEach((box) => {
+            const c = CROPS[box.getAttribute("data-crop")];
+            const s = c.w / c.sw;
+            const img = box.querySelector("img");
+            img.style.width = c.iw * s + "px";
+            img.style.left = -c.sx * s + "px";
+            img.style.top = -c.sy * s + "px";
+          });
+
+          // Scene window 20.4–33.1 s of the film. A(t) converts film time to scene time.
+          const A = (t) => +(t - 20.4).toFixed(3);
+          const tl = gsap.timeline({ paused: true });
+          const E = "power3.out", IO = "sine.inOut";
+          tl.fromTo("#s4-wrap", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: IO }, 0);
+          tl.fromTo("#s4-head", { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: E }, A(20.55));
+          [["#s4-c1", 23.2], ["#s4-c2", 24.15], ["#s4-c3", 25.15], ["#s4-c4", 26.0]].forEach(([sel, t]) => {
+            tl.fromTo(sel, { x: 40, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: E }, A(t));
+          });
+          tl.fromTo("#s4-ready", { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.45, ease: E }, A(28.3));
+          tl.fromTo("#s4-sheet", { scale: 0.985 }, { scale: 1.015, duration: 12.0, ease: "none", transformOrigin: "50% 45%" }, 0);
+          tl.to("#s4-wrap", { opacity: 0, duration: 0.5, ease: IO }, A(32.6));
+          window.__timelines["s4-report"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

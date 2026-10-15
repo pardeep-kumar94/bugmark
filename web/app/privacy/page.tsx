@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy policy" updated="September 17, 2026">
+    <LegalPage title="Privacy policy" updated="October 15, 2026">
       <p>
         {site.name} is built to be local-first. This policy explains what the {site.name} Chrome extension and this website do with
         information. {/* TODO: replace with your legal entity name and address, and have this reviewed before launch. */}
@@ -23,6 +23,7 @@ export default function PrivacyPage() {
         <li>Passwords, tokens, API keys, card numbers and authorization headers are masked before network data is saved.</li>
         <li>The extension can send anonymous feature-usage counts (never page addresses or content). You can turn this off in Settings.</li>
         <li>This website uses Google Analytics for Firebase to measure visits. You can decline it in the banner.</li>
+        <li>If you answer one of our short feedback questions, we store your answer anonymously to improve {site.name}.</li>
       </ul>
 
       <h2>Information the extension stores on your device</h2>
@@ -76,6 +77,14 @@ export default function PrivacyPage() {
         IP addresses are not logged or stored by Google Analytics 4, Google signals and ad personalisation are turned off, and we don’t use this data for
         advertising. You can decline analytics in the cookie banner; to change your choice later, clear this site’s data in your browser. Google’s
         privacy policy applies to the data it processes on our behalf.
+      </p>
+      <p id="feedback">
+        If you answer the short “what held you back?” question on this website or the survey shown after uninstalling the extension, we store the
+        reasons you selected, any note you write, the page you were on, the referring website’s domain, campaign source, extension version (uninstall
+        survey only), and your browser family and device type (for example “chrome” and “desktop”). We do not store your IP address, your browser’s
+        full identification string, or any account or contact details with your answer, and the note is never sent to analytics. Answers are kept in
+        Google Cloud Firestore and used only to improve {site.name}. Please don&rsquo;t include personal details in your note; if you do, ask us
+        and we&rsquo;ll delete it.
       </p>
       <p>If you email us, we use your message only to respond to you.</p>
 

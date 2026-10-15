@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Captions · verbatim voiceover</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Bricolage Grotesque"; src: url("assets/fonts/BricolageGrotesque-latin-600-800.woff2") format("woff2"); font-weight: 600 800; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Regular.woff2") format("woff2"); font-weight: 400; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Medium.woff2") format("woff2"); font-weight: 500; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-SemiBold.woff2") format("woff2"); font-weight: 600; }
+        :root {
+          --canvas: #ffffff; --surface: #fbfbfd; --surface-2: #f5f5f7; --line: #eaeaee; --line-2: #dedee3;
+          --ink: #1d1d1f; --ink-2: #3a3a3e; --dim: #6e6e73; --mute: #747478;
+          --accent: #0071e3; --accent-ink: #0062c4; --accent-soft: #eaf2fe; --bug: #d0342c; --ok: #1d8a54;
+          --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+          --sans: "Geist", system-ui, sans-serif;
+          --shadow: 0 40px 90px -36px rgba(15, 20, 40, 0.32), 0 2px 8px rgba(20, 25, 40, 0.05);
+        }
+        #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+        #root { pointer-events: none; }
+        .cap {
+          position: absolute; top: auto; bottom: 60px; left: 0; right: 0; margin: 0 auto; width: fit-content;
+          max-width: 1640px; padding: 14px 30px 16px; border-radius: 18px;
+          background: rgba(22, 22, 26, 0.8); color: #fff;
+          font-family: var(--sans); font-size: 46px; font-weight: 500; line-height: 1.25; letter-spacing: -0.005em;
+          white-space: nowrap; text-align: center; opacity: 0;
+        }
+      </style>
+
+      <!-- One caption track (this host). Text is the voiceover verbatim (SCRIPT.md); cues split at spoken pauses.
+           Cue windows live in data-cue-start / data-cue-duration and are driven by the timeline below. -->
+      <div id="root" data-composition-id="captions" data-width="1920" data-height="1080">
+        <div id="cap-1" class="cap" data-cue-start="1.15" data-cue-duration="1.15" data-joins="1">You found a bug.</div>
+        <div id="cap-2" class="cap" data-cue-start="2.3" data-cue-duration="2.00" data-joins="0">Now you have to explain it.</div>
+        <div id="cap-3" class="cap" data-cue-start="6.15" data-cue-duration="2.60" data-joins="1">Bugmark is a free Chrome extension.</div>
+        <div id="cap-4" class="cap" data-cue-start="8.75" data-cue-duration="2.50" data-joins="0">Add it in two clicks — no account.</div>
+        <div id="cap-5" class="cap" data-cue-start="12.75" data-cue-duration="2.32" data-joins="1">When something breaks, click Bugmark.</div>
+        <div id="cap-6" class="cap" data-cue-start="15.07" data-cue-duration="2.88" data-joins="0">Circle the problem, or record your screen.</div>
+        <div id="cap-7" class="cap" data-cue-start="20.95" data-cue-duration="3.71" data-joins="1">Behind the scenes, Bugmark notes every step you took</div>
+        <div id="cap-8" class="cap" data-cue-start="24.66" data-cue-duration="2.40" data-joins="1">and what went wrong inside the page —</div>
+        <div id="cap-9" class="cap" data-cue-start="27.06" data-cue-duration="2.94" data-joins="0">the details developers always ask for.</div>
+        <div id="cap-10" class="cap" data-cue-start="33.15" data-cue-duration="1.66" data-joins="1">Send it straight to GitHub,</div>
+        <div id="cap-11" class="cap" data-cue-start="34.81" data-cue-duration="2.39" data-joins="0">or share it however your team works.</div>
+        <div id="cap-12" class="cap" data-cue-start="41.95" data-cue-duration="2.54" data-joins="1">Your developer sees exactly what you saw —</div>
+        <div id="cap-13" class="cap" data-cue-start="44.49" data-cue-duration="2.91" data-joins="0">and fixes it, without the back-and-forth.</div>
+        <div id="cap-14" class="cap" data-cue-start="50.95" data-cue-duration="0.79" data-joins="1">Bugmark.</div>
+        <div id="cap-15" class="cap" data-cue-start="51.74" data-cue-duration="2.16" data-joins="0">Bug reports anyone can send.</div>
+      </div>
+
+      <script>
+        (function () {
+          const tl = gsap.timeline({ paused: true });
+          document.querySelectorAll("[data-composition-id='captions'] .cap").forEach((el) => {
+            const start = parseFloat(el.getAttribute("data-cue-start"));
+            const end = start + parseFloat(el.getAttribute("data-cue-duration"));
+            tl.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, start);
+            // a cue followed straight away by the next one hands over at once; the last cue of a line fades out
+            if (el.getAttribute("data-joins") === "1") tl.set(el, { opacity: 0 }, end);
+            else tl.to(el, { opacity: 0, duration: 0.2, ease: "power1.in" }, end - 0.2);
+          });
+          window.__timelines["captions"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

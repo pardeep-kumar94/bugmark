@@ -33,6 +33,16 @@ export const ctaHref: string = site.chromeStoreUrl || site.installUrl;
 // True when the CTA leaves our origin (opens the store in a new tab).
 export const ctaExternal = ctaHref.startsWith('http');
 
+/** Whether `href` (resolved against `pageHref`) is an "Add to Chrome" install link. */
+export function isInstallHref(href: string, pageHref: string): boolean {
+  try {
+    const url = new URL(href, pageHref);
+    return href === ctaHref || url.href === ctaHref || (url.origin === new URL(pageHref).origin && url.pathname === site.installUrl);
+  } catch {
+    return false;
+  }
+}
+
 export const nav = [
   { href: '/#product', label: 'Product' },
   { href: '/#developers', label: 'For developers' },

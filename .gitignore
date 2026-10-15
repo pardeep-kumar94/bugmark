@@ -26,3 +26,11 @@ firebase-service-account*.json
 
 # old screenshots and exports from Claude sessions
 Claude outputs/
+
+# HyperFrames render outputs (the web copy lives in web/public/video)
+video/*/renders/
+video/*/node_modules/
+video/*/.hyperframes/
+video/*/.work/
+video/*/.media/
+video/*/assets/music/

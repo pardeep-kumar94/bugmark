@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>S5 · send</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Bricolage Grotesque"; src: url("assets/fonts/BricolageGrotesque-latin-600-800.woff2") format("woff2"); font-weight: 600 800; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Regular.woff2") format("woff2"); font-weight: 400; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Medium.woff2") format("woff2"); font-weight: 500; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-SemiBold.woff2") format("woff2"); font-weight: 600; }
+        :root {
+          --canvas: #ffffff; --surface: #fbfbfd; --surface-2: #f5f5f7; --line: #eaeaee; --line-2: #dedee3;
+          --ink: #1d1d1f; --ink-2: #3a3a3e; --dim: #6e6e73; --mute: #747478;
+          --accent: #0071e3; --accent-ink: #0062c4; --accent-soft: #eaf2fe; --bug: #d0342c; --ok: #1d8a54;
+          --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+          --sans: "Geist", system-ui, sans-serif;
+          --shadow: 0 40px 90px -36px rgba(15, 20, 40, 0.32), 0 2px 8px rgba(20, 25, 40, 0.05);
+        }
+        #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+        .cursor { position: absolute; left: 0; top: 0; width: 40px; height: 40px; opacity: 0; }
+        .cursor svg { width: 40px; height: 40px; display: block; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25)); }
+        .click-ring { position: absolute; left: 0; top: 0; width: 56px; height: 56px; border-radius: 50%; border: 3px solid var(--accent); opacity: 0; }
+        #s5-wrap { position: absolute; inset: 0; }
+        #s5-stage { position: absolute; inset: 0; }
+        .s5-k { position: absolute; top: 96px; font-size: 24px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); white-space: nowrap; }
+        .s5-k b { color: var(--accent-ink); font-weight: 600; }
+        .s5-dlg { position: absolute; top: 148px; border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
+        .s5-dlg img { display: block; width: 100%; height: auto; }
+        #s5-ok {
+          position: absolute; inset: 0; background: rgba(255, 255, 255, 0.94);
+          display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; opacity: 0;
+        }
+        #s5-ck { width: 120px; height: 120px; border-radius: 50%; background: var(--ok); display: flex; align-items: center; justify-content: center; }
+        #s5-ok .tx { font-size: 40px; font-weight: 600; color: var(--ink); }
+        #s5-ok .sx { font-size: 24px; color: var(--dim); }
+      </style>
+
+      <div id="root" data-composition-id="s5-send" data-width="1920" data-height="1080">
+        <div id="s5-wrap">
+          <div id="s5-stage">
+            <div class="s5-k" id="s5-k-gh" style="left: 200px">Send to <b>GitHub</b></div>
+            <div class="s5-dlg" id="s5-gh" style="left: 200px; width: 760px">
+              <img src="assets/screens/github-dialog.webp" alt="" />
+              <div id="s5-ok">
+                <div id="s5-ck"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></div>
+                <div class="tx">Issue created</div>
+                <div class="sx">Screenshot and details attached</div>
+              </div>
+            </div>
+            <div class="s5-k" id="s5-k-ex" style="left: 1100px">Or <b>share a report</b></div>
+            <div class="s5-dlg" id="s5-ex" style="left: 1100px; width: 600px"><img src="assets/screens/export-dialog.webp" alt="" /></div>
+          </div>
+          <div class="click-ring" id="s5-click"></div>
+          <div class="cursor" id="s5-cursor"><svg viewBox="0 0 24 24"><path d="M4 2.5l15.5 10.2-6.9 1.3 4 7.4-2.9 1.5-4-7.4-5.2 4.6z" fill="#1d1d1f" stroke="#fff" stroke-width="1.4" stroke-linejoin="round" /></svg></div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // cursor helpers — coordinates are frame pixels of the arrow tip
+          function cursorTo(tl, cur, x, y, t, d) { tl.to(cur, { x: x - 7, y: y - 4, duration: d, ease: "power2.inOut" }, t); }
+          function click(tl, cur, ring, x, y, t) {
+            tl.to(cur, { scale: 0.86, duration: 0.08, ease: "power1.in", transformOrigin: "4px 3px" }, t);
+            tl.to(cur, { scale: 1, duration: 0.14, ease: "power1.out" }, t + 0.08);
+            tl.fromTo(ring, { x: x - 28, y: y - 28, scale: 0.4, opacity: 0.8 }, { scale: 1.25, opacity: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, t);
+          }
+          // Scene window 32.6–41.9 s of the film. A(t) converts film time to scene time.
+          const A = (t) => +(t - 32.6).toFixed(3);
+          const tl = gsap.timeline({ paused: true });
+          const E = "power3.out", IO = "sine.inOut";
+          const cur = "#s5-cursor", ring = "#s5-click";
+          tl.fromTo("#s5-wrap", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: IO }, 0);
+          tl.fromTo(["#s5-k-gh", "#s5-gh"], { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: E, stagger: 0.06 }, A(32.7));
+          tl.set(cur, { x: 1173, y: 856, opacity: 0 }, 0);
+          tl.to(cur, { opacity: 1, duration: 0.25 }, A(33.4));
+          cursorTo(tl, cur, 840, 703, A(33.4), 0.9);
+          click(tl, cur, ring, 840, 703, A(34.45));
+          tl.fromTo("#s5-ok", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: IO }, A(34.6));
+          tl.fromTo("#s5-ck", { scale: 0.8 }, { scale: 1, duration: 0.45, ease: E }, A(34.6));
+          tl.to(cur, { opacity: 0, duration: 0.25 }, A(34.9));
+          tl.fromTo(["#s5-k-ex", "#s5-ex"], { x: 50, opacity: 0 }, { x: 0, opacity: 1, duration: 0.65, ease: E, stagger: 0.06 }, A(35.2));
+          tl.fromTo("#s5-stage", { scale: 1 }, { scale: 1.025, duration: 8.8, ease: "none", transformOrigin: "50% 50%" }, 0);
+          tl.to("#s5-wrap", { opacity: 0, duration: 0.5, ease: IO }, A(41.4));
+          window.__timelines["s5-send"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

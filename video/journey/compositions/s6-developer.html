@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>S6 · the developer fixes it</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Bricolage Grotesque"; src: url("assets/fonts/BricolageGrotesque-latin-600-800.woff2") format("woff2"); font-weight: 600 800; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Regular.woff2") format("woff2"); font-weight: 400; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Medium.woff2") format("woff2"); font-weight: 500; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-SemiBold.woff2") format("woff2"); font-weight: 600; }
+        :root {
+          --canvas: #ffffff; --surface: #fbfbfd; --surface-2: #f5f5f7; --line: #eaeaee; --line-2: #dedee3;
+          --ink: #1d1d1f; --ink-2: #3a3a3e; --dim: #6e6e73; --mute: #747478;
+          --accent: #0071e3; --accent-ink: #0062c4; --accent-soft: #eaf2fe; --bug: #d0342c; --ok: #1d8a54;
+          --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+          --sans: "Geist", system-ui, sans-serif;
+          --shadow: 0 40px 90px -36px rgba(15, 20, 40, 0.32), 0 2px 8px rgba(20, 25, 40, 0.05);
+        }
+        #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+        .win { position: absolute; background: var(--canvas); border: 1px solid var(--line-2); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
+        .win-bar { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; gap: 22px; padding: 0 24px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+        .dots { display: flex; gap: 10px; }
+        .dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--line-2); display: block; }
+        .url { flex: 1; height: 40px; border-radius: 999px; background: var(--canvas); border: 1px solid var(--line); position: relative; overflow: hidden; font-size: 21px; color: var(--dim); }
+        .url span { position: absolute; left: 22px; top: 7px; white-space: nowrap; }
+        .url b { color: var(--ink-2); font-weight: 500; }
+        .tb-icons { display: flex; align-items: center; gap: 18px; width: 120px; justify-content: flex-end; }
+        .puzzle { width: 30px; height: 30px; display: block; }
+        .tb-bug { width: 38px; height: 38px; border-radius: 9px; display: block; }
+        .win-body { position: absolute; left: 0; right: 0; top: 64px; bottom: 0; overflow: hidden; }
+        #s6-wrap { position: absolute; inset: 0; }
+        #s6-cover { position: absolute; inset: 0; overflow: hidden; background: #fff; }
+        #s6-cover img { position: absolute; left: 0; top: 0; width: 1400px; height: auto; display: block; }
+        #s6-ba { position: absolute; inset: 0; background: #11141a; opacity: 0; }
+        .s6-pane { position: absolute; left: 49px; top: 0; width: 1302px; height: 740px; overflow: hidden; }
+        .s6-pane img { position: absolute; display: block; max-width: none; }
+        #s6-img-after { position: absolute; inset: 0; }
+        #s6-line { position: absolute; left: 0; top: 0; width: 4px; height: 740px; background: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15); opacity: 0; }
+        .s6-tag { position: absolute; bottom: 22px; height: 46px; padding: 0 20px; border-radius: 999px; font-size: 22px; font-weight: 600; display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+        #s6-before { right: 76px; background: rgba(255, 255, 255, 0.92); color: var(--ink); }
+        #s6-after { left: 76px; background: var(--ok); color: #fff; opacity: 0; }
+      </style>
+
+      <div id="root" data-composition-id="s6-developer" data-width="1920" data-height="1080">
+        <div id="s6-wrap">
+          <div class="win" id="s6-win" style="left: 260px; top: 60px; width: 1400px; height: 804px">
+            <div class="win-bar">
+              <div class="dots"><i></i><i></i><i></i></div>
+              <div class="url" data-layout-allow-overlap><span><b>Bug report</b> · Lumen Stays — opened by your developer</span></div>
+              <div class="tb-icons"><img class="tb-bug" src="assets/logo.png" alt="" /></div>
+            </div>
+            <div class="win-body">
+              <div id="s6-cover"><img data-layout-allow-overflow id="s6-cover-img" src="assets/screens/report-cover.webp" alt="" /></div>
+              <div id="s6-ba">
+                <div class="s6-pane"><img data-layout-allow-overflow id="s6-img-before" src="assets/screens/before-after.webp" alt="" /></div>
+                <div class="s6-pane" id="s6-after-pane"><div id="s6-img-after"></div></div>
+                <div id="s6-line"></div>
+                <div class="s6-tag" id="s6-before">Before</div>
+                <div class="s6-tag" id="s6-after">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                  After · fixed
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // before/after halves of one screenshot (2400×753): before = x16..1184, after = x1216..2384, y76..740
+          const s = 1302 / 1168;
+          const b = document.getElementById("s6-img-before");
+          b.style.width = 2400 * s + "px";
+          b.style.top = -76 * s + "px";
+          b.style.left = -16 * s + "px";
+          // the after half is a background of the same file, so the image is discovered once
+          const a = document.getElementById("s6-img-after");
+          a.style.background = "url('assets/screens/before-after.webp') " + (-1216 * s) + "px " + (-76 * s) + "px / " + (2400 * s) + "px auto no-repeat";
+
+          // Scene window 41.4–50.9 s of the film. A(t) converts film time to scene time.
+          const A = (t) => +(t - 41.4).toFixed(3);
+          const tl = gsap.timeline({ paused: true });
+          const E = "power3.out", IO = "sine.inOut";
+          tl.fromTo("#s6-wrap", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: IO }, 0);
+          tl.fromTo("#s6-win", { y: 24 }, { y: 0, duration: 0.8, ease: E }, 0);
+          tl.fromTo("#s6-cover-img", { scale: 1 }, { scale: 1.06, duration: 3.2, ease: "none", transformOrigin: "30% 30%" }, 0);
+          tl.to("#s6-ba", { opacity: 1, duration: 0.45, ease: IO }, A(44.05));
+          tl.set("#s6-after-pane", { clipPath: "inset(0 100% 0 0)" }, 0);
+          tl.set("#s6-line", { x: 49 }, 0);
+          tl.to("#s6-line", { opacity: 1, duration: 0.2 }, A(44.6));
+          tl.to("#s6-after-pane", { clipPath: "inset(0 0% 0 0)", duration: 1.7, ease: IO }, A(44.7));
+          tl.to("#s6-line", { x: 49 + 1302 - 4, duration: 1.7, ease: IO }, A(44.7));
+          tl.to("#s6-line", { opacity: 0, duration: 0.3 }, A(46.4));
+          tl.to("#s6-before", { opacity: 0, duration: 0.3 }, A(45.9));
+          tl.fromTo("#s6-after", { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, A(46.3));
+          tl.fromTo("#s6-win", { scale: 1 }, { scale: 1.02, duration: 6.0, ease: "none", transformOrigin: "50% 50%", immediateRender: false }, A(44.4));
+          tl.to("#s6-wrap", { opacity: 0, duration: 0.5, ease: IO }, A(50.4));
+          window.__timelines["s6-developer"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

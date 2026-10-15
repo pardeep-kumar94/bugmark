@@ -3,18 +3,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { track } from '@/lib/analytics';
 import { ctaHref } from '@/lib/site';
+import { NOTE_MAX, UNINSTALL_REASONS, sendFeedback } from '@/lib/feedback';
 import { IconCheck, IconPuzzle } from './icons';
-
-const reasons = [
-  { id: 'not_needed', label: 'I only needed it once' },
-  { id: 'missing_feature', label: 'A feature I need is missing' },
-  { id: 'bug', label: 'Something didn’t work' },
-  { id: 'hard_to_use', label: 'It was hard to use' },
-  { id: 'install_hassle', label: 'Installing or updating was a hassle' },
-  { id: 'switched', label: 'I switched to another tool' },
-  { id: 'privacy', label: 'Privacy or permission concerns' },
-  { id: 'other', label: 'Something else' },
-];
 
 /** Opened by Chrome when Bugmark is removed (CONFIG.uninstallUrl in the extension). */
 export function UninstallSurvey() {
@@ -34,7 +24,8 @@ export function UninstallSurvey() {
     e.preventDefault();
     const v = new URLSearchParams(location.search).get('v') || '';
     for (const r of picked.length ? picked : ['no_reason']) track('uninstall_reason', { reason: r, version: v });
-    // Free text goes to email, not analytics — analytics must not collect personal data.
+    // The note is stored with the answer in Firestore (/api/feedback), never sent to analytics.
+    if (picked.length || note.trim()) void sendFeedback({ kind: 'uninstall', reasons: picked, note: note.trim(), version: v });
     setSent(true);
   }
 
@@ -58,15 +49,18 @@ export function UninstallSurvey() {
           <p className="mt-3 text-[15.5px] leading-relaxed text-dim">Bugmark has been removed. What made you uninstall it? It takes five seconds and shapes what we build next.</p>
           <fieldset className="mt-6 grid gap-2">
             <legend className="sr-only">Reasons</legend>
-            {reasons.map((r) => (
+            {UNINSTALL_REASONS.map((r) => (
               <label key={r.id} className={`flex cursor-pointer items-center gap-3 rounded-lg border px-3.5 py-2.5 text-[14.5px] transition ${picked.includes(r.id) ? 'border-accent/50 bg-accent/[.07] text-ink' : 'border-line bg-canvas text-ink-2 hover:border-line-2'}`}>
                 <input type="checkbox" className="accent-[#4ade80]" checked={picked.includes(r.id)} onChange={() => toggle(r.id)} />{r.label}
               </label>
             ))}
           </fieldset>
           <label className="mt-5 block">
-            <span className="text-[12.5px] text-dim">Anything else? (optional — we’ll only see it if you email it)</span>
-            <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3} className="mt-2 w-full rounded-lg border border-line bg-canvas p-3 text-[14.5px] text-ink outline-none focus:border-accent/50" />
+            <span className="text-[12.5px] text-dim">
+              Anything else? (optional · stored anonymously —{' '}
+              <a href="/privacy#feedback" className="underline decoration-dim/40 underline-offset-2 hover:text-ink-2">Privacy</a>)
+            </span>
+            <textarea value={note} onChange={(e) => setNote(e.target.value)} rows={3} maxLength={NOTE_MAX} className="mt-2 w-full rounded-lg border border-line bg-canvas p-3 text-[14.5px] text-ink outline-none focus:border-accent/50" />
           </label>
           <button type="submit" className="btn-primary mt-5 w-full">Send feedback</button>
         </form>

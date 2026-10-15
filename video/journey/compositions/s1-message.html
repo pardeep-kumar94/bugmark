@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>S1 · the vague message</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Bricolage Grotesque"; src: url("assets/fonts/BricolageGrotesque-latin-600-800.woff2") format("woff2"); font-weight: 600 800; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Regular.woff2") format("woff2"); font-weight: 400; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Medium.woff2") format("woff2"); font-weight: 500; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-SemiBold.woff2") format("woff2"); font-weight: 600; }
+        :root {
+          --canvas: #ffffff; --surface: #fbfbfd; --surface-2: #f5f5f7; --line: #eaeaee; --line-2: #dedee3;
+          --ink: #1d1d1f; --ink-2: #3a3a3e; --dim: #6e6e73; --mute: #747478;
+          --accent: #0071e3; --accent-ink: #0062c4; --accent-soft: #eaf2fe; --bug: #d0342c; --ok: #1d8a54;
+          --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+          --sans: "Geist", system-ui, sans-serif;
+          --shadow: 0 40px 90px -36px rgba(15, 20, 40, 0.32), 0 2px 8px rgba(20, 25, 40, 0.05);
+        }
+        #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+        #s1-wrap { position: absolute; inset: 0; }
+        #s1-chat {
+          position: absolute; left: 510px; top: 150px; width: 900px; height: 680px;
+          background: var(--canvas); border: 1px solid var(--line-2); border-radius: 28px;
+          box-shadow: var(--shadow); overflow: hidden;
+        }
+        #s1-head {
+          position: absolute; left: 0; right: 0; top: 0; height: 84px; border-bottom: 1px solid var(--line); background: var(--surface);
+          display: flex; align-items: center; gap: 16px; padding: 0 32px; font-size: 26px; font-weight: 600; color: var(--ink);
+        }
+        #s1-head .hash { color: var(--mute); font-weight: 500; }
+        #s1-head .sub { margin-left: auto; font-size: 20px; font-weight: 500; color: var(--mute); }
+        .s1-msg { position: absolute; display: flex; align-items: flex-end; gap: 14px; }
+        .s1-av { width: 52px; height: 52px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 600; color: #fff; }
+        .s1-bubble { padding: 18px 26px; border-radius: 26px; font-size: 32px; line-height: 1.25; font-weight: 500; white-space: nowrap; }
+        .s1-msg.me { right: 32px; flex-direction: row-reverse; }
+        .s1-msg.me .s1-bubble { background: var(--accent); color: #fff; border-bottom-right-radius: 8px; font-size: 44px; padding: 22px 32px; }
+        .s1-msg.me .s1-av { background: var(--ink-2); }
+        .s1-msg.dev { left: 32px; }
+        .s1-msg.dev .s1-bubble { background: var(--surface-2); color: var(--ink); border-bottom-left-radius: 8px; }
+        .s1-msg.dev .s1-av { background: #5b6472; }
+        .s1-who { position: absolute; top: -30px; font-size: 19px; font-weight: 500; color: var(--mute); white-space: nowrap; }
+        .s1-msg.me .s1-who { right: 66px; }
+        .s1-msg.dev .s1-who { left: 66px; }
+      </style>
+
+      <div id="root" data-composition-id="s1-message" data-width="1920" data-height="1080">
+        <div id="s1-wrap">
+          <div id="s1-chat">
+            <div id="s1-head"><span class="hash">#</span>website-team<span class="sub">3 people</span></div>
+            <div class="s1-msg me" id="s1-m0" style="top: 150px">
+              <div class="s1-av">ME</div>
+              <div class="s1-bubble">checkout's broken??</div>
+              <div class="s1-who">You · just now</div>
+            </div>
+            <div class="s1-msg dev" id="s1-m1" style="top: 330px">
+              <div class="s1-av">DV</div>
+              <div class="s1-bubble">Which page?</div>
+              <div class="s1-who">Developer</div>
+            </div>
+            <div class="s1-msg dev" id="s1-m2" style="top: 438px">
+              <div class="s1-av">DV</div>
+              <div class="s1-bubble">What did you click?</div>
+            </div>
+            <div class="s1-msg dev" id="s1-m3" style="top: 546px">
+              <div class="s1-av">DV</div>
+              <div class="s1-bubble">Which browser? Can you send a screenshot?</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // Scene window 0–6.1 s of the film; times below are scene-local.
+          const tl = gsap.timeline({ paused: true });
+          const E = "power3.out";
+          tl.fromTo("#s1-chat", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: E }, 0.1);
+          tl.fromTo("#s1-m0", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.55, ease: E }, 0.5);
+          tl.fromTo("#s1-m1", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E }, 2.45);
+          tl.fromTo("#s1-m2", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E }, 3.0);
+          tl.fromTo("#s1-m3", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E }, 3.55);
+          tl.fromTo("#s1-wrap", { scale: 1 }, { scale: 1.03, duration: 5.0, ease: "none", transformOrigin: "50% 45%" }, 0.8);
+          tl.to("#s1-wrap", { opacity: 0, duration: 0.5, ease: "sine.inOut" }, 5.6);
+          window.__timelines["s1-message"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

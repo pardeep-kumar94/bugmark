@@ -13,6 +13,7 @@ const bricolage = localFont({
 import { site } from '@/lib/site';
 import { siteKeywords } from '@/lib/seo';
 import { Analytics } from '@/components/Analytics';
+import { ExitSurvey } from '@/components/ExitSurvey';
 import './globals.css';
 
 const defaultTitle = `${site.name} — Free Bug Reporting & Debugging Tool for Chrome`;
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable} ${bricolage.variable}`}>
       <body className="min-h-dvh overflow-x-hidden">
         {children}
+        <ExitSurvey />
         <Analytics />
       </body>
     </html>

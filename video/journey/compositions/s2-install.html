@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>S2 · install</title>
+  </head>
+  <body>
+    <template>
+      <style>
+        @font-face { font-family: "Bricolage Grotesque"; src: url("assets/fonts/BricolageGrotesque-latin-600-800.woff2") format("woff2"); font-weight: 600 800; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Regular.woff2") format("woff2"); font-weight: 400; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-Medium.woff2") format("woff2"); font-weight: 500; }
+        @font-face { font-family: "Geist"; src: url("assets/fonts/Geist-SemiBold.woff2") format("woff2"); font-weight: 600; }
+        :root {
+          --canvas: #ffffff; --surface: #fbfbfd; --surface-2: #f5f5f7; --line: #eaeaee; --line-2: #dedee3;
+          --ink: #1d1d1f; --ink-2: #3a3a3e; --dim: #6e6e73; --mute: #747478;
+          --accent: #0071e3; --accent-ink: #0062c4; --accent-soft: #eaf2fe; --bug: #d0342c; --ok: #1d8a54;
+          --display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+          --sans: "Geist", system-ui, sans-serif;
+          --shadow: 0 40px 90px -36px rgba(15, 20, 40, 0.32), 0 2px 8px rgba(20, 25, 40, 0.05);
+        }
+        #root { position: absolute; inset: 0; overflow: hidden; font-family: var(--sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+        .win { position: absolute; background: var(--canvas); border: 1px solid var(--line-2); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow); }
+        .win-bar { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; gap: 22px; padding: 0 24px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
+        .dots { display: flex; gap: 10px; }
+        .dots i { width: 14px; height: 14px; border-radius: 50%; background: var(--line-2); display: block; }
+        .url { flex: 1; height: 40px; border-radius: 999px; background: var(--canvas); border: 1px solid var(--line); position: relative; overflow: hidden; font-size: 21px; color: var(--dim); }
+        .url span { position: absolute; left: 22px; top: 7px; white-space: nowrap; }
+        .url b { color: var(--ink-2); font-weight: 500; }
+        .tb-icons { display: flex; align-items: center; gap: 18px; width: 120px; justify-content: flex-end; }
+        .puzzle { width: 30px; height: 30px; display: block; }
+        .tb-bug { width: 38px; height: 38px; border-radius: 9px; display: block; }
+        .win-body { position: absolute; left: 0; right: 0; top: 64px; bottom: 0; overflow: hidden; }
+        .cursor { position: absolute; left: 0; top: 0; width: 40px; height: 40px; opacity: 0; }
+        .cursor svg { width: 40px; height: 40px; display: block; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25)); }
+        .click-ring { position: absolute; left: 0; top: 0; width: 56px; height: 56px; border-radius: 50%; border: 3px solid var(--accent); opacity: 0; }
+        #s2-wrap { position: absolute; inset: 0; }
+        #s2-body { background: var(--surface-2); }
+        /* a simplified, stylized store card — not a capture of the real store page */
+        #s2-card {
+          position: absolute; left: 290px; top: 150px; width: 1100px; height: 320px;
+          background: var(--canvas); border: 1px solid var(--line-2); border-radius: 28px;
+          box-shadow: 0 30px 70px -34px rgba(15, 20, 40, 0.28);
+        }
+        #s2-logo { position: absolute; left: 56px; top: 85px; width: 150px; height: 150px; border-radius: 34px; display: block; }
+        #s2-name { position: absolute; left: 244px; top: 92px; font-family: var(--display); font-weight: 700; font-size: 76px; letter-spacing: -0.035em; line-height: 1; color: var(--ink); white-space: nowrap; }
+        #s2-desc { position: absolute; left: 246px; top: 190px; font-size: 30px; color: var(--dim); white-space: nowrap; }
+        .s2-btn {
+          position: absolute; left: 764px; top: 126px; width: 280px; height: 68px; border-radius: 999px;
+          display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 26px; font-weight: 600;
+        }
+        #s2-add { background: var(--accent); color: #fff; }
+        #s2-added { background: var(--surface-2); border: 1px solid var(--line-2); color: var(--ink-2); font-size: 24px; opacity: 0; }
+        #s2-veil { position: absolute; inset: 0; background: rgba(29, 29, 31, 0.18); opacity: 0; }
+        #s2-pop {
+          position: absolute; left: 520px; top: 34px; width: 640px; height: 220px;
+          background: var(--canvas); border: 1px solid var(--line-2); border-radius: 20px; box-shadow: var(--shadow); opacity: 0;
+        }
+        #s2-pop .h { position: absolute; left: 34px; top: 30px; font-size: 30px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+        #s2-pop .p { position: absolute; left: 34px; top: 78px; font-size: 22px; color: var(--dim); white-space: nowrap; }
+        #s2-pop .b { position: absolute; top: 140px; height: 52px; border-radius: 999px; font-size: 22px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+        #s2-pop .b.c { left: 264px; width: 120px; border: 1px solid var(--line-2); color: var(--ink-2); }
+        #s2-pop .b.a { left: 400px; width: 210px; background: var(--accent); color: #fff; }
+        #s2-ring { position: absolute; left: 1724px; top: 40px; width: 64px; height: 64px; border-radius: 50%; border: 3px solid var(--accent); opacity: 0; }
+        #s2-tip { position: absolute; left: 1530px; top: 118px; padding: 10px 18px; border-radius: 12px; background: var(--ink); color: #fff; font-size: 21px; font-weight: 500; white-space: nowrap; opacity: 0; }
+      </style>
+
+      <div id="root" data-composition-id="s2-install" data-width="1920" data-height="1080">
+        <div id="s2-wrap">
+          <div class="win" id="s2-win" style="left: 120px; top: 40px; width: 1680px; height: 820px">
+            <div class="win-bar">
+              <div class="dots"><i></i><i></i><i></i></div>
+              <div class="url"><span><b>chromewebstore.google.com</b>/detail/pmddndflbglmpliiinfhhecmfkmfffkj</span></div>
+              <div class="tb-icons">
+                <svg class="puzzle" viewBox="0 0 24 24" fill="none" stroke="#6e6e73" stroke-width="1.8" stroke-linejoin="round"><path d="M9 4.5a1.8 1.8 0 0 1 3.6 0V6H16a1 1 0 0 1 1 1v3.4h1.5a1.8 1.8 0 0 1 0 3.6H17V18a1 1 0 0 1-1 1h-3.4v-1.5a1.8 1.8 0 0 0-3.6 0V19H6a1 1 0 0 1-1-1v-3.4h1.5a1.8 1.8 0 0 0 0-3.6H5V7a1 1 0 0 1 1-1h3z" /></svg>
+                <div class="tb-bug" id="s2-tb-bug" style="background: url('assets/logo.png') center / cover"></div>
+              </div>
+            </div>
+            <div class="win-body" id="s2-body">
+              <div id="s2-card">
+                <img id="s2-logo" src="assets/logo.png" alt="" />
+                <div id="s2-name">Bugmark</div>
+                <div id="s2-desc">Visual bug reports for any website.</div>
+                <div class="s2-btn" id="s2-add">Add to Chrome</div>
+                <div class="s2-btn" id="s2-added">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d8a54" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
+                  Added to Chrome
+                </div>
+              </div>
+              <div id="s2-veil"></div>
+              <div id="s2-pop" data-layout-allow-overlap>
+                <div class="h">Add “Bugmark”?</div>
+                <div class="p">It will appear in your browser toolbar.</div>
+                <div class="b c">Cancel</div>
+                <div class="b a">Add extension</div>
+              </div>
+            </div>
+          </div>
+          <div id="s2-ring"></div>
+          <div id="s2-tip">Pinned to your toolbar</div>
+          <div class="click-ring" id="s2-click"></div>
+          <div class="cursor" id="s2-cursor"><svg viewBox="0 0 24 24"><path d="M4 2.5l15.5 10.2-6.9 1.3 4 7.4-2.9 1.5-4-7.4-5.2 4.6z" fill="#1d1d1f" stroke="#fff" stroke-width="1.4" stroke-linejoin="round" /></svg></div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // cursor helpers — coordinates are frame pixels of the arrow tip
+          function cursorTo(tl, cur, x, y, t, d) { tl.to(cur, { x: x - 7, y: y - 4, duration: d, ease: "power2.inOut" }, t); }
+          function click(tl, cur, ring, x, y, t) {
+            tl.to(cur, { scale: 0.86, duration: 0.08, ease: "power1.in", transformOrigin: "4px 3px" }, t);
+            tl.to(cur, { scale: 1, duration: 0.14, ease: "power1.out" }, t + 0.08);
+            tl.fromTo(ring, { x: x - 28, y: y - 28, scale: 0.4, opacity: 0.8 }, { scale: 1.25, opacity: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, t);
+          }
+          // Scene window 5.6–12.7 s of the film. A(t) converts film time to scene time.
+          const A = (t) => +(t - 5.6).toFixed(3);
+          const tl = gsap.timeline({ paused: true });
+          const E = "power3.out", IO = "sine.inOut";
+          const cur = "#s2-cursor", ring = "#s2-click";
+          tl.fromTo("#s2-wrap", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: IO }, 0);
+          tl.fromTo("#s2-win", { y: 26 }, { y: 0, duration: 0.8, ease: E }, 0);
+          tl.set("#s2-tb-bug", { opacity: 0, scale: 0.6 }, 0);
+          tl.set(cur, { x: 1500, y: 780, opacity: 0 }, 0);
+          // click 1: Add to Chrome
+          tl.to(cur, { opacity: 1, duration: 0.3 }, A(7.7));
+          cursorTo(tl, cur, 1315, 414, A(7.7), 0.95);
+          click(tl, cur, ring, 1315, 414, A(8.8));
+          tl.to("#s2-add", { scale: 0.97, duration: 0.08, yoyo: true, repeat: 1 }, A(8.8));
+          tl.to("#s2-veil", { opacity: 1, duration: 0.3, ease: IO }, A(8.95));
+          tl.fromTo("#s2-pop", { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, A(8.95));
+          // click 2: Add extension
+          cursorTo(tl, cur, 1145, 304, A(9.15), 0.5);
+          click(tl, cur, ring, 1145, 304, A(9.7));
+          tl.to("#s2-pop", { opacity: 0, y: -8, duration: 0.25, ease: "power1.in" }, A(9.85));
+          tl.to("#s2-veil", { opacity: 0, duration: 0.3, ease: IO }, A(9.85));
+          tl.to("#s2-add", { opacity: 0, duration: 0.25 }, A(9.95));
+          tl.to("#s2-added", { opacity: 1, duration: 0.25 }, A(9.95));
+          cursorTo(tl, cur, 1450, 520, A(10.0), 0.6);
+          tl.to(cur, { opacity: 0, duration: 0.3 }, A(10.2));
+          // pinned to the toolbar
+          tl.to("#s2-tb-bug", { opacity: 1, scale: 1, duration: 0.5, ease: E }, A(10.25));
+          tl.fromTo("#s2-ring", { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: E }, A(10.3));
+          tl.to("#s2-ring", { opacity: 0, scale: 1.2, duration: 0.6, ease: "power1.in" }, A(11.0));
+          tl.fromTo("#s2-tip", { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, A(10.6));
+          tl.to("#s2-tip", { opacity: 0, duration: 0.3 }, A(11.9));
+          window.__timelines["s2-install"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>
