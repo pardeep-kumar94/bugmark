@@ -461,7 +461,7 @@ export const guidePages: ContentPage[] = [
               'Records the **last 150 requests** (fetch, XHR and resources) with method, URL, status and timing.',
               'For the 60 most recent fetch/XHR calls, keeps query params, request headers and payload, response headers and response body.',
               '**Masks secrets before saving:** passwords, tokens, API keys, session IDs, card numbers and `Authorization`/`Cookie` headers become `[redacted]`.',
-              'Filter to failures, **Copy as cURL**, or **Download HAR** and open it in Chrome DevTools.',
+              'Filter to failures, **Copy as cURL** (see [copy as cURL in Chrome](/guides/copy-as-curl-chrome)), or **Download HAR** and open it in Chrome DevTools.',
               'Attaches the screenshot, console errors and steps to reproduce to the same report.',
             ],
           },
@@ -707,6 +707,7 @@ export const guidePages: ContentPage[] = [
     ],
     related: [
       '/guides/how-to-capture-har-file-chrome',
+      '/guides/copy-as-curl-chrome',
       '/debugging-tool',
       '/guides/how-to-write-a-bug-report',
       '/web-developer-tools',
@@ -732,15 +733,19 @@ export const guidePages: ContentPage[] = [
   {
     slug: 'steps-to-reproduce-template',
     kind: 'guide',
-    title: 'Steps to Reproduce Template (With Examples)',
+    title: 'Steps to Reproduce a Bug: Template & Examples',
     description:
-      'A copy-paste steps to reproduce template for bug reports, with good and bad STR examples, rules for writing reproduction steps and tips for intermittent bugs.',
-    h1: 'Steps to reproduce template and examples',
+      'How to write steps to reproduce a bug, with a copy-paste template for bug reports, good and bad STR examples by bug type and tips for intermittent bugs.',
+    h1: 'Steps to reproduce a bug: template and examples',
     eyebrow: 'guide',
     intro:
-      'Steps to reproduce (STR) are the part of a bug report developers read first and the part most often done badly. Use the template below, follow a few simple rules, and your bugs will stop coming back marked "cannot reproduce".',
+      'Steps to reproduce (STR) are the numbered actions that make a bug happen again, from a known starting point. They are the part of a bug report developers read first and the part most often done badly. Use the template below, follow a few simple rules, and your bugs will stop coming back marked "cannot reproduce".',
     primaryKeyword: 'steps to reproduce template',
     keywords: [
+      'steps to reproduce bug',
+      'steps to reproduce bug report',
+      'step to reproduce',
+      'what are steps to reproduce',
       'steps to reproduce examples',
       'STR bug report',
       'reproduction steps',
@@ -840,7 +845,7 @@ export const guidePages: ContentPage[] = [
           },
           {
             type: 'p',
-            text: 'For visual bugs, a numbered screenshot is often the clearest companion to written steps: add a numbered pin for each step directly on the image. For bugs across long pages, a [full page screenshot](/guides/full-page-screenshot-chrome) shows where each element sits.',
+            text: 'For visual bugs, a numbered screenshot is often the clearest companion to written steps: use a [screenshot annotation tool](/screenshot-annotation-tool) to add a numbered pin for each step directly on the image. For bugs across long pages, a [full page screenshot](/guides/full-page-screenshot-chrome) shows where each element sits.',
           },
           {
             type: 'p',
@@ -895,6 +900,10 @@ export const guidePages: ContentPage[] = [
     ],
     faqs: [
       {
+        q: 'What are steps to reproduce a bug?',
+        a: 'Steps to reproduce are a numbered list of the exact actions that make a bug happen again, starting from a stated page, account and browser. Each step is a single click, entry or navigation, and the list ends with the expected and actual results. A developer who has never seen the bug should be able to follow them and see it.',
+      },
+      {
         q: 'What does STR mean in a bug report?',
         a: 'STR stands for steps to reproduce. It is the numbered list of actions someone must take, from a known starting point, to make a bug happen again. Along with the expected and actual results, it is the most important part of a bug report because developers need to see a problem before they can fix it.',
       },
@@ -920,8 +929,9 @@ export const guidePages: ContentPage[] = [
       '/qa-testing-tool',
       '/bug-reporting-tool',
       '/guides/how-to-capture-console-logs',
+      '/screenshot-annotation-tool',
     ],
-    updated: '2026-09-17',
+    updated: '2026-10-20',
     howTo: {
       name: 'How to write steps to reproduce',
       totalTime: 'PT5M',

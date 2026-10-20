@@ -16,7 +16,7 @@ import { Analytics } from '@/components/Analytics';
 import { ExitSurvey } from '@/components/ExitSurvey';
 import './globals.css';
 
-const defaultTitle = `${site.name} — Free Bug Reporting & Debugging Tool for Chrome`;
+const defaultTitle = `${site.name} — Free Bug Report Chrome Extension & Debugging Tool`;
 export const metaDescription = 'Free bug reporting & debugging tool for Chrome: annotated screenshots, screen recording, console logs and network requests in every report. No account.';
 const ogTitle = `${site.name} — Free bug reporting tool developers can actually fix from`;
 

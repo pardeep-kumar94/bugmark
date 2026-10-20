@@ -12,7 +12,7 @@ export function Hero() {
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-10">
         {/* Left: message */}
         <div className="max-w-xl">
-          <p className="kicker animate-rise">Free Chrome extension · works on any website</p>
+          <p className="kicker animate-rise">Free bug report Chrome extension · works on any website</p>
 
           <h1 className="animate-rise mt-5 text-[40px] font-extrabold leading-[1.02] tracking-[-0.04em] text-ink text-balance sm:text-[54px] lg:text-[58px]" style={{ animationDelay: '.05s' }}>
             Found a bug? Report it in one click.

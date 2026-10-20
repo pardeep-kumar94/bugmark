@@ -366,7 +366,7 @@ export const alternativePages: ContentPage[] = [
     slug: "bugherd",
     kind: "alternative",
     competitor: "BugHerd",
-    title: "Free BugHerd Alternative: Bugmark vs BugHerd (2026)",
+    title: "BugHerd Alternatives & Competitors: Bugmark vs BugHerd",
     description:
       "Searching for a free BugHerd alternative? Compare Bugmark and BugHerd on price, client feedback, task boards, local data, console and network logs, and exports.",
     h1: "BugHerd alternative: Bugmark vs BugHerd for website feedback",
@@ -376,6 +376,8 @@ export const alternativePages: ContentPage[] = [
     primaryKeyword: "BugHerd alternative",
     keywords: [
       "free bugherd alternative",
+      "bugherd competitors",
+      "bugherd alternatives",
       "bugherd vs bugmark",
       "website feedback tool",
       "free website feedback tool",
@@ -535,9 +537,13 @@ export const alternativePages: ContentPage[] = [
         q: "What technical details does Bugmark attach to feedback?",
         a: "Each capture includes the URL, page title, browser, OS, viewport, pixel ratio and scroll position, plus the last 30 actions, 150 console messages and 150 network requests. With the element inspector, you can also attach an element's CSS selector, size and computed styles such as font, color, padding, margin and border.",
       },
+      {
+        q: "Who are BugHerd's main competitors?",
+        a: "The closest BugHerd competitors are [Marker.io](/alternatives/marker-io), [Userback](/alternatives/userback) and [Usersnap](/alternatives/usersnap) for client and user feedback on websites, and [Jam](/alternatives/jam) and Bugmark for developer-ready bug reports with console and network logs. Bugmark is the free option with no account. See [the best bug reporting tools compared](/guides/best-bug-reporting-tools).",
+      },
     ],
-    related: ["/alternatives/marker-io", "/alternatives/jam", "/website-feedback-tool", "/qa-testing-tool"],
-    updated: "2026-10-13",
+    related: ["/alternatives/marker-io", "/alternatives/userback", "/alternatives/jam", "/website-feedback-tool", "/qa-testing-tool"],
+    updated: "2026-10-20",
   },
 
   // ---------------------------------------------------------------------------

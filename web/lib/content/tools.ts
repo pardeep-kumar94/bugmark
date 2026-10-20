@@ -7,16 +7,19 @@ export const toolPages: ContentPage[] = [
   {
     slug: 'bug-reporting-tool',
     kind: 'tool',
-    title: 'Free Bug Reporting Tool for Chrome, No Account Needed',
+    title: 'Free Bug Reporting Tool & Chrome Extension, No Account',
     description:
-      "Bugmark is a free bug reporting tool for Chrome: annotated screenshots, video, steps to reproduce, console and network logs in one report. No account needed.",
+      "Bugmark is a free bug reporting tool and Chrome extension: annotated screenshots, video, steps to reproduce, console and network logs in one report. No account.",
     h1: 'A free bug reporting tool that captures what developers need',
-    eyebrow: 'free bug reporting tool',
+    eyebrow: 'free bug report chrome extension',
     intro:
-      "Bugmark is a free Chrome extension that turns “it's broken” into a report a developer can act on. One capture gives you an annotated screenshot or screen recording, the steps that led there, console errors, network requests and environment details, stored locally in your browser.",
+      "Bugmark is a free bug report Chrome extension that turns “it's broken” into a report a developer can act on. One capture gives you an annotated screenshot or screen recording, the steps that led there, console errors, network requests and environment details, stored locally in your browser.",
     primaryKeyword: 'free bug reporting tool',
     keywords: [
       'bug report tool',
+      'bug report chrome extension',
+      'chrome extension to report bugs',
+      'bug reporting extension',
       'bug reporting chrome extension',
       'visual bug reporting',
       'free bug tracker chrome',
@@ -171,9 +174,13 @@ export const toolPages: ContentPage[] = [
         q: 'Does Bugmark capture passwords or personal data?',
         a: "Typed text is never recorded in the steps, only which field was used. Passwords, tokens, API keys, session IDs, card numbers and Authorization or Cookie headers are replaced with [redacted] before saving. You can also pixelate anything visible on screen with the redact tool before capturing.",
       },
+      {
+        q: 'Is there a Chrome extension to report bugs?',
+        a: 'Yes. Bugmark is a bug report Chrome extension: click its icon on any page to take an annotated screenshot or record the tab, and it attaches the steps to reproduce, console errors, network requests and environment details automatically. It also works in Edge, Brave and Arc, and needs no account. Other bug reporting extensions include Jam, Marker.io and BugHerd.',
+      },
     ],
     related: ['/qa-testing-tool', '/screen-recorder-for-bug-reports', '/guides/how-to-write-a-bug-report', '/alternatives/jam'],
-    updated: '2026-10-13',
+    updated: '2026-10-20',
   },
 
   // ---------------------------------------------------------------------------
@@ -225,7 +232,7 @@ export const toolPages: ContentPage[] = [
             type: 'list',
             items: [
               "**Network log with bodies** — the last 150 requests (fetch, XHR and resources) with method, URL, status and timing. For the 60 most recent fetch/XHR calls you also get query params, request headers, the request payload (JSON, form data, `FormData` fields, up to 16 KB), response headers and the response body (up to 32 KB).",
-              "**Copy as cURL** — replay any captured request from your terminal against a local or staging API.",
+              "**Copy as cURL** — replay any captured request from your terminal against a local or staging API (see [how to copy as cURL in Chrome](/guides/copy-as-curl-chrome)).",
               "**Download HAR** — export the log and open it in Chrome DevTools → Network for the tooling you already know.",
               '**Console with uncaught errors** — the last 150 messages, including JavaScript errors and unhandled promise rejections that never reach a visible UI.',
               "**Element inspector** — click an element to attach its CSS selector, size and computed `font`, `color`, `background`, `padding`, `margin`, `border`, `border-radius` and `display`.",
@@ -340,7 +347,7 @@ export const toolPages: ContentPage[] = [
         a: "Use Bugmark's element inspector during a capture and click the element in question. The report stores its CSS selector, rendered size and computed styles such as font, color, background, padding, margin, border, radius and display, so the developer sees exact values instead of a description.",
       },
     ],
-    related: ['/debugging-tool', '/network-request-logger', '/guides/how-to-capture-har-file-chrome', '/screenshot-annotation-tool'],
+    related: ['/debugging-tool', '/network-request-logger', '/guides/copy-as-curl-chrome', '/guides/how-to-capture-har-file-chrome', '/screenshot-annotation-tool'],
     updated: '2026-10-13',
   },
 
@@ -416,7 +423,7 @@ export const toolPages: ContentPage[] = [
               'Filtering the network log to failures shows `POST /api/payments/intents` returned a 4xx.',
               'The request payload shows the discounted amount; the response body explains the rejection reason.',
               'The console shows an unhandled promise rejection from the checkout handler, which is why the button appeared to do nothing rather than showing an error.',
-              'The developer copies the request as cURL, replays it against staging with the same payload, and has a failing case in minutes.',
+              'The developer [copies the request as cURL](/guides/copy-as-curl-chrome), replays it against staging with the same payload, and has a failing case in minutes.',
             ],
           },
           {
@@ -502,7 +509,7 @@ export const toolPages: ContentPage[] = [
         a: 'No. It keeps a rolling window of recent tab activity: the last 30 actions, 150 console messages and 150 network requests, attached when you capture. Video is only recorded when you start a recording. Bugmark does not offer replay of past sessions that were not recorded.',
       },
     ],
-    related: ['/network-request-logger', '/web-developer-tools', '/guides/how-to-capture-console-logs', '/screen-recorder-for-bug-reports'],
+    related: ['/network-request-logger', '/guides/copy-as-curl-chrome', '/web-developer-tools', '/guides/how-to-capture-console-logs', '/screen-recorder-for-bug-reports'],
     updated: '2026-10-13',
   },
 
@@ -830,7 +837,7 @@ export const toolPages: ContentPage[] = [
         a: 'Recordings are stored locally in your browser using IndexedDB and are not uploaded to Bugmark servers. They leave your device only when you export an HTML report, which embeds the video, or create a GitHub issue, where the file is committed to a separate bugmark-assets branch in your repository.',
       },
     ],
-    related: ['/bug-reporting-tool', '/alternatives/loom', '/guides/steps-to-reproduce-template', '/debugging-tool'],
+    related: ['/bug-reporting-tool', '/alternatives/jam', '/alternatives/loom', '/guides/steps-to-reproduce-template', '/debugging-tool'],
     updated: '2026-10-13',
   },
 
@@ -1007,7 +1014,7 @@ export const toolPages: ContentPage[] = [
         a: 'Yes. Bugmark is free to try with every feature unlocked, including full page, element and breakpoint captures, annotation tools, redaction and exports. There is no account and no required watermark; the free version keeps up to 2 saved reports at a time, and a one-time $7.99 payment removes the limit. It runs in Chrome, Edge, Brave and Arc.',
       },
     ],
-    related: ['/website-feedback-tool', '/guides/full-page-screenshot-chrome', '/bug-reporting-tool', '/web-developer-tools'],
+    related: ['/website-feedback-tool', '/guides/full-page-screenshot-chrome', '/bug-reporting-tool', '/alternatives/userback', '/web-developer-tools'],
     updated: '2026-10-13',
   },
 
@@ -1090,7 +1097,7 @@ export const toolPages: ContentPage[] = [
             items: [
               '**Filter to failures** to jump straight to 4xx and 5xx responses.',
               '**Per-request detail view** with params, headers, payload and response body on separate panes.',
-              "**Copy as cURL** to replay a request in a terminal, change a parameter, and confirm the fix against staging.",
+              "**Copy as cURL** to replay a request in a terminal, change a parameter, and confirm the fix against staging. New to cURL? Read [how to copy a request as cURL in Chrome](/guides/copy-as-curl-chrome).",
               '**Download HAR** to open the whole log in Chrome DevTools → Network, or share it with a backend engineer who prefers their own tooling.',
               "**GitHub issues** include the failing requests in the issue body and commit the HAR file to the `bugmark-assets` branch.",
             ],
@@ -1191,15 +1198,18 @@ export const toolPages: ContentPage[] = [
   {
     slug: 'qa-testing-tool',
     kind: 'tool',
-    title: 'QA Testing Tool for Manual Testers and Bug Reports',
+    title: 'Bug Reporting Tool for Manual Testing & QA Teams',
     description:
-      'A free QA testing tool for Chrome that speeds up manual testing: log bugs with steps, logs and screenshots, triage in a dashboard and export CSV for Jira.',
-    h1: 'A QA testing tool that makes manual bug reporting faster',
-    eyebrow: 'qa testing tool',
+      'A free bug reporting tool for manual testing in Chrome: log bugs with steps, console logs and screenshots, triage in a dashboard and export CSV to Jira.',
+    h1: 'A bug reporting tool for manual testing and QA',
+    eyebrow: 'manual testing tool',
     intro:
-      "Manual testers spend a surprising share of a session writing up what they found instead of testing. Bugmark records the steps, logs and environment while you test, so logging a bug takes a capture, a title and a priority.",
-    primaryKeyword: 'QA testing tool',
+      "Manual testers spend a surprising share of a session writing up what they found instead of testing. Bugmark is a bug reporting tool for manual testing that records the steps, logs and environment while you test, so logging a bug takes a capture, a title and a priority.",
+    primaryKeyword: 'bug reporting tool for manual testing',
     keywords: [
+      'QA testing tool',
+      'bug tracking tool for manual testing',
+      'manual software testing tool',
       'manual testing tool',
       'QA bug reporting',
       'test reporting tool',
@@ -1287,7 +1297,7 @@ export const toolPages: ContentPage[] = [
         blocks: [
           {
             type: 'p',
-            text: "The friction between QA and engineering usually comes from reports that can't be acted on. When each bug includes the failing request's status and response body, the console error and the exact sequence of actions, “works for me” gets much rarer. Developers can copy a request as cURL or download a HAR without asking the tester to reproduce anything. For guidance on the written part, share [how to write a bug report](/guides/how-to-write-a-bug-report) and the [steps to reproduce template](/guides/steps-to-reproduce-template) with your team, and point developers at the [network request logger](/network-request-logger) page for the details of what is captured.",
+            text: "The friction between QA and engineering usually comes from reports that can't be acted on. When each bug includes the failing request's status and response body, the console error and the exact sequence of actions, “works for me” gets much rarer. Developers can [copy a request as cURL](/guides/copy-as-curl-chrome) or download a HAR without asking the tester to reproduce anything. For guidance on the written part, share [how to write a bug report](/guides/how-to-write-a-bug-report) and the [steps to reproduce template](/guides/steps-to-reproduce-template) with your team, and point developers at the [network request logger](/network-request-logger) page for the details of what is captured.",
           },
         ],
       },
@@ -1344,8 +1354,12 @@ export const toolPages: ContentPage[] = [
         q: 'How do I test a website at different screen sizes?',
         a: 'You can resize the window or use Chrome DevTools device mode. Bugmark adds a Mobile · tablet · desktop capture that renders the current page at 390×844, 768×1024 and 1440×900 using Chrome device emulation and combines them into one side-by-side image for quick responsive checks.',
       },
+      {
+        q: 'Which bug tracking tool is best for manual testing?',
+        a: 'Use two tools: one to capture bugs while you test and one to track them. A capture tool such as Bugmark records the steps, screenshot, console errors and network requests in one click, so the write-up takes seconds. A tracker such as Jira, Linear or GitHub Issues holds the shared backlog; Bugmark sends reports there as GitHub issues, CSV or Markdown.',
+      },
     ],
-    related: ['/bug-reporting-tool', '/guides/steps-to-reproduce-template', '/network-request-logger', '/guides/how-to-write-a-bug-report'],
-    updated: '2026-10-13',
+    related: ['/bug-reporting-tool', '/guides/steps-to-reproduce-template', '/network-request-logger', '/guides/how-to-write-a-bug-report', '/guides/best-bug-reporting-tools'],
+    updated: '2026-10-20',
   },
 ];

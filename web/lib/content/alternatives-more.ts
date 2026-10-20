@@ -25,6 +25,7 @@ export const moreAlternativePages: ContentPage[] = [
       "userback alternative for bug reporting",
       "userback vs bugmark",
       "userback pricing alternative",
+      "userback chrome extension",
       "bug reporting chrome extension",
       "bug report with console and network logs",
       "one-time payment bug reporting tool",
@@ -183,9 +184,13 @@ export const moreAlternativePages: ContentPage[] = [
         q: "Can I use Bugmark and Userback together?",
         a: "Yes. A common split is Userback for customer and stakeholder feedback in production, and Bugmark for internal QA passes where testers need full network and console context. Both offer browser extensions that can be installed side by side; if keyboard shortcuts conflict, change them in chrome://extensions/shortcuts.",
       },
+      {
+        q: "Is there a Userback Chrome extension alternative?",
+        a: "Yes. Userback's browser extension sends feedback to a Userback workspace, so it needs a Userback account and project. Bugmark is a Chrome extension that works on any site with no account: it captures an annotated screenshot or recording with steps, console and network logs, and keeps it in your browser until you export it or create a GitHub issue.",
+      },
     ],
-    related: ["/alternatives/marker-io", "/alternatives/jam", "/website-feedback-tool", "/bug-reporting-tool"],
-    updated: "2026-10-13",
+    related: ["/alternatives/marker-io", "/alternatives/bugherd", "/alternatives/jam", "/website-feedback-tool", "/bug-reporting-tool"],
+    updated: "2026-10-20",
   },
 
   // ---------------------------------------------------------------------------
